@@ -2,6 +2,7 @@ package dao.implementation;
 
 import dao.UserDao;
 import dao.util.DbUtil;
+import domain.Reader;
 import domain.User;
 
 import java.sql.Connection;

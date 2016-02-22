@@ -9,17 +9,17 @@ public class Path implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int idPath;
+    private int id;
     private String path;
     private String format;
     private int idBook;
 
-    public int getIdPath() {
-        return idPath;
+    public int getId() {
+        return id;
     }
 
-    public void setIdPath(int idPath) {
-        this.idPath = idPath;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPath() {

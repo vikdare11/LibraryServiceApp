@@ -6,17 +6,19 @@ import java.io.Serializable;
  * Created by Vika on 2/22/2016.
  */
 public class Reader implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    private int idReader;
+
+    private int id;
     private int idUser;
     private String email;
 
-    public int getIdReader() {
-        return idReader;
+    public int getId() {
+        return id;
     }
 
-    public void setIdReader(int idReader) {
-        this.idReader = idReader;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getIdUser() {

@@ -9,14 +9,14 @@ public class Author implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int idAuthor;
+    private int id;
 
-    public int getIdAuthor() {
-        return idAuthor;
+    public int getId() {
+        return id;
     }
 
-    public void setIdAuthor(int idAuthor) {
-        this.idAuthor = idAuthor;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

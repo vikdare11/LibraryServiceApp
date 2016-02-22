@@ -25,7 +25,7 @@
       <tr>
         <td>${book.id}</td>
         <td>${book.name}</td>
-        <td>${book.idAuthor}</td>
+        <td>${book.id}</td>
         <td>${book.description}</td>
         <td>${book.countOfViews}</td>
       </tr>

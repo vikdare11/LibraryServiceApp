@@ -9,17 +9,17 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int idUser;
+    private int id;
     private String login;
     private String password;
-    private boolean idID;
+    private boolean isAdmin;
 
-    public int getIdUser() {
-        return idUser;
+    public int getId() {
+        return id;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getLogin() {
@@ -38,11 +38,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public boolean isIdID() {
-        return idID;
+    public boolean getAdmin() {
+        return isAdmin;
     }
 
-    public void setIdID(boolean idID) {
-        this.idID = idID;
+    public void setAdmin(boolean admin) {
+        this.isAdmin = admin;
     }
 }
