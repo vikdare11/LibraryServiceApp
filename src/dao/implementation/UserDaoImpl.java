@@ -2,13 +2,9 @@ package dao.implementation;
 
 import dao.UserDao;
 import dao.util.DbUtil;
-import domain.Reader;
 import domain.User;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,22 +14,70 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
     @Override
     public int create(User user) {
-        return 0;
+        int id = 0;
+
+        try (Connection connection = DbUtil.getConnection();
+            PreparedStatement statement = connection.prepareStatement("insert into `user` (login, `password`) " +
+                    "values (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, user.getLogin());
+            statement.setString(2, user.getPassword());
+            statement.execute();
+            try (ResultSet resultSet = statement.getGeneratedKeys()) {
+                if (resultSet.next()) {
+                    id = resultSet.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
     }
 
     @Override
     public User read(int idUser) {
-        return null;
+        User user = null;
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement("select * from `user` where id=?")) {
+            statement.setInt(1, idUser);
+
+            try(ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    user = new User();
+                    user.setLogin(resultSet.getString("login"));
+                    user.setPassword(resultSet.getString("password"));
+                    user.setId(idUser);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 
     @Override
     public void update(User user) {
-
+        try (Connection connection = DbUtil.getConnection();
+            PreparedStatement statement = connection.prepareStatement("update `user` set login=?, password=? "+
+                    "where id=?")) {
+            statement.setString(1, user.getLogin());
+            statement.setString(2, user.getPassword());
+            statement.setInt(3, user.getId());
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void delete(User user) {
+        try (Connection connection = DbUtil.getConnection();
+            PreparedStatement statement = connection.prepareStatement("delete from `user` where id=?")){
+            statement.setInt(1, user.getId());
+            statement.execute();
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
