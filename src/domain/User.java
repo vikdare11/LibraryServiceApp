@@ -2,9 +2,6 @@ package domain;
 
 import java.io.Serializable;
 
-/**
- * Created by Vika on 2/22/2016.
- */
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;

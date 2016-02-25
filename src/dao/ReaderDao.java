@@ -4,9 +4,6 @@ import domain.Reader;
 
 import java.util.List;
 
-/**
- * Created by Vika on 2/22/2016.
- */
 public interface ReaderDao {
     int create(Reader reader);
     Reader read(int idReader);

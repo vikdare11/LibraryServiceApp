@@ -4,9 +4,6 @@ import domain.Book;
 
 import java.util.List;
 
-/**
- * Created by Vika on 2/22/2016.
- */
 public interface BookDao {
     int create(Book book);
     Book read(int idBook);

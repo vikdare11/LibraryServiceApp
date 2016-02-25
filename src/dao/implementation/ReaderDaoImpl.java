@@ -8,9 +8,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Vika on 2/22/2016.
- */
 public class ReaderDaoImpl implements ReaderDao {
     @Override
     public int create(Reader reader) {
@@ -37,7 +34,7 @@ public class ReaderDaoImpl implements ReaderDao {
     public Reader read(int idReader) {
         Reader reader = null;
         try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement("select * from `reder` where id=?")) {
+             PreparedStatement statement = connection.prepareStatement("select * from `reader` where id=?")) {
             statement.setInt(1, idReader);
 
             try(ResultSet resultSet = statement.executeQuery()) {

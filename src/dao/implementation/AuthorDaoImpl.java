@@ -4,36 +4,78 @@ import dao.AuthorDao;
 import dao.util.DbUtil;
 import domain.Author;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Vika on 2/22/2016.
- */
 public class AuthorDaoImpl implements AuthorDao {
 
     @Override
     public int create(Author author) {
-        return 0;
+        int id = 0;
+
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement("insert into `author` (name, surname) " +
+                     "values (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, author.getName());
+            statement.setString(2, author.getSurname());
+            statement.execute();
+            try (ResultSet resultSet = statement.getGeneratedKeys()) {
+                if (resultSet.next()) {
+                    id = resultSet.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
     }
 
     @Override
     public Author read(int idAuthor) {
-        return null;
+        Author author = null;
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement("select * from `author` where id=?")) {
+            statement.setInt(1, idAuthor);
+
+            try(ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    author = new Author();
+                    author.setSurname(resultSet.getString("surname"));
+                    author.setName(resultSet.getString("name"));
+                    author.setId(idAuthor);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return author;
     }
 
     @Override
     public void update(Author author) {
-
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement("update `author` set surname=?, name=?"+
+                     "where id=?")) {
+            statement.setString(1, author.getSurname());
+            statement.setString(2, author.getName());
+            statement.setInt(3, author.getId());
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void delete(Author author) {
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement("delete from `author` where id=?")){
+            statement.setInt(1, author.getId());
+            statement.execute();
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
