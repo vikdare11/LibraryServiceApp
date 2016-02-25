@@ -1,7 +1,3 @@
-/**
- * Created by Vika on 2/5/2016.
- */
-
 import domain.Book;
 
 import javax.servlet.RequestDispatcher;

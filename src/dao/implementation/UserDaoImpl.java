@@ -8,9 +8,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Vika on 2/23/2016.
- */
 public class UserDaoImpl implements UserDao {
     @Override
     public int create(User user) {
