@@ -3,12 +3,22 @@ package dao.implementation;
 import dao.UserDao;
 import dao.util.DbUtil;
 import domain.User;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
+
+    private static final UserDao instance = new UserDaoImpl();
+
+    private UserDaoImpl() {}
+
+    public static UserDao getInstance() {
+        return instance;
+    }
+
     @Override
     public int create(User user) {
         int id = 0;
@@ -97,5 +107,33 @@ public class UserDaoImpl implements UserDao {
             e.printStackTrace();
         }
         return users;
+    }
+
+    @Override
+    public int findIdUser(User user){
+        int id = -1;
+
+        try(
+                Connection connection = DbUtil.getConnection();
+                PreparedStatement statement = setStatement(connection, "SELECT iduser FROM account where " +
+                        "login = ? and password = ?", user.getLogin(), user.getPassword());
+                ResultSet resultSet = statement.executeQuery()
+        )
+        {
+            if (resultSet.next()) {
+                id = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+
+    private PreparedStatement setStatement(Connection connection, String sqlRequest, String login, String password) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(sqlRequest);
+        statement.setString(1, login);
+        statement.setString(2, DigestUtils.md5Hex(password));
+        return statement;
     }
 }

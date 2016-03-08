@@ -4,9 +4,8 @@ import controller.command.Command;
 import dao.AuthorDao;
 import dao.implementation.AuthorDaoImpl;
 import domain.Author;
-
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+
 
 /**
  * Created by Vika on 3/1/2016.
