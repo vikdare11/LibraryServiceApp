@@ -10,6 +10,14 @@ import java.util.List;
 
 public class AuthorDaoImpl implements AuthorDao {
 
+    private static final AuthorDao instance = new AuthorDaoImpl();
+
+    private AuthorDaoImpl() {}
+
+    public static AuthorDao getInstance() {
+        return instance;
+    }
+
     @Override
     public int create(Author author) {
         int id = 0;
@@ -35,7 +43,7 @@ public class AuthorDaoImpl implements AuthorDao {
     public Author read(int idAuthor) {
         Author author = null;
         try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement("select * from `author` where id=?")) {
+            PreparedStatement statement = connection.prepareStatement("select * from `author` where idauthor=?")) {
             statement.setInt(1, idAuthor);
 
             try(ResultSet resultSet = statement.executeQuery()) {
@@ -56,7 +64,7 @@ public class AuthorDaoImpl implements AuthorDao {
     public void update(Author author) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement("update `author` set surname=?, name=?"+
-                     "where id=?")) {
+                     "where idauthor=?")) {
             statement.setString(1, author.getSurname());
             statement.setString(2, author.getName());
             statement.setInt(3, author.getId());
@@ -69,7 +77,7 @@ public class AuthorDaoImpl implements AuthorDao {
     @Override
     public void delete(Author author) {
         try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement("delete from `author` where id=?")){
+             PreparedStatement statement = connection.prepareStatement("delete from `author` where idauthor=?")){
             statement.setInt(1, author.getId());
             statement.execute();
 

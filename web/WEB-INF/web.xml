@@ -6,12 +6,25 @@
 
     <servlet>
         <servlet-name>Controller</servlet-name>
-        <servlet-class>Controller</servlet-class>
+        <servlet-class>controller.Controller</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/controller</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <display-name>CharsetFilter</display-name>
+        <filter-name>CharsetFilter</filter-name>
+        <filter-class>filter.CharsetFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CharsetFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
 
 </web-app>

@@ -11,8 +11,9 @@
     <title></title>
   </head>
   <body>
-    <form action="controller" method="post">
-      <input align="center" type="submit" value="get books from library">
+    <form action="controller" enctype="multipart/form-data" method="post">
+      <input type="hidden" name="command" value="get_authors">
+      <input type="submit" value="authors list">
     </form>
   </body>
 </html>

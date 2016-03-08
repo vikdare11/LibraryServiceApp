@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class DbUtil {
     public static Connection getConnection() {
         String driverName = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://localhost:3306/library";
+        String url = "jdbc:mysql://localhost:3306/library?useUnicode=true&characterEncoding=UTF8&autoReconnect=true";
         String user = "root";
         String pass = "";
 
