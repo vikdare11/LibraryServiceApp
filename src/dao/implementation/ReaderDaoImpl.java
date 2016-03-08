@@ -9,6 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReaderDaoImpl implements ReaderDao {
+
+    private static final ReaderDao instance = new ReaderDaoImpl();
+
+    private ReaderDaoImpl() {}
+
+    public static ReaderDao getInstance() {
+        return instance;
+    }
+
     @Override
     public int create(Reader reader) {
         int id = 0;

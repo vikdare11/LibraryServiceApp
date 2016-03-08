@@ -9,5 +9,6 @@ public interface UserDao {
     User read(int idUser);
     void update(User user);
     void delete(User user);
+    int findIdUser(User user);
     List<User> getUsersList();
 }
