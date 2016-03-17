@@ -115,7 +115,7 @@ public class UserDaoImpl implements UserDao {
 
         try(
                 Connection connection = DbUtil.getConnection();
-                PreparedStatement statement = setStatement(connection, "SELECT iduser FROM account where " +
+                PreparedStatement statement = setStatement(connection, "SELECT iduser FROM `user` where " +
                         "login = ? and password = ?", user.getLogin(), user.getPassword());
                 ResultSet resultSet = statement.executeQuery()
         )
@@ -133,7 +133,7 @@ public class UserDaoImpl implements UserDao {
     private PreparedStatement setStatement(Connection connection, String sqlRequest, String login, String password) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(sqlRequest);
         statement.setString(1, login);
-        statement.setString(2, DigestUtils.md5Hex(password));
+        statement.setString(2, password);
         return statement;
     }
 }

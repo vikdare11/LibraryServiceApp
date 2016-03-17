@@ -40,18 +40,18 @@ public class ReaderDaoImpl implements ReaderDao {
     }
 
     @Override
-    public Reader read(int idReader) {
+    public Reader read(int idUser) {
         Reader reader = null;
         try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement("select * from `reader` where id=?")) {
-            statement.setInt(1, idReader);
+             PreparedStatement statement = connection.prepareStatement("select * from `reader` where iduser=?")) {
+            statement.setInt(1, idUser);
 
             try(ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     reader = new Reader();
-                    reader.setIdUser(resultSet.getInt("iduser"));
+                    reader.setIdUser(idUser);
                     reader.setEmail(resultSet.getString("email"));
-                    reader.setId(idReader);
+                    reader.setId(resultSet.getInt("idReader"));
                 }
             }
         } catch (SQLException e) {
