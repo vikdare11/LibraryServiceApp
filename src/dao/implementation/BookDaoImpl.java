@@ -9,6 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookDaoImpl implements BookDao {
+
+    private static final BookDao instance = new BookDaoImpl();
+
+    private BookDaoImpl() {}
+
+    public static BookDao getInstance() {
+        return instance;
+    }
+
     @Override
     public int create(Book book) {
         int id = 0;
