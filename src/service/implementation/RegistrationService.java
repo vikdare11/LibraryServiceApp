@@ -39,6 +39,8 @@ public class RegistrationService implements Service<Registration, Boolean> {
             int id = userDao.create(user);
             user.setId(id);
             userDao.create(user);
+            reader.setIdUser(id);
+            readerDao.create(reader);
         } catch (Exception e) {
             e.printStackTrace();
         }

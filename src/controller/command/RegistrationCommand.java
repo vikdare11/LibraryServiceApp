@@ -7,6 +7,14 @@ import service.implementation.RegistrationService;
 
 public class RegistrationCommand implements Command {
 
+    private static final RegistrationCommand instance = new RegistrationCommand();
+
+    private RegistrationCommand() {}
+
+    public static RegistrationCommand getInstance() {
+        return instance;
+    }
+
     @Override
     public String execute(HttpServletRequest request) {
         String page = new String("");
