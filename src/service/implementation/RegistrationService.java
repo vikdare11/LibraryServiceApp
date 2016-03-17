@@ -4,9 +4,7 @@ import dao.ReaderDao;
 import dao.UserDao;
 import dao.implementation.ReaderDaoImpl;
 import dao.implementation.UserDaoImpl;
-import domain.Reader;
-import domain.Registration;
-import domain.User;
+import domain.*;
 import service.Service;
 
 public class RegistrationService implements Service<Registration, Boolean> {

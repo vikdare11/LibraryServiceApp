@@ -1,9 +1,11 @@
-package controller.command;
+package controller.command.implementation.user;
 
-import javax.servlet.http.HttpServletRequest;
+import controller.command.Command;
 import domain.Registration;
 import service.Service;
 import service.implementation.RegistrationService;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class RegistrationCommand implements Command {
 

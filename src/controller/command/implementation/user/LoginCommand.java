@@ -1,5 +1,7 @@
-package controller.command;
+package controller.command.implementation.user;
 
+import controller.command.Command;
+import controller.command.implementation.book.GetBooksCommand;
 import domain.Reader;
 import domain.User;
 import service.Service;
@@ -7,9 +9,6 @@ import service.implementation.LoginService;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by Vika on 3/17/2016.
- */
 public class LoginCommand implements Command {
 
     private static final LoginCommand instance = new LoginCommand();
@@ -48,7 +47,7 @@ public class LoginCommand implements Command {
             else {
                 request.getSession(true).setAttribute("user", user);
             }
-            page = "index.jsp";
+            return GetBooksCommand.getInstance().execute(request);
         }
         else {
             page = "login.jsp";
