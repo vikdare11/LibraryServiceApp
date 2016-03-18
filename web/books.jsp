@@ -15,19 +15,24 @@
 <body>
   <table border="1">
     <tr>
-      <th>Book id</th>
+      <th>Author</th>
       <th>Name</th>
-      <th>Author id</th>
       <th>Description</th>
       <th>Count of views</th>
     </tr>
     <c:forEach var="book" items="${books}">
       <tr>
-        <td>${book.id}</td>
+        <td>${book.author}</td>
         <td>${book.name}</td>
-        <td>${book.id}</td>
         <td>${book.description}</td>
         <td>${book.countOfViews}</td>
+        <td>
+          <form action="controller" enctype="multipart/form-data">
+            <input type="hidden" name="command" value="view_book">
+            <input type="hidden" name="bookid" value="${book.id}">
+            <input type="submit" value="view"/>
+          </form>
+        </td>
       </tr>
     </c:forEach>
   </table>

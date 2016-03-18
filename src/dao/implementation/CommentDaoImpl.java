@@ -9,6 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommentDaoImpl implements CommentDao {
+
+    private static final CommentDao instance = new CommentDaoImpl();
+
+    private CommentDaoImpl() {}
+
+    public static CommentDao getInstance() {
+        return instance;
+    }
+
     @Override
     public int create(Comment comment) {
         int id = 0;
@@ -71,7 +80,7 @@ public class CommentDaoImpl implements CommentDao {
     @Override
     public void delete(Comment comment) {
         try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement("delete from `comment` where id=?")){
+             PreparedStatement statement = connection.prepareStatement("delete from `comment` where id=?")) {
             statement.setInt(1, comment.getId());
             statement.execute();
 
@@ -81,20 +90,22 @@ public class CommentDaoImpl implements CommentDao {
     }
 
     @Override
-    public List<Comment> getCommentsList() {
+    public List<Comment> getCommentsByBookId(int bookId) {
         List<Comment> comments = new ArrayList<>();
 
-        try(Connection connection = DbUtil.getConnection()) {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from comment");
-            while (resultSet.next()) {
-                Comment comment = new Comment();
-                comment.setId(resultSet.getInt("idcomment"));
-                comment.setIdBook(resultSet.getInt("idbook"));
-                comment.setIdReader(resultSet.getInt("idreader"));
-                comment.setReview(resultSet.getString("review"));
+        try (Connection connection = DbUtil.getConnection();
+            PreparedStatement statement = connection.prepareStatement("select * from comment where idbook=?")) {
+            statement.setInt(1, bookId);
+            try(ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    Comment comment = new Comment();
+                    comment.setId(resultSet.getInt("idcomment"));
+                    comment.setIdBook(resultSet.getInt("idbook"));
+                    comment.setIdReader(resultSet.getInt("idreader"));
+                    comment.setReview(resultSet.getString("review"));
 
-                comments.add(comment);
+                    comments.add(comment);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -44,7 +44,7 @@ public class BookDaoImpl implements BookDao {
     public Book read(int idBook) {
         Book book = null;
         try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement("select * from `book` where id=?")) {
+             PreparedStatement statement = connection.prepareStatement("select * from `book` where id=? ")) {
             statement.setInt(1, idBook);
 
             try(ResultSet resultSet = statement.executeQuery()) {
@@ -95,7 +95,8 @@ public class BookDaoImpl implements BookDao {
 
         try(Connection connection = DbUtil.getConnection()) {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from book");
+            ResultSet resultSet = statement.executeQuery("select * from book as b " +
+                    "join bookofauthor as ba on b.idbook = ba.idbook join author as a on ba.idauthor = a.idauthor");
             while (resultSet.next()) {
                 Book book = new Book();
                 book.setId(resultSet.getInt("idbook"));
@@ -103,7 +104,7 @@ public class BookDaoImpl implements BookDao {
                 book.setIdAuthor(resultSet.getInt("idauthor"));
                 book.setDescription(resultSet.getString("description"));
                 book.setCountOfViews(resultSet.getInt("countOfViews"));
-
+                book.setAuthor(resultSet.getString("name") + resultSet.getString("surname"));
                 books.add(book);
             }
         } catch (SQLException e) {

@@ -1,6 +1,7 @@
 package controller;
 
 import controller.command.Command;
+import controller.command.implementation.book.ViewBookCommand;
 import controller.command.implementation.user.LoginCommand;
 import controller.command.implementation.user.RegistrationCommand;
 import controller.command.implementation.author.*;
@@ -49,6 +50,10 @@ public class Controller extends HttpServlet {
                 }
                 case "login" : {
                     command = LoginCommand.getInstance();
+                    break;
+                }
+                case "view_book" : {
+                    command = ViewBookCommand.getInstance();
                     break;
                 }
             }

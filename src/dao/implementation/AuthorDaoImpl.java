@@ -3,6 +3,7 @@ package dao.implementation;
 import dao.AuthorDao;
 import dao.util.DbUtil;
 import domain.Author;
+import domain.Book;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -105,5 +106,13 @@ public class AuthorDaoImpl implements AuthorDao {
             e.printStackTrace();
         }
         return authors;
+    }
+
+    @Override
+    public Author getAuthorByBook(Book book) {
+        Author author = null;
+        int idAuthor = book.getIdAuthor();
+        author = this.read(idAuthor);
+        return author;
     }
 }

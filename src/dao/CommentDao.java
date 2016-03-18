@@ -9,5 +9,5 @@ public interface CommentDao {
     Comment read(int idComment);
     void update(Comment comment);
     void delete(Comment comment);
-    List<Comment> getCommentsList();
+    List<Comment> getCommentsByBookId(int bookId);
 }

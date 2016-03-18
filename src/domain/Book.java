@@ -11,6 +11,15 @@ public class Book implements Serializable {
     private int idAuthor;
     private String description;
     private int countOfViews;
+    private String author;
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
     public int getId() {
         return id;

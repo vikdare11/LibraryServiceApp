@@ -1,6 +1,7 @@
 package dao;
 
 import domain.Author;
+import domain.Book;
 
 import java.util.List;
 
@@ -10,4 +11,5 @@ public interface AuthorDao {
     void update(Author author);
     void delete(Author author);
     List<Author> getAuthorsList();
+    Author getAuthorByBook(Book book);
 }
