@@ -3,7 +3,6 @@ package dao.implementation;
 import dao.UserDao;
 import dao.util.DbUtil;
 import domain.User;
-import org.apache.commons.codec.digest.DigestUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -44,7 +43,7 @@ public class UserDaoImpl implements UserDao {
     public User read(int idUser) {
         User user = null;
         try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement("select * from `user` where id=?")) {
+             PreparedStatement statement = connection.prepareStatement("select * from `user` where iduser=?")) {
             statement.setInt(1, idUser);
 
             try(ResultSet resultSet = statement.executeQuery()) {
@@ -65,7 +64,7 @@ public class UserDaoImpl implements UserDao {
     public void update(User user) {
         try (Connection connection = DbUtil.getConnection();
             PreparedStatement statement = connection.prepareStatement("update `user` set login=?, password=? "+
-                    "where id=?")) {
+                    "where iduser=?")) {
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
             statement.setInt(3, user.getId());
@@ -78,7 +77,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void delete(User user) {
         try (Connection connection = DbUtil.getConnection();
-            PreparedStatement statement = connection.prepareStatement("delete from `user` where id=?")){
+            PreparedStatement statement = connection.prepareStatement("delete from `user` where iduser=?")){
             statement.setInt(1, user.getId());
             statement.execute();
 

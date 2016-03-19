@@ -1,5 +1,6 @@
 package dao;
 
+import domain.Book;
 import domain.Path;
 
 import java.util.List;
@@ -9,5 +10,6 @@ public interface PathDao {
     Path read(int idPath);
     void update(Path path);
     void delete(Path path);
-    List<Path> getPathsList();
+    List<Path> getPathsList(Book book);
+    Path getPathsList(String format, Book book);
 }

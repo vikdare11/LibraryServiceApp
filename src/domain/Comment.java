@@ -10,6 +10,15 @@ public class Comment implements Serializable {
     private int idBook;
     private int idReader;
     private String review;
+    private String user;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 
     public int getId() {
         return id;

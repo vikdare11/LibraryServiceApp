@@ -44,15 +44,16 @@ public class BookDaoImpl implements BookDao {
     public Book read(int idBook) {
         Book book = null;
         try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement("select * from `book` where id=? ")) {
+             PreparedStatement statement = connection.prepareStatement("select * from book as b join bookofauthor as ba on b.idbook = ba.idbook join author as a on ba.idauthor = a.idauthor where b.idbook=?")) {
             statement.setInt(1, idBook);
-
             try(ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     book = new Book();
                     book.setCountOfViews(resultSet.getInt("countOfViews"));
                     book.setDescription(resultSet.getString("description"));
                     book.setName(resultSet.getString("title"));
+                    book.setAuthor(resultSet.getString("name") + " " + resultSet.getString("surname"));
+                    book.setIdAuthor(resultSet.getInt("idauthor"));
                     book.setId(idBook);
                 }
             }
@@ -66,7 +67,7 @@ public class BookDaoImpl implements BookDao {
     public void update(Book book) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement("update `book` set title=?, description=?, countOfViews=? "+
-                     "where id=?")) {
+                     "where idbook=?")) {
             statement.setString(1, book.getName());
             statement.setString(2, book.getDescription());
             statement.setInt(3, book.getCountOfViews());
@@ -80,7 +81,7 @@ public class BookDaoImpl implements BookDao {
     @Override
     public void delete(Book book) {
         try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement("delete from `book` where id=?")){
+             PreparedStatement statement = connection.prepareStatement("delete from `book` where idbook=?")){
             statement.setInt(1, book.getId());
             statement.execute();
 
@@ -100,11 +101,11 @@ public class BookDaoImpl implements BookDao {
             while (resultSet.next()) {
                 Book book = new Book();
                 book.setId(resultSet.getInt("idbook"));
-                book.setName(resultSet.getString("name"));
+                book.setName(resultSet.getString("title"));
                 book.setIdAuthor(resultSet.getInt("idauthor"));
                 book.setDescription(resultSet.getString("description"));
                 book.setCountOfViews(resultSet.getInt("countOfViews"));
-                book.setAuthor(resultSet.getString("name") + resultSet.getString("surname"));
+                book.setAuthor(resultSet.getString("name") + " " + resultSet.getString("surname"));
                 books.add(book);
             }
         } catch (SQLException e) {
