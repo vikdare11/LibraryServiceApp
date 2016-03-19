@@ -18,16 +18,14 @@
       <th>Author</th>
       <th>Name</th>
       <th>Description</th>
-      <th>Count of views</th>
     </tr>
     <c:forEach var="book" items="${books}">
       <tr>
         <td>${book.author}</td>
         <td>${book.name}</td>
         <td>${book.description}</td>
-        <td>${book.countOfViews}</td>
         <td>
-          <form action="controller" enctype="multipart/form-data">
+          <form action="controller" enctype="multipart/form-data" method="post">
             <input type="hidden" name="command" value="view_book">
             <input type="hidden" name="bookid" value="${book.id}">
             <input type="submit" value="view"/>

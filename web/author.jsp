@@ -10,11 +10,7 @@
   <input type="hidden"name="command" value="edit_author">
   <input type="hidden" name="author_id" value="${author.id}">
 
-  <h3>Фамилия автора:</h3>
-  <input type="text" name="author_surname" value="${author.surname}">
 
-  <h3>Имя автора:</h3>
-  <input type="text" name="author_name" value="${author.name}">
 
   <input type="submit" value="apply changes">
 

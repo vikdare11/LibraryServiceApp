@@ -18,8 +18,7 @@
     <form action="controller" enctype="multipart/form-data" method="post">
       <input type="hidden" name="command" value="open_author">
       <input type="hidden" name="author_id" value="${author.id}">
-      <input type="submit" value="edit">
-      <input type="submit" value="delete">
+      <input type="submit" value="Get books">
     </form>
   </c:forEach>
 </body>

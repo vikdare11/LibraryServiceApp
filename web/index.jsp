@@ -13,7 +13,13 @@
   <body>
     <form action="controller" enctype="multipart/form-data" method="post">
       <input type="hidden" name="command" value="get_authors">
-      <input type="submit" value="authors list">
+      <input type="submit" value="Authors list">
     </form>
+    <form action="controller" enctype="multipart/form-data" method="post">
+      <input type="hidden" name="command" value="get_books">
+      <input type="submit" value="Books list">
+    </form>
+    <a href="login.jsp">Sign in</a>
+    <a href="registration.jsp">Sign up</a>
   </body>
 </html>

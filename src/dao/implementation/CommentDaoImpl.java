@@ -1,8 +1,12 @@
 package dao.implementation;
 
 import dao.CommentDao;
+import dao.ReaderDao;
+import dao.UserDao;
 import dao.util.DbUtil;
 import domain.Comment;
+import domain.Reader;
+import domain.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -103,7 +107,7 @@ public class CommentDaoImpl implements CommentDao {
                     comment.setIdBook(resultSet.getInt("idbook"));
                     comment.setIdReader(resultSet.getInt("idreader"));
                     comment.setReview(resultSet.getString("review"));
-
+                    comment.setUser(this.getUserByComment(resultSet.getInt("idreader")));
                     comments.add(comment);
                 }
             }
@@ -111,5 +115,14 @@ public class CommentDaoImpl implements CommentDao {
             e.printStackTrace();
         }
         return comments;
+    }
+
+    @Override
+    public String getUserByComment(int idReader) {
+        ReaderDao readerDao = ReaderDaoImpl.getInstance();
+        UserDao userDao = UserDaoImpl.getInstance();
+        Reader reader = readerDao.read(idReader);
+        User user = userDao.read(reader.getIdUser());
+        return user.getLogin();
     }
 }

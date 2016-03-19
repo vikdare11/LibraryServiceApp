@@ -10,6 +10,33 @@ public class BookViewObject implements Serializable {
     private Book book;
     private Author author;
     private List<Comment> listOfComments;
+    private List<Path> listOfPath;
+    private Path readPath;
+    private Path downloadPath;
+
+    public Path getDownloadPath() {
+        return downloadPath;
+    }
+
+    public void setDownloadPath(Path downloadPath) {
+        this.downloadPath = downloadPath;
+    }
+
+    public Path getReadPath() {
+        return readPath;
+    }
+
+    public void setReadPath(Path readPath) {
+        this.readPath = readPath;
+    }
+
+    public List<Path> getListOfPath() {
+        return listOfPath;
+    }
+
+    public void setListOfPath(List<Path> listOfPath) {
+        this.listOfPath = listOfPath;
+    }
 
     public Book getBook() {
         return book;
