@@ -28,7 +28,7 @@ public class OpenAuthorCommand implements Command {
 
         request.setAttribute("author", author);
 
-        return "author.jsp";
+        return "edit_author.jsp";
 
     }
 }

@@ -28,7 +28,7 @@
           <form action="controller" enctype="multipart/form-data" method="post">
             <input type="hidden" name="command" value="view_book">
             <input type="hidden" name="bookid" value="${book.id}">
-            <input type="submit" value="view"/>
+            <input type="submit" value="View"/>
           </form>
         </td>
       </tr>

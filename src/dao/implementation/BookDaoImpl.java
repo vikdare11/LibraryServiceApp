@@ -2,6 +2,7 @@ package dao.implementation;
 
 import dao.BookDao;
 import dao.util.DbUtil;
+import domain.Author;
 import domain.Book;
 
 import java.sql.*;
@@ -113,4 +114,5 @@ public class BookDaoImpl implements BookDao {
         }
         return books;
     }
+
 }

@@ -64,7 +64,7 @@ public class AuthorDaoImpl implements AuthorDao {
     @Override
     public void update(Author author) {
         try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement("update `author` set surname=?, name=?"+
+             PreparedStatement statement = connection.prepareStatement("update `author` set surname=?, name=? "+
                      "where idauthor=?")) {
             statement.setString(1, author.getSurname());
             statement.setString(2, author.getName());

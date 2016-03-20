@@ -1,6 +1,7 @@
 package controller;
 
 import controller.command.Command;
+import controller.command.implementation.book.GetBooksByAuthorCommand;
 import controller.command.implementation.book.GetBooksCommand;
 import controller.command.implementation.book.ViewBookCommand;
 import controller.command.implementation.user.LoginCommand;
@@ -30,7 +31,7 @@ public class Controller extends HttpServlet {
                     break;
                 }
                 case "open_author" : {
-                    command = OpenAuthorCommand.getInstance();
+                    command = GetBooksByAuthorCommand.getInstance();
                     break;
                 }
                 case "edit_author" : {
@@ -59,6 +60,10 @@ public class Controller extends HttpServlet {
                 }
                 case "view_book" : {
                     command = ViewBookCommand.getInstance();
+                    break;
+                }
+                case "open_edit_author" : {
+                    command = OpenAuthorCommand.getInstance();
                     break;
                 }
             }
