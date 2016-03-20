@@ -1,6 +1,5 @@
 package controller.command.implementation.author;
 
-import com.sun.deploy.net.HttpRequest;
 import controller.command.Command;
 import dao.AuthorDao;
 import dao.implementation.AuthorDaoImpl;
@@ -9,9 +8,6 @@ import domain.Author;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-/**
- * Created by Vika on 3/1/2016.
- */
 public class GetAuthorsCommand implements Command {
 
     private static final Command instance = new GetAuthorsCommand();
