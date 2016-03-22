@@ -23,10 +23,16 @@
         </c:forEach>
     </table>
     <a href="${bookVO.readPath.path}">Read online</a>
+    <form action="controller" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="command" value="add_comment">
+        <input type="hidden" name="book_id" value="${bookVO.book.id}">
+        <input type="text" required name="review" placeholder="Input your review here...">
+        <input type="submit" value="Add comment">
+    </form>
     <form action="download" method="get" enctype="multipart/form-data">
         <input type="hidden" name="command" value="download_book">
         <input type="hidden" name="bookPath" value="${bookVO.downloadPath.path}">
-        <input type="submit" value="download">
+        <input type="submit" value="Download">
     </form>
 </body>
 </html>

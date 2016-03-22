@@ -1,5 +1,6 @@
 package dao;
 
+import domain.Book;
 import domain.Reader;
 
 import java.util.List;
@@ -10,4 +11,5 @@ public interface ReaderDao {
     void update(Reader reader);
     void delete(Reader reader);
     List<Reader> getReadersList();
+    List<Book> getBookCollection(int idReader);
 }
