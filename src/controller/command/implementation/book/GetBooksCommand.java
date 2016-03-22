@@ -1,6 +1,6 @@
 package controller.command.implementation.book;
 
-import controller.command.Command;
+import controller.command.PostCommand;
 import dao.BookDao;
 import dao.implementation.BookDaoImpl;
 import domain.Book;
@@ -8,13 +8,13 @@ import domain.Book;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class GetBooksCommand implements Command {
+public class GetBooksCommand implements PostCommand {
 
-    private static final Command instance = new GetBooksCommand();
+    private static final PostCommand instance = new GetBooksCommand();
 
     private GetBooksCommand(){}
 
-    public static Command getInstance() {
+    public static PostCommand getInstance() {
         return instance;
     }
 

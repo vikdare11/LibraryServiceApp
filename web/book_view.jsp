@@ -23,6 +23,10 @@
         </c:forEach>
     </table>
     <a href="${bookVO.readPath.path}">Read online</a>
-    <a href="${bookVO.downloadPath.path}">Download .fb2</a>
+    <form action="download" method="get" enctype="multipart/form-data">
+        <input type="hidden" name="command" value="download_book">
+        <input type="hidden" name="bookPath" value="${bookVO.downloadPath.path}">
+        <input type="submit" value="download">
+    </form>
 </body>
 </html>

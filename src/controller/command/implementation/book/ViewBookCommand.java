@@ -1,19 +1,19 @@
 package controller.command.implementation.book;
 
-import controller.command.Command;
+import controller.command.PostCommand;
 import domain.BookViewObject;
 import service.Service;
 import service.implementation.GetBookInfoService;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class ViewBookCommand implements Command {
+public class ViewBookCommand implements PostCommand {
 
-    private static final Command instance = new ViewBookCommand();
+    private static final PostCommand instance = new ViewBookCommand();
 
     private ViewBookCommand() {}
 
-    public static Command getInstance() {
+    public static PostCommand getInstance() {
         return instance;
     }
 

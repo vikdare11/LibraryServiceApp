@@ -1,6 +1,6 @@
 package controller.command.implementation.book;
 
-import controller.command.Command;
+import controller.command.PostCommand;
 import dao.BookDao;
 import dao.implementation.BookDaoImpl;
 import domain.Book;
@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by Vika on 3/20/2016.
  */
-public class DeleteBookCommand implements Command {
+public class DeleteBookCommand implements PostCommand {
 
-    private static final Command instance = new DeleteBookCommand();
+    private static final PostCommand instance = new DeleteBookCommand();
 
     private DeleteBookCommand(){}
 
-    public static Command getInstance() {
+    public static PostCommand getInstance() {
         return instance;
     }
 

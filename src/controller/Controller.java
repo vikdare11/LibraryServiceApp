@@ -1,12 +1,12 @@
 package controller;
 
-import controller.command.Command;
+import controller.command.PostCommand;
+import controller.command.implementation.author.*;
 import controller.command.implementation.book.GetBooksByAuthorCommand;
 import controller.command.implementation.book.GetBooksCommand;
 import controller.command.implementation.book.ViewBookCommand;
 import controller.command.implementation.user.LoginCommand;
 import controller.command.implementation.user.RegistrationCommand;
-import controller.command.implementation.author.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,7 +23,7 @@ public class Controller extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String commandName = req.getParameter("command");
         String page = null;
-        Command command = null;
+        PostCommand command = null;
         if (commandName != null) {
             switch (commandName) {
                 case "get_authors" : {
@@ -80,5 +80,6 @@ public class Controller extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doGet(req, resp);
     }
 }

@@ -1,6 +1,6 @@
 package controller.command.implementation.user;
 
-import controller.command.Command;
+import controller.command.PostCommand;
 import controller.command.implementation.book.GetBooksCommand;
 import domain.Reader;
 import domain.User;
@@ -9,7 +9,7 @@ import service.implementation.LoginService;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class LoginCommand implements Command {
+public class LoginCommand implements PostCommand {
 
     private static final LoginCommand instance = new LoginCommand();
 
