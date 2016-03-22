@@ -1,13 +1,13 @@
 package controller.command.implementation.comment;
 
-import controller.command.Command;
+import controller.command.PostCommand;
 import dao.CommentDao;
 import dao.implementation.CommentDaoImpl;
 import domain.Comment;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class DeleteCommentCommand implements Command {
+public class DeleteCommentCommand implements PostCommand {
     private static DeleteCommentCommand ourInstance = new DeleteCommentCommand();
 
     public static DeleteCommentCommand getInstance() {

@@ -14,6 +14,16 @@
         <url-pattern>/controller</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>BookDownloadController</servlet-name>
+        <servlet-class>controller.BookDownloadController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>BookDownloadController</servlet-name>
+        <url-pattern>/download</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <display-name>CharsetFilter</display-name>
         <filter-name>CharsetFilter</filter-name>

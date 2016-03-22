@@ -1,6 +1,6 @@
 package controller.command.implementation.book;
 
-import controller.command.Command;
+import controller.command.PostCommand;
 import dao.AuthorDao;
 import dao.BookDao;
 import dao.implementation.AuthorDaoImpl;
@@ -14,12 +14,12 @@ import java.util.List;
 /**
  * Created by Vika on 3/20/2016.
  */
-public class GetBooksByAuthorCommand implements Command {
-    private static final Command instance = new GetBooksByAuthorCommand();
+public class GetBooksByAuthorCommand implements PostCommand {
+    private static final PostCommand instance = new GetBooksByAuthorCommand();
 
     private GetBooksByAuthorCommand(){}
 
-    public static Command getInstance() {
+    public static PostCommand getInstance() {
         return instance;
     }
 
