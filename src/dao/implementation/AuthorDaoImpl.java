@@ -111,8 +111,21 @@ public class AuthorDaoImpl implements AuthorDao {
     @Override
     public Author getAuthorByBook(Book book) {
         Author author = null;
-        int idAuthor = book.getIdAuthor();
-        author = this.read(idAuthor);
+        int idBook = book.getId();
+        try (Connection connection = DbUtil.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM author AS b JOIN bookofauthor AS ba ON b.idauthor = ba.idauthor JOIN book AS a ON ba.idbook = a.idbook WHERE a.idbook=?")) {
+            statement.setInt(1, idBook);
+            try(ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    author = new Author();
+                    author.setName(resultSet.getString("name"));
+                    author.setId(resultSet.getInt("idauthor"));
+                    author.setSurname(resultSet.getString("surname"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return author;
     }
 }

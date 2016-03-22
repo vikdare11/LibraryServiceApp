@@ -2,6 +2,8 @@ package controller.command.implementation.user;
 
 import controller.command.PostCommand;
 import controller.command.implementation.book.GetBooksCommand;
+import dao.UserDao;
+import dao.implementation.UserDaoImpl;
 import domain.Reader;
 import domain.User;
 import service.Service;
@@ -26,9 +28,12 @@ public class LoginCommand implements PostCommand {
 
         if (validateRequest(request)) {
 
+            UserDao userDao = UserDaoImpl.getInstance();
             User user = new User();
             user.setLogin(request.getParameter("login"));
             user.setPassword(request.getParameter("password"));
+            user.setId(userDao.findIdUser(user));
+
             Service<User, Reader> loginService = LoginService.getInstance();
             Reader reader = null;
             try {

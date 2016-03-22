@@ -7,9 +7,6 @@ import domain.Book;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by Vika on 3/20/2016.
- */
 public class DeleteBookCommand implements PostCommand {
 
     private static final PostCommand instance = new DeleteBookCommand();
@@ -24,14 +21,10 @@ public class DeleteBookCommand implements PostCommand {
     public String execute(HttpServletRequest request) {
         BookDao bookDao = BookDaoImpl.getInstance();
 
-        int id = Integer.parseInt(request.getParameter("book_id"));
-        String title = request.getParameter("title");
-        String description = request.getParameter("description");
+        int id = Integer.parseInt(request.getParameter("bookid"));
 
         Book book = new Book();
         book.setId(id);
-        book.setName(title);
-        book.setDescription(description);
 
         bookDao.delete(book);
 

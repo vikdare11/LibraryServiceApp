@@ -1,5 +1,6 @@
 package dao.implementation;
 
+import dao.AuthorDao;
 import dao.ReaderDao;
 import dao.util.DbUtil;
 import domain.Book;
@@ -109,6 +110,7 @@ public class ReaderDaoImpl implements ReaderDao {
 
     @Override
     public List<Book> getBookCollection(int idReader) {
+        AuthorDao authorDao = AuthorDaoImpl.getInstance();
         List<Book> bookCollectionOfReader = new ArrayList<>();
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement("select * from book as b join bookcollectionofreader as br on b.idbook = br.idbook join reader as r on br.idreader = r.idreader where r.idreader=?")) {
@@ -119,6 +121,8 @@ public class ReaderDaoImpl implements ReaderDao {
                     Book book = new Book();
                     book.setId(resultSet.getInt("idbook"));
                     book.setName(resultSet.getString("title"));
+                    book.setDescription(resultSet.getString("description"));
+                    book.setAuthor(authorDao.getAuthorByBook(book).getName() + " " + authorDao.getAuthorByBook(book).getSurname());
                     bookCollectionOfReader.add(book);
                 }
             }

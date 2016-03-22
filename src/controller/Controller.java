@@ -2,6 +2,7 @@ package controller;
 
 import controller.command.PostCommand;
 import controller.command.implementation.author.*;
+import controller.command.implementation.book.DeleteBookCommand;
 import controller.command.implementation.book.GetBooksByAuthorCommand;
 import controller.command.implementation.book.GetBooksCommand;
 import controller.command.implementation.book.ViewBookCommand;
@@ -79,6 +80,11 @@ public class Controller extends HttpServlet {
                 }
                 case "open_user" : {
                     command = ViewUserCommand.getInstance();
+                    break;
+                }
+                case "delete_book" : {
+                    command = DeleteBookCommand.getInstance();
+                    break;
                 }
             }
             if (command != null) {

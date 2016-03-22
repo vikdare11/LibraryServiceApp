@@ -12,11 +12,13 @@
     <h1>Book collection of reader ${userVO.login}:</h1>
     <table border="1">
         <tr>
+            <th>Author</th>
             <th>Title</th>
             <th>Description</th>
         </tr>
         <c:forEach var="book" items="${userVO.bookCollection}">
             <tr>
+                <td>${book.author}</td>
                 <td>${book.name}</td>
                 <td>${book.description}</td>
                 <td>

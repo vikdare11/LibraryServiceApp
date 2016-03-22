@@ -11,9 +11,6 @@ import domain.Book;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-/**
- * Created by Vika on 3/20/2016.
- */
 public class GetBooksByAuthorCommand implements PostCommand {
     private static final PostCommand instance = new GetBooksByAuthorCommand();
 
