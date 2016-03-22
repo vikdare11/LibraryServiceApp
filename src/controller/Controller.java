@@ -5,8 +5,11 @@ import controller.command.implementation.author.*;
 import controller.command.implementation.book.GetBooksByAuthorCommand;
 import controller.command.implementation.book.GetBooksCommand;
 import controller.command.implementation.book.ViewBookCommand;
+import controller.command.implementation.comment.AddCommentCommand;
+import controller.command.implementation.user.GetUsersCommand;
 import controller.command.implementation.user.LoginCommand;
 import controller.command.implementation.user.RegistrationCommand;
+import controller.command.implementation.user.ViewUserCommand;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -65,6 +68,17 @@ public class Controller extends HttpServlet {
                 case "open_edit_author" : {
                     command = OpenAuthorCommand.getInstance();
                     break;
+                }
+                case "add_comment" : {
+                    command = AddCommentCommand.getInstance();
+                    break;
+                }
+                case "get_users" : {
+                    command = GetUsersCommand.getInstance();
+                    break;
+                }
+                case "open_user" : {
+                    command = ViewUserCommand.getInstance();
                 }
             }
             if (command != null) {

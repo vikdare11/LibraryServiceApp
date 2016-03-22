@@ -2,6 +2,7 @@ package dao.implementation;
 
 import dao.ReaderDao;
 import dao.util.DbUtil;
+import domain.Book;
 import domain.Reader;
 
 import java.sql.*;
@@ -104,5 +105,26 @@ public class ReaderDaoImpl implements ReaderDao {
             e.printStackTrace();
         }
         return readers;
+    }
+
+    @Override
+    public List<Book> getBookCollection(int idReader) {
+        List<Book> bookCollectionOfReader = new ArrayList<>();
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement("select * from book as b join bookcollectionofreader as br on b.idbook = br.idbook join reader as r on br.idreader = r.idreader where r.idreader=?")) {
+            statement.setInt(1, idReader);
+
+            try(ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    Book book = new Book();
+                    book.setId(resultSet.getInt("idbook"));
+                    book.setName(resultSet.getString("title"));
+                    bookCollectionOfReader.add(book);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bookCollectionOfReader;
     }
 }
