@@ -13,6 +13,11 @@
         <input type="hidden" name="user_id" value="${user.id}">
         <input type="submit" value="View information"/>
     </form>
+    <form action="controller" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="command" value="delete_user">
+        <input type="hidden" name="user_id" value="${user.id}">
+        <input type="submit" value="Delete">
+    </form>
 </c:forEach>
 </body>
 </html>

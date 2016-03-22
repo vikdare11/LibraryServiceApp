@@ -19,6 +19,13 @@
             <tr>
                 <td>${comment.user}</td>
                 <td>${comment.review}</td>
+                <td>
+                    <form action="controller" enctype="multipart/form-data" method="post">
+                        <input type="hidden" name="command" value="delete_comment">
+                        <input type="hidden" name="comment_id" value="${comment.id}">
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
             </tr>
         </c:forEach>
     </table>

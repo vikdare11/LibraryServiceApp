@@ -84,7 +84,7 @@ public class CommentDaoImpl implements CommentDao {
     @Override
     public void delete(Comment comment) {
         try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement("delete from `comment` where id=?")) {
+             PreparedStatement statement = connection.prepareStatement("delete from `comment` where idcomment=?")) {
             statement.setInt(1, comment.getId());
             statement.execute();
 

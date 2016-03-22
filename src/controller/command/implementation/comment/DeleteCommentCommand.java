@@ -22,16 +22,8 @@ public class DeleteCommentCommand implements PostCommand {
         CommentDao commentDao = CommentDaoImpl.getInstance();
 
         int id = Integer.parseInt(request.getParameter("comment_id"));
-        int idReader = Integer.parseInt(request.getParameter("reader_id"));
-        int idBook = Integer.parseInt(request.getParameter("book_id"));
-        String review = request.getParameter("review");
-
         Comment comment = new Comment();
         comment.setId(id);
-        comment.setIdBook(idBook);
-        comment.setReview(review);
-        comment.setIdReader(idReader);
-        commentDao.create(comment);
 
         commentDao.delete(comment);
 

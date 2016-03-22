@@ -21,13 +21,9 @@ public class DeleteUserCommand implements PostCommand {
         UserDao bookDao = UserDaoImpl.getInstance();
 
         int id = Integer.parseInt(request.getParameter("user_id"));
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
 
         User user = new User();
         user.setId(id);
-        user.setPassword(password);
-        user.setLogin(login);
 
         bookDao.delete(user);
 

@@ -7,10 +7,8 @@ import controller.command.implementation.book.GetBooksByAuthorCommand;
 import controller.command.implementation.book.GetBooksCommand;
 import controller.command.implementation.book.ViewBookCommand;
 import controller.command.implementation.comment.AddCommentCommand;
-import controller.command.implementation.user.GetUsersCommand;
-import controller.command.implementation.user.LoginCommand;
-import controller.command.implementation.user.RegistrationCommand;
-import controller.command.implementation.user.ViewUserCommand;
+import controller.command.implementation.comment.DeleteCommentCommand;
+import controller.command.implementation.user.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -84,6 +82,14 @@ public class Controller extends HttpServlet {
                 }
                 case "delete_book" : {
                     command = DeleteBookCommand.getInstance();
+                    break;
+                }
+                case "delete_user" : {
+                    command = DeleteUserCommand.getInstance();
+                    break;
+                }
+                case "delete_comment" : {
+                    command = DeleteCommentCommand.getInstance();
                     break;
                 }
             }
