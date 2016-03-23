@@ -35,6 +35,7 @@ public class GetBookInfoService implements Service<Integer, BookViewObject> {
         List<Comment> listOfComments = commentDao.getCommentsByBookId(bookId);
         Path readPath = pathDao.getPathsList("html", book);
         Path downloadPath = pathDao.getPathsList("fb2", book);
+
         BookViewObject bookViewObject = new BookViewObject();
         bookViewObject.setAuthor(author);
         bookViewObject.setBook(book);

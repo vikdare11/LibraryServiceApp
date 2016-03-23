@@ -101,13 +101,13 @@ public class CommentDaoImpl implements CommentDao {
             PreparedStatement statement = connection.prepareStatement("select * from comment where idbook=?")) {
             statement.setInt(1, bookId);
             try(ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
+                while (resultSet.next()) {
                     Comment comment = new Comment();
                     comment.setId(resultSet.getInt("idcomment"));
                     comment.setIdBook(resultSet.getInt("idbook"));
                     comment.setIdReader(resultSet.getInt("idreader"));
                     comment.setReview(resultSet.getString("review"));
-                    comment.setUser(this.getUserByComment(resultSet.getInt("idreader")));
+                    comment.setUser(this.getCommentByReader(resultSet.getInt("idreader")));
                     comments.add(comment);
                 }
             }
@@ -118,7 +118,7 @@ public class CommentDaoImpl implements CommentDao {
     }
 
     @Override
-    public String getUserByComment(int idReader) {
+    public String getCommentByReader(int idReader) {
         ReaderDao readerDao = ReaderDaoImpl.getInstance();
         UserDao userDao = UserDaoImpl.getInstance();
         Reader reader = readerDao.read(idReader);

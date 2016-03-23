@@ -20,12 +20,10 @@ public class AddAuthorCommand implements PostCommand {
     public String execute(HttpServletRequest request) {
         AuthorDao authorDao = AuthorDaoImpl.getInstance();
 
-        int id = Integer.parseInt(request.getParameter("author_id"));
         String surname = request.getParameter("author_surname");
         String name = request.getParameter("author_name");
 
         Author author = new Author();
-        author.setId(id);
         author.setName(name);
         author.setSurname(surname);
 

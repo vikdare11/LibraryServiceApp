@@ -22,10 +22,12 @@ public class BookDownloadController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String bookPath = req.getParameter("bookPath");
         String savingFileName = bookPath.split("/")[1];
+
         resp.setContentType("text/plain");
         resp.setHeader("Content-Disposition",
                 "attachment;filename="+savingFileName);
         ServletContext ctx = getServletContext();
+
         InputStream is = ctx.getResourceAsStream(bookPath);
 
         try {

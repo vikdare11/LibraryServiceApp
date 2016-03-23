@@ -10,5 +10,5 @@ public interface CommentDao {
     void update(Comment comment);
     void delete(Comment comment);
     List<Comment> getCommentsByBookId(int bookId);
-    String getUserByComment(int idReader);
+    String getCommentByReader(int idReader);
 }

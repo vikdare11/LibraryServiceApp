@@ -1,9 +1,10 @@
 package controller.command.implementation.comment;
 
 import controller.command.PostCommand;
+import dao.CommentDao;
+import dao.implementation.CommentDaoImpl;
 import domain.Comment;
 import domain.User;
-import service.implementation.AddCommentService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,6 +20,7 @@ public class AddCommentCommand implements PostCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
+        CommentDao commentDao = CommentDaoImpl.getInstance();
 
         int readerId = ((User)request.getSession().getAttribute("user")).getId();
         int idBook = Integer.parseInt(request.getParameter("book_id"));
@@ -29,8 +31,8 @@ public class AddCommentCommand implements PostCommand {
         comment.setReview(review);
         comment.setIdReader(readerId);
 
-        AddCommentService addCommentService = AddCommentService.getInstance();
-        addCommentService.execute(comment);
+
+        commentDao.create(comment);
 
         return GetCommentsCommand.getInstance().execute(request);
     }

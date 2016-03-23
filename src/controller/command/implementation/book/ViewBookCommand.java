@@ -19,7 +19,12 @@ public class ViewBookCommand implements PostCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        Integer bookId = Integer.parseInt(request.getParameter(("bookid")));
+        Integer bookId = null;
+        try {
+            bookId = Integer.parseInt(request.getParameter(("bookid")));
+        } catch (Exception e) {
+            bookId = (Integer) request.getAttribute(("bookid"));
+        }
         Service<Integer, BookViewObject> getBookInfoService = GetBookInfoService.getInstance();
         BookViewObject book = getBookInfoService.execute(bookId);
 

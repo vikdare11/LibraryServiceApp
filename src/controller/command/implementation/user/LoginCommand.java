@@ -36,6 +36,7 @@ public class LoginCommand implements PostCommand {
 
             Service<User, Reader> loginService = LoginService.getInstance();
             Reader reader = null;
+
             try {
                 reader = loginService.execute(user);
             } catch (Exception e) {

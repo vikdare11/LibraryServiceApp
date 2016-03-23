@@ -23,6 +23,7 @@
                     <form action="controller" enctype="multipart/form-data" method="post">
                         <input type="hidden" name="command" value="delete_comment">
                         <input type="hidden" name="comment_id" value="${comment.id}">
+                        <input type="hidden" name="book_id" value="${bookVO.book.id}">
                         <input type="submit" value="Delete">
                     </form>
                 </td>

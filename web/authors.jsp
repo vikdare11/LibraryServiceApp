@@ -13,6 +13,8 @@
     <title></title>
 </head>
 <body>
+<a href="add_author.jsp">Add author</a>
+
   <c:forEach var="author" items="${authors}">
     <h3>${author.name} ${author.surname}</h3>
     <form action="controller" enctype="multipart/form-data" method="post">

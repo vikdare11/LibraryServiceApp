@@ -1,6 +1,7 @@
 package controller.command.implementation.comment;
 
 import controller.command.PostCommand;
+import controller.command.implementation.book.ViewBookCommand;
 import dao.CommentDao;
 import dao.implementation.CommentDaoImpl;
 import domain.Comment;
@@ -22,11 +23,12 @@ public class DeleteCommentCommand implements PostCommand {
         CommentDao commentDao = CommentDaoImpl.getInstance();
 
         int id = Integer.parseInt(request.getParameter("comment_id"));
+        request.setAttribute("bookid", Integer.parseInt(request.getParameter("book_id")));
         Comment comment = new Comment();
         comment.setId(id);
 
         commentDao.delete(comment);
 
-        return GetCommentsCommand.getInstance().execute(request);
+        return ViewBookCommand.getInstance().execute(request);
     }
 }

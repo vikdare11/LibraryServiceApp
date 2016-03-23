@@ -18,11 +18,11 @@
   <input type="hidden"name="command" value="edit_author">
   <input type="hidden" name="author_id" value="${author.id}">
 
-  <h3>Surname:</h3>
-  <input type="text" name="author_surname" value="${author.surname}">
-
   <h3>Name:</h3>
   <input type="text" name="author_name" value="${author.name}">
+
+  <h3>Surname:</h3>
+  <input type="text" name="author_surname" value="${author.surname}">
 
   <input type="submit" value="Apply changes">
 
