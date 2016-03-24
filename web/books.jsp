@@ -13,6 +13,12 @@
     <title></title>
 </head>
 <body>
+<c:if test="${not empty user}">
+  <form action="controller" enctype="multipart/form-data" method="post">
+    <input type="hidden" name="command" value="logout">
+    <input type="submit" value="Logout">
+  </form>
+</c:if>
   <table border="1">
     <tr>
       <th>Author</th>

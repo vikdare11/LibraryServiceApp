@@ -17,5 +17,7 @@
   <input type="password" maxlength="45" required name="password" placeholder="Password">
   <input type="submit" value="Login">
 </form>
+<h1></h1>
+<a href="registration.jsp">Sign up</a>
 </body>
 </html>

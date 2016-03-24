@@ -20,6 +20,8 @@
   <input type="email" maxlength="45" required name="email" placeholder="user@library.lib">
   <input type="submit" value="Register">
 </form>
+<h1></h1>
+<a href="login.jsp">Sign in</a>
 <c:if test="${not empty param['message']}">
   <p>User with this login is already exist</p>
 </c:if>

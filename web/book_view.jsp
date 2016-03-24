@@ -6,6 +6,12 @@
     <title></title>
 </head>
 <body>
+<c:if test="${not empty user}">
+    <form action="controller" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="command" value="logout">
+        <input type="submit" value="Logout">
+    </form>
+</c:if>
     <h1>Author: ${bookVO.author.name} ${bookVO.author.surname}</h1>
     <h1>Title: ${bookVO.book.name}</h1>
     <h1>Description: ${bookVO.book.description}</h1>
@@ -36,7 +42,7 @@
     <form action="controller" method="post" enctype="multipart/form-data">
         <input type="hidden" name="command" value="add_comment">
         <input type="hidden" name="book_id" value="${bookVO.book.id}">
-        <input type="textarea" required name="review" placeholder="Input your review here...">
+        <textarea maxlength="10000" name="review" placeholder="Input your review here..."></textarea>
         <input type="submit" value="Add comment">
     </form>
     <form action="download" method="get" enctype="multipart/form-data">

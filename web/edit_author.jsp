@@ -14,6 +14,12 @@
     <title></title>
 </head>
 <body>
+<c:if test="${not empty user}">
+  <form action="controller" enctype="multipart/form-data" method="post">
+    <input type="hidden" name="command" value="logout">
+    <input type="submit" value="Logout">
+  </form>
+</c:if>
 <form action="controller" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
   <input type="hidden"name="command" value="edit_author">
   <input type="hidden" name="author_id" value="${author.id}">

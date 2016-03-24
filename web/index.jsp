@@ -14,7 +14,11 @@
   </head>
   <body>
 <c:if test="${not empty user}">
-  <c:choose>
+  <h3>Hello, ${user.login}! Have a nice day.</h3>
+    <form action="controller" enctype="multipart/form-data" method="post">
+      <input type="hidden" name="command" value="logout">
+      <input type="submit" value="Logout">
+    </form>
     <form action="controller" enctype="multipart/form-data" method="post">
       <input type="hidden" name="command" value="get_authors">
       <input type="submit" value="Authors list">
@@ -27,9 +31,10 @@
       <input type="hidden" name="command" value="get_users">
       <input type="submit" value="Users list">
     </form>
-</c:choose>
 </c:if>
+<c:if test="${empty user}">
     <a href="login.jsp">Sign in</a>
     <a href="registration.jsp">Sign up</a>
+</c:if>
   </body>
 </html>

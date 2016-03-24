@@ -45,12 +45,14 @@ public class Controller extends HttpServlet {
         availableAdminOperations.add("delete_comment");
         availableAdminOperations.add("prepare_add_book");
         availableAdminOperations.add("add_book");
+        availableAdminOperations.add("logout");
 
 
         availableUserOperations.add("view_book");
         availableUserOperations.add("add_comment");
         availableUserOperations.add("get_users");
         availableUserOperations.add("open_user");
+        availableAdminOperations.add("logout");
     }
 
     @Override
@@ -130,6 +132,10 @@ public class Controller extends HttpServlet {
                 }
                 case "add_book" : {
                     command = AddBookCommand.getInstance();
+                    break;
+                }
+                case "logout" : {
+                    command = LogoutCommand.getInstance();
                     break;
                 }
             }
