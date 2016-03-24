@@ -34,7 +34,7 @@
     <form action="controller" method="post" enctype="multipart/form-data">
         <input type="hidden" name="command" value="add_comment">
         <input type="hidden" name="book_id" value="${bookVO.book.id}">
-        <input type="text" required name="review" placeholder="Input your review here...">
+        <input type="textarea" required name="review" placeholder="Input your review here...">
         <input type="submit" value="Add comment">
     </form>
     <form action="download" method="get" enctype="multipart/form-data">

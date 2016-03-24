@@ -1,6 +1,6 @@
 package controller.command.implementation.comment;
 
-import controller.command.PostCommand;
+import controller.command.Command;
 import dao.CommentDao;
 import dao.implementation.CommentDaoImpl;
 import domain.Comment;
@@ -8,7 +8,7 @@ import domain.User;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class AddCommentCommand implements PostCommand {
+public class AddCommentCommand implements Command {
     private static AddCommentCommand ourInstance = new AddCommentCommand();
 
     public static AddCommentCommand getInstance() {

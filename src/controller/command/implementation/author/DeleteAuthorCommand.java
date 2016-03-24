@@ -1,19 +1,19 @@
 package controller.command.implementation.author;
 
-import controller.command.PostCommand;
+import controller.command.Command;
 import dao.AuthorDao;
 import dao.implementation.AuthorDaoImpl;
 import domain.Author;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class DeleteAuthorCommand implements PostCommand {
+public class DeleteAuthorCommand implements Command {
 
-    private static final PostCommand instance = new DeleteAuthorCommand();
+    private static final Command instance = new DeleteAuthorCommand();
 
     private DeleteAuthorCommand(){}
 
-    public static PostCommand getInstance() {
+    public static Command getInstance() {
         return instance;
     }
 

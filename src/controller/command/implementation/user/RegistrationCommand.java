@@ -1,13 +1,13 @@
 package controller.command.implementation.user;
 
-import controller.command.PostCommand;
+import controller.command.Command;
 import domain.Registration;
 import service.Service;
 import service.implementation.RegistrationService;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class RegistrationCommand implements PostCommand {
+public class RegistrationCommand implements Command {
 
     private static final RegistrationCommand instance = new RegistrationCommand();
 

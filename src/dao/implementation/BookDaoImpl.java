@@ -2,7 +2,6 @@ package dao.implementation;
 
 import dao.BookDao;
 import dao.util.DbUtil;
-import domain.Author;
 import domain.Book;
 
 import java.sql.*;
@@ -24,11 +23,10 @@ public class BookDaoImpl implements BookDao {
         int id = 0;
 
         try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement("insert into `book` (title, description, countOfViews) " +
-                     "values (?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement statement = connection.prepareStatement("insert into `book` (title, description) " +
+                     "values (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, book.getName());
             statement.setString(2, book.getDescription());
-            statement.setInt(3, book.getCountOfViews());
             statement.execute();
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
                 if (resultSet.next()) {
@@ -113,6 +111,19 @@ public class BookDaoImpl implements BookDao {
             e.printStackTrace();
         }
         return books;
+    }
+
+    @Override
+    public void insertBookAuthorLink(Integer bookId, Integer authorId) {
+        try (Connection connection = DbUtil.getConnection();
+            PreparedStatement statement = connection.prepareStatement
+                    ("INSERT INTO bookofauthor (idauthor, idbook) VALUES (?,?)")) {
+            statement.setInt(1, authorId);
+            statement.setInt(2, bookId);
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

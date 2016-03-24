@@ -23,6 +23,11 @@
       <input type="submit" value="View books"/>
     </form>
     <form action="controller" enctype="multipart/form-data" method="post">
+      <input type="hidden" name="command" value="prepare_add_book">
+      <input type="hidden" name="author_id" value="${author.id}">
+      <input type="submit" value="Add book"/>
+    </form>
+    <form action="controller" enctype="multipart/form-data" method="post">
       <input type="hidden" name="command" value="open_edit_author">
       <input type="hidden" name="author_id" value="${author.id}">
       <input type="submit" value="Edit">

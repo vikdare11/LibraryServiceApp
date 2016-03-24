@@ -1,14 +1,12 @@
 package controller;
 
-import controller.command.PostCommand;
+import controller.command.Command;
 import controller.command.implementation.author.*;
-import controller.command.implementation.book.DeleteBookCommand;
-import controller.command.implementation.book.GetBooksByAuthorCommand;
-import controller.command.implementation.book.GetBooksCommand;
-import controller.command.implementation.book.ViewBookCommand;
+import controller.command.implementation.book.*;
 import controller.command.implementation.comment.AddCommentCommand;
 import controller.command.implementation.comment.DeleteCommentCommand;
 import controller.command.implementation.user.*;
+import domain.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,15 +15,49 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @MultipartConfig
 public class Controller extends HttpServlet {
+
+    private static List<String> availableOperations = new ArrayList<>();
+    private static List<String> availableAdminOperations = new ArrayList<>();
+    private static List<String> availableUserOperations = new ArrayList<>();
+
+    static {
+        availableOperations.add("login");
+        availableOperations.add("register");
+        availableOperations.add("get_books");
+        availableOperations.add("get_authors");
+        availableOperations.add("open_author");
+
+        availableAdminOperations.add("add_author");
+        availableAdminOperations.add("delete_author");
+        availableAdminOperations.add("open_edit_author");
+        availableAdminOperations.add("edit_author");
+        availableAdminOperations.add("view_book");
+        availableAdminOperations.add("add_comment");
+        availableAdminOperations.add("get_users");
+        availableAdminOperations.add("open_user");
+        availableAdminOperations.add("delete_book");
+        availableAdminOperations.add("delete_user");
+        availableAdminOperations.add("delete_comment");
+        availableAdminOperations.add("prepare_add_book");
+        availableAdminOperations.add("add_book");
+
+
+        availableUserOperations.add("view_book");
+        availableUserOperations.add("add_comment");
+        availableUserOperations.add("get_users");
+        availableUserOperations.add("open_user");
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String commandName = req.getParameter("command");
         String page = null;
-        PostCommand command = null;
+        Command command = null;
         if (commandName != null) {
             switch (commandName) {
                 case "get_authors" : {
@@ -92,8 +124,34 @@ public class Controller extends HttpServlet {
                     command = DeleteCommentCommand.getInstance();
                     break;
                 }
+                case "prepare_add_book" : {
+                    command = PrepareAddBookCommand.getInstance();
+                    break;
+                }
+                case "add_book" : {
+                    command = AddBookCommand.getInstance();
+                    break;
+                }
             }
+
+            boolean access = true;
             if (command != null) {
+                if (!availableOperations.contains(commandName)) {
+                    User user = (User) req.getSession().getAttribute("user");
+
+                    if (user.isAdmin()) {
+                        access = availableAdminOperations.contains(commandName);
+                    }
+                    else {
+                        access = availableUserOperations.contains(commandName);
+                    }
+
+                }
+                if (!access) {
+                    req.getSession().invalidate();
+                    resp.sendRedirect("login.jsp");
+                    return;
+                }
                 page = command.execute(req);
             }
         }

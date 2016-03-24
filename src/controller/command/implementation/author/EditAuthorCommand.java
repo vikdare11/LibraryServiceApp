@@ -1,18 +1,18 @@
 package controller.command.implementation.author;
 
-import controller.command.PostCommand;
+import controller.command.Command;
 import dao.AuthorDao;
 import dao.implementation.AuthorDaoImpl;
 import domain.Author;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class EditAuthorCommand implements PostCommand {
-    private static final PostCommand instance = new EditAuthorCommand();
+public class EditAuthorCommand implements Command {
+    private static final Command instance = new EditAuthorCommand();
 
     private EditAuthorCommand(){}
 
-    public static PostCommand getInstance() {
+    public static Command getInstance() {
         return instance;
     }
 

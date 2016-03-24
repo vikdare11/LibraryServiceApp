@@ -1,6 +1,6 @@
 package controller.command.implementation.user;
 
-import controller.command.PostCommand;
+import controller.command.Command;
 import dao.UserDao;
 import dao.implementation.UserDaoImpl;
 import domain.User;
@@ -8,13 +8,13 @@ import domain.User;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class GetUsersCommand implements PostCommand {
+public class GetUsersCommand implements Command {
 
-    private static final PostCommand instance = new GetUsersCommand();
+    private static final Command instance = new GetUsersCommand();
 
     private GetUsersCommand(){}
 
-    public static PostCommand getInstance() {
+    public static Command getInstance() {
         return instance;
     }
 

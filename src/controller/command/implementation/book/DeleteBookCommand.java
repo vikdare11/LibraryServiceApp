@@ -1,19 +1,19 @@
 package controller.command.implementation.book;
 
-import controller.command.PostCommand;
+import controller.command.Command;
 import dao.BookDao;
 import dao.implementation.BookDaoImpl;
 import domain.Book;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class DeleteBookCommand implements PostCommand {
+public class DeleteBookCommand implements Command {
 
-    private static final PostCommand instance = new DeleteBookCommand();
+    private static final Command instance = new DeleteBookCommand();
 
     private DeleteBookCommand(){}
 
-    public static PostCommand getInstance() {
+    public static Command getInstance() {
         return instance;
     }
 

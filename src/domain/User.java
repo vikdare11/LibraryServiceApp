@@ -9,7 +9,15 @@ public class User implements Serializable {
     private int id;
     private String login;
     private String password;
-    private boolean isAdmin;
+    private boolean admin;
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
 
     public int getId() {
         return id;
@@ -35,11 +43,4 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public boolean getAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(boolean admin) {
-        this.isAdmin = admin;
-    }
 }

@@ -1,6 +1,6 @@
 package controller.command.implementation.user;
 
-import controller.command.PostCommand;
+import controller.command.Command;
 import controller.command.implementation.book.GetBooksCommand;
 import dao.UserDao;
 import dao.implementation.UserDaoImpl;
@@ -11,7 +11,7 @@ import service.implementation.LoginService;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class LoginCommand implements PostCommand {
+public class LoginCommand implements Command {
 
     private static final LoginCommand instance = new LoginCommand();
 
@@ -47,12 +47,8 @@ public class LoginCommand implements PostCommand {
                 return "login.jsp" + "?" + "message" + "=incorrect";
             }
 
-            if (user.getAdmin()) {
-                request.getSession(true).setAttribute("admin", user);
-            }
-            else {
-                request.getSession(true).setAttribute("user", user);
-            }
+            request.getSession(true).setAttribute("user", user);
+
             return GetBooksCommand.getInstance().execute(request);
         }
         else {

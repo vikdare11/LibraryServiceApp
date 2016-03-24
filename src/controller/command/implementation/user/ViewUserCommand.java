@@ -1,13 +1,13 @@
 package controller.command.implementation.user;
 
-import controller.command.PostCommand;
+import controller.command.Command;
 import domain.UserViewObject;
 import service.Service;
 import service.implementation.GetUserInfoService;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class ViewUserCommand implements PostCommand {
+public class ViewUserCommand implements Command {
     private static ViewUserCommand ourInstance = new ViewUserCommand();
 
     public static ViewUserCommand getInstance() {

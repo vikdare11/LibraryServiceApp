@@ -1,18 +1,18 @@
 package controller.command.implementation.user;
 
-import controller.command.PostCommand;
+import controller.command.Command;
 import dao.UserDao;
 import dao.implementation.UserDaoImpl;
 import domain.User;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class DeleteUserCommand implements PostCommand {
-    private static final PostCommand instance = new DeleteUserCommand();
+public class DeleteUserCommand implements Command {
+    private static final Command instance = new DeleteUserCommand();
 
     private DeleteUserCommand(){}
 
-    public static PostCommand getInstance() {
+    public static Command getInstance() {
         return instance;
     }
 

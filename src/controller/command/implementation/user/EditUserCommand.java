@@ -1,13 +1,13 @@
 package controller.command.implementation.user;
 
-import controller.command.PostCommand;
+import controller.command.Command;
 import dao.UserDao;
 import dao.implementation.UserDaoImpl;
 import domain.User;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class EditUserCommand implements PostCommand {
+public class EditUserCommand implements Command {
 
     private static EditUserCommand instance = new EditUserCommand();
 

@@ -10,4 +10,5 @@ public interface BookDao {
     void update(Book book);
     void delete(Book book);
     List<Book> getBooksList();
+    void insertBookAuthorLink(Integer bookId, Integer authorId);
 }
