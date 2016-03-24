@@ -6,18 +6,20 @@
     <title></title>
 </head>
 <body>
-<c:forEach var="user" items="${users}">
-    <h3>${user.login}</h3>
+<c:forEach var="person" items="${users}">
+    <h3>${person.login}</h3>
     <form action="controller" enctype="multipart/form-data" method="post">
         <input type="hidden" name="command" value="open_user">
-        <input type="hidden" name="user_id" value="${user.id}">
+        <input type="hidden" name="user_id" value="${person.id}">
         <input type="submit" value="View information"/>
     </form>
+    <c:if test="${user.admin == true}">
     <form action="controller" enctype="multipart/form-data" method="post">
         <input type="hidden" name="command" value="delete_user">
-        <input type="hidden" name="user_id" value="${user.id}">
+        <input type="hidden" name="user_id" value="${person.id}">
         <input type="submit" value="Delete">
     </form>
+    </c:if>
 </c:forEach>
 </body>
 </html>

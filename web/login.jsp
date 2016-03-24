@@ -13,8 +13,8 @@
 <body>
 <form method="post" action="controller">
   <input type="hidden" name="command" value="login">
-  <input type="text" required name="login" placeholder="Login">
-  <input type="password" required name="password" placeholder="Password">
+  <input type="text" maxlength="45" required name="login" placeholder="Login">
+  <input type="password" maxlength="45" required name="password" placeholder="Password">
   <input type="submit" value="Login">
 </form>
 </body>

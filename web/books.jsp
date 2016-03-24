@@ -24,14 +24,10 @@
         <td>${book.author}</td>
         <td>${book.name}</td>
         <td>${book.description}</td>
-        <td>
-          <form action="controller" enctype="multipart/form-data" method="post">
-            <input type="hidden" name="command" value="view_book">
-            <input type="hidden" name="bookid" value="${book.id}">
-            <input type="submit" value="View"/>
-          </form>
-        </td>
-        <c:if test="${user.admin == true}">
+
+        <c:if test="${not empty user}">
+          <c:choose>
+          <c:when test="${user.admin == true}">
           <td>
             <form action="controller" enctype="multipart/form-data" method="post">
               <input type="hidden" name="command" value="delete_book">
@@ -39,6 +35,17 @@
               <input type="submit" value="Delete">
             </form>
           </td>
+          </c:when>
+          <c:otherwise>
+          <td>
+            <form action="controller" enctype="multipart/form-data" method="post">
+              <input type="hidden" name="command" value="view_book">
+              <input type="hidden" name="bookid" value="${book.id}">
+              <input type="submit" value="View"/>
+            </form>
+          </td>
+          </c:otherwise>
+          </c:choose>
         </c:if>
 
       </tr>

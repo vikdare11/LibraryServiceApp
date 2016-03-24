@@ -19,13 +19,13 @@
   <input maxlength="45" type="text" name="title" placeholder="Pride and Prejudice">
 
   <h3>Description:</h3>
-  <textarea name="description" placeholder="Input book description here..."></textarea>
+  <textarea maxlength="10000" name="description" placeholder="Input book description here..."></textarea>
 
   <h3>Path for online reading:</h3>
-  <input type="text" name="readPath" placeholder="Books/book.html">
+  <input maxlength="255" type="text" name="readPath" placeholder="Books/book.html">
 
   <h3>Path for online reading:</h3>
-  <input type="text" name="downloadPath" placeholder="Books/book.fb2">
+  <input maxlength="255" type="text" name="downloadPath" placeholder="Books/book.fb2">
 
   <input type="submit" value="Add book">
 

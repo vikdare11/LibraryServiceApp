@@ -16,8 +16,8 @@
 <form method="post" action="controller">
   <input type="hidden" name="command" value="register">
   <input type="text" required name="login" placeholder="Login">
-  <input type="password" required name="password" placeholder="Password">
-  <input type="email" required name="email" placeholder="user@library.lib">
+  <input type="password" maxlength="45" required name="password" placeholder="Password">
+  <input type="email" maxlength="45" required name="email" placeholder="user@library.lib">
   <input type="submit" value="Register">
 </form>
 <c:if test="${not empty param['message']}">

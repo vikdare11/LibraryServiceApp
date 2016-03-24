@@ -13,7 +13,9 @@
     <title></title>
 </head>
 <body>
-<a href="add_author.jsp">Add author</a>
+  <c:if test="${user.admin == true}">
+    <a href="add_author.jsp">Add author</a>
+  </c:if>
 
   <c:forEach var="author" items="${authors}">
     <h3>${author.name} ${author.surname}</h3>
@@ -22,21 +24,23 @@
       <input type="hidden" name="author_id" value="${author.id}">
       <input type="submit" value="View books"/>
     </form>
-    <form action="controller" enctype="multipart/form-data" method="post">
-      <input type="hidden" name="command" value="prepare_add_book">
-      <input type="hidden" name="author_id" value="${author.id}">
-      <input type="submit" value="Add book"/>
-    </form>
-    <form action="controller" enctype="multipart/form-data" method="post">
-      <input type="hidden" name="command" value="open_edit_author">
-      <input type="hidden" name="author_id" value="${author.id}">
-      <input type="submit" value="Edit">
-    </form>
-    <form action="controller" enctype="multipart/form-data" method="post">
-      <input type="hidden" name="command" value="delete_author">
-      <input type="hidden" name="author_id" value="${author.id}">
-      <input type="submit" value="Delete">
-    </form>
+    <c:if test="${user.admin == true}">
+      <form action="controller" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="command" value="prepare_add_book">
+        <input type="hidden" name="author_id" value="${author.id}">
+        <input type="submit" value="Add book"/>
+      </form>
+      <form action="controller" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="command" value="open_edit_author">
+        <input type="hidden" name="author_id" value="${author.id}">
+        <input type="submit" value="Edit">
+      </form>
+      <form action="controller" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="command" value="delete_author">
+        <input type="hidden" name="author_id" value="${author.id}">
+        <input type="submit" value="Delete">
+      </form>
+    </c:if>
   </c:forEach>
 </body>
 </html>

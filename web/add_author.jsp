@@ -15,10 +15,10 @@
   <input type="hidden"name="command" value="add_author">
 
   <h3>Name:</h3>
-  <input type="text" name="author_name" placeholder="Joanne">
+  <input maxlength="45" type="text" name="author_name" placeholder="Joanne">
 
   <h3>Surname:</h3>
-  <input type="text" name="author_surname" placeholder="Rowling">
+  <input maxlength="45" type="text" name="author_surname" placeholder="Rowling">
 
   <input type="submit" value="Add author">
 

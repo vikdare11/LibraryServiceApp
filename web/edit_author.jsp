@@ -19,10 +19,10 @@
   <input type="hidden" name="author_id" value="${author.id}">
 
   <h3>Name:</h3>
-  <input type="text" name="author_name" value="${author.name}">
+  <input type="text" maxlength="45" name="author_name" value="${author.name}">
 
   <h3>Surname:</h3>
-  <input type="text" name="author_surname" value="${author.surname}">
+  <input type="text" maxlength="45" name="author_surname" value="${author.surname}">
 
   <input type="submit" value="Apply changes">
 

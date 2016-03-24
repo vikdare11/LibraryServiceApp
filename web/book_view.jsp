@@ -19,6 +19,7 @@
             <tr>
                 <td>${comment.user}</td>
                 <td>${comment.review}</td>
+                <c:if test="${user.admin == true}">
                 <td>
                     <form action="controller" enctype="multipart/form-data" method="post">
                         <input type="hidden" name="command" value="delete_comment">
@@ -27,6 +28,7 @@
                         <input type="submit" value="Delete">
                     </form>
                 </td>
+                </c:if>
             </tr>
         </c:forEach>
     </table>

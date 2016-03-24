@@ -1,7 +1,6 @@
 package controller.command.implementation.user;
 
 import controller.command.Command;
-import controller.command.implementation.book.GetBooksCommand;
 import dao.UserDao;
 import dao.implementation.UserDaoImpl;
 import domain.Reader;
@@ -49,7 +48,7 @@ public class LoginCommand implements Command {
 
             request.getSession(true).setAttribute("user", user);
 
-            return GetBooksCommand.getInstance().execute(request);
+            return "index.jsp";
         }
         else {
             page = "login.jsp";
