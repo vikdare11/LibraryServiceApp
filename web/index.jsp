@@ -20,18 +20,23 @@
       <input type="submit" value="Logout">
     </form>
     <form action="controller" enctype="multipart/form-data" method="post">
-      <input type="hidden" name="command" value="get_authors">
-      <input type="submit" value="Authors list">
-    </form>
-    <form action="controller" enctype="multipart/form-data" method="post">
-      <input type="hidden" name="command" value="get_books">
-      <input type="submit" value="Books list">
+      <input type="hidden" name="command" value="open_user">
+      <input type="hidden" name="user_id" value="${user.id}">
+      <input type="submit" value="My profile">
     </form>
     <form action="controller" enctype="multipart/form-data" method="post">
       <input type="hidden" name="command" value="get_users">
       <input type="submit" value="Users list">
     </form>
 </c:if>
+<form action="controller" enctype="multipart/form-data" method="post">
+  <input type="hidden" name="command" value="get_authors">
+  <input type="submit" value="Authors list">
+</form>
+<form action="controller" enctype="multipart/form-data" method="post">
+  <input type="hidden" name="command" value="get_books">
+  <input type="submit" value="Books list">
+</form>
 <c:if test="${empty user}">
     <a href="login.jsp">Sign in</a>
     <a href="registration.jsp">Sign up</a>

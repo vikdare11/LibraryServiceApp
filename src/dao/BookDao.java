@@ -11,4 +11,7 @@ public interface BookDao {
     void delete(Book book);
     List<Book> getBooksList();
     void insertBookAuthorLink(Integer bookId, Integer authorId);
+    void addBookToReaderCollection(int bookId, int readerId);
+    boolean readerHasBook(int idReader, int idBook);
+    void removeBookFromReaderCollection(int idReader, int idBook);
 }

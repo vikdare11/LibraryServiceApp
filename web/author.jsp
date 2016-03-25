@@ -6,6 +6,7 @@
     <title></title>
 </head>
 <body>
+<a href="index.jsp">Main page</a>
 <c:if test="${not empty user}">
     <form action="controller" enctype="multipart/form-data" method="post">
         <input type="hidden" name="command" value="logout">
@@ -25,13 +26,15 @@
                 <tr>
                     <td>${book.name}</td>
                     <td>${book.description}</td>
-                    <td>
-                        <form action="controller" enctype="multipart/form-data" method="post">
-                            <input type="hidden" name="command" value="view_book">
-                            <input type="hidden" name="bookid" value="${book.id}">
-                            <input type="submit" value="View"/>
-                        </form>
-                    </td>
+                    <c:if test="${not empty user}">
+                        <td>
+                            <form action="controller" enctype="multipart/form-data" method="post">
+                                <input type="hidden" name="command" value="view_book">
+                                <input type="hidden" name="bookid" value="${book.id}">
+                                <input type="submit" value="View"/>
+                            </form>
+                        </td>
+                    </c:if>
                 </tr>
             </c:if>
         </c:forEach>

@@ -11,4 +11,5 @@ public interface UserDao {
     void delete(User user);
     int findIdUser(User user);
     List<User> getUsersList();
+    boolean isLoginExist(String login);
 }

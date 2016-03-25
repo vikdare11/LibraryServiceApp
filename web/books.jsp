@@ -13,6 +13,7 @@
     <title></title>
 </head>
 <body>
+<a href="index.jsp">Main page</a>
 <c:if test="${not empty user}">
   <form action="controller" enctype="multipart/form-data" method="post">
     <input type="hidden" name="command" value="logout">
@@ -33,29 +34,40 @@
 
         <c:if test="${not empty user}">
           <c:choose>
-          <c:when test="${user.admin == true}">
-          <td>
-            <form action="controller" enctype="multipart/form-data" method="post">
-              <input type="hidden" name="command" value="delete_book">
-              <input type="hidden" name="bookid" value="${book.id}">
-              <input type="submit" value="Delete">
-            </form>
-          </td>
-          </c:when>
-          <c:otherwise>
-          <td>
-            <form action="controller" enctype="multipart/form-data" method="post">
-              <input type="hidden" name="command" value="view_book">
-              <input type="hidden" name="bookid" value="${book.id}">
-              <input type="submit" value="View"/>
-            </form>
-          </td>
-          </c:otherwise>
+            <c:when test="${user.admin}">
+              <td>
+                <form action="controller" enctype="multipart/form-data" method="post">
+                  <input type="hidden" name="command" value="delete_book">
+                  <input type="hidden" name="bookid" value="${book.id}">
+                  <input type="submit" value="Delete">
+                </form>
+              </td>
+
+              <td>
+                <form action="controller" enctype="multipart/form-data" method="post">
+                  <input type="hidden" name="command" value="view_book">
+                  <input type="hidden" name="bookid" value="${book.id}">
+                  <input type="submit" value="View"/>
+                </form>
+              </td>
+            </c:when>
+            <c:otherwise>
+            <td>
+              <form action="controller" enctype="multipart/form-data" method="post">
+                <input type="hidden" name="command" value="view_book">
+                <input type="hidden" name="bookid" value="${book.id}">
+                <input type="submit" value="View"/>
+              </form>
+            </td>
+            </c:otherwise>
           </c:choose>
         </c:if>
-
       </tr>
     </c:forEach>
   </table>
+<c:if test="${empty user}">
+  <a href="login.jsp">Sign in</a>
+  <a href="registration.jsp">Sign up</a>
+</c:if>
 </body>
 </html>

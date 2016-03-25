@@ -24,6 +24,7 @@ public class DeleteCommentCommand implements Command {
 
         int id = Integer.parseInt(request.getParameter("comment_id"));
         request.setAttribute("bookid", Integer.parseInt(request.getParameter("book_id")));
+
         Comment comment = new Comment();
         comment.setId(id);
 

@@ -117,7 +117,7 @@ public class ReaderDaoImpl implements ReaderDao {
             statement.setInt(1, idReader);
 
             try(ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
+                while (resultSet.next()) {
                     Book book = new Book();
                     book.setId(resultSet.getInt("idbook"));
                     book.setName(resultSet.getString("title"));

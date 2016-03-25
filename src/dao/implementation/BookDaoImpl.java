@@ -126,4 +126,47 @@ public class BookDaoImpl implements BookDao {
         }
     }
 
+    @Override
+    public void addBookToReaderCollection(int bookId, int readerId) {
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement
+                     ("INSERT INTO bookcollectionofreader (idbook, idreader) VALUES (?,?)")) {
+            statement.setInt(1, bookId);
+            statement.setInt(2, readerId);
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean readerHasBook(int idReader, int idBook) {
+        boolean readerHasBook = false;
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM `bookcollectionofreader` WHERE `idbook`=? and `idreader`=?")) {
+            statement.setInt(1, idBook);
+            statement.setInt(2, idBook);
+            try(ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    readerHasBook = true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return readerHasBook;
+    }
+
+    @Override
+    public void removeBookFromReaderCollection(int idReader, int idBook) {
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement("DELETE FROM `bookcollectionofreader` WHERE `idbook`=? and `idreader`=?")) {
+            statement.setInt(1, idBook);
+            statement.setInt(2, idReader);
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

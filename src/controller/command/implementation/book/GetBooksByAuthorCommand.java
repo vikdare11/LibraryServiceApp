@@ -30,6 +30,7 @@ public class GetBooksByAuthorCommand implements Command {
         request.setAttribute("author", author);
 
         BookDao bookDao = BookDaoImpl.getInstance();
+
         List<Book> books = bookDao.getBooksList();
 
         request.setAttribute("books", books);

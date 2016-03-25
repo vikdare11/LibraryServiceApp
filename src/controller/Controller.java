@@ -46,13 +46,18 @@ public class Controller extends HttpServlet {
         availableAdminOperations.add("prepare_add_book");
         availableAdminOperations.add("add_book");
         availableAdminOperations.add("logout");
+        availableAdminOperations.add("add_book_to_reader_collection");
+        availableAdminOperations.add("remove_book_from_reader_collection");
 
 
         availableUserOperations.add("view_book");
         availableUserOperations.add("add_comment");
         availableUserOperations.add("get_users");
         availableUserOperations.add("open_user");
-        availableAdminOperations.add("logout");
+        availableUserOperations.add("logout");
+        availableUserOperations.add("add_book_to_reader_collection");
+        availableUserOperations.add("remove_book_from_reader_collection");
+
     }
 
     @Override
@@ -136,6 +141,14 @@ public class Controller extends HttpServlet {
                 }
                 case "logout" : {
                     command = LogoutCommand.getInstance();
+                    break;
+                }
+                case "add_book_to_reader_collection" : {
+                    command = AddBookToReaderCollectionCommand.getInstance();
+                    break;
+                }
+                case "remove_book_from_reader_collection" :{
+                    command = RemoveBookFromReaderCollection.getInstance();
                     break;
                 }
             }

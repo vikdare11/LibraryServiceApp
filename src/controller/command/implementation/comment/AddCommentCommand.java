@@ -1,6 +1,7 @@
 package controller.command.implementation.comment;
 
 import controller.command.Command;
+import controller.command.implementation.book.ViewBookCommand;
 import dao.CommentDao;
 import dao.implementation.CommentDaoImpl;
 import domain.Comment;
@@ -33,7 +34,7 @@ public class AddCommentCommand implements Command {
 
 
         commentDao.create(comment);
-
-        return GetCommentsCommand.getInstance().execute(request);
+        request.setAttribute("bookid", idBook);
+        return ViewBookCommand.getInstance().execute(request);
     }
 }

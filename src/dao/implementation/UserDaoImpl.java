@@ -52,6 +52,7 @@ public class UserDaoImpl implements UserDao {
                     user.setLogin(resultSet.getString("login"));
                     user.setPassword(resultSet.getString("password"));
                     user.setId(idUser);
+                    user.setAdmin(resultSet.getBoolean("isadmin"));
                 }
             }
         } catch (SQLException e) {
@@ -106,6 +107,26 @@ public class UserDaoImpl implements UserDao {
             e.printStackTrace();
         }
         return users;
+    }
+
+    @Override
+    public boolean isLoginExist(String login) {
+        boolean loginExist = false;
+
+        try (Connection connection = DbUtil.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT login FROM `user` WHERE login=?"))
+        {
+            statement.setString(1, login);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    loginExist = true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return loginExist;
     }
 
     @Override

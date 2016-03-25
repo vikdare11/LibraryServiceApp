@@ -13,12 +13,11 @@
     <title></title>
 </head>
 <body>
-<c:if test="${not empty user}">
+<a href="index.jsp">Main page</a>
   <form action="controller" enctype="multipart/form-data" method="post">
     <input type="hidden" name="command" value="logout">
     <input type="submit" value="Logout">
   </form>
-</c:if>
 <form action="controller" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
   <input type="hidden"name="command" value="add_book">
   <input type="hidden" name="author_id" value="${author_id}">
@@ -32,7 +31,7 @@
   <h3>Path for online reading:</h3>
   <input maxlength="255" type="text" name="readPath" placeholder="Books/book.html">
 
-  <h3>Path for online reading:</h3>
+  <h3>Path for download:</h3>
   <input maxlength="255" type="text" name="downloadPath" placeholder="Books/book.fb2">
 
   <input type="submit" value="Add book">

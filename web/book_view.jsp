@@ -6,12 +6,11 @@
     <title></title>
 </head>
 <body>
-<c:if test="${not empty user}">
+<a href="index.jsp">Main page</a>
     <form action="controller" enctype="multipart/form-data" method="post">
         <input type="hidden" name="command" value="logout">
         <input type="submit" value="Logout">
     </form>
-</c:if>
     <h1>Author: ${bookVO.author.name} ${bookVO.author.surname}</h1>
     <h1>Title: ${bookVO.book.name}</h1>
     <h1>Description: ${bookVO.book.description}</h1>
@@ -38,13 +37,18 @@
             </tr>
         </c:forEach>
     </table>
-    <a href="${bookVO.readPath.path}">Read online</a>
     <form action="controller" method="post" enctype="multipart/form-data">
         <input type="hidden" name="command" value="add_comment">
         <input type="hidden" name="book_id" value="${bookVO.book.id}">
         <textarea maxlength="10000" name="review" placeholder="Input your review here..."></textarea>
         <input type="submit" value="Add comment">
     </form>
+    <form action="controller" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="command" value="add_book_to_reader_collection">
+        <input type="hidden" name="book_id" value="${bookVO.book.id}">
+        <input type="submit" value="Add to my collection">
+    </form>
+    <a href="${bookVO.readPath.path}">Read online</a>
     <form action="download" method="get" enctype="multipart/form-data">
         <input type="hidden" name="command" value="download_book">
         <input type="hidden" name="bookPath" value="${bookVO.downloadPath.path}">

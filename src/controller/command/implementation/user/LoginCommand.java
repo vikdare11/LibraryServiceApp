@@ -3,7 +3,6 @@ package controller.command.implementation.user;
 import controller.command.Command;
 import dao.UserDao;
 import dao.implementation.UserDaoImpl;
-import domain.Reader;
 import domain.User;
 import service.Service;
 import service.implementation.LoginService;
@@ -33,20 +32,20 @@ public class LoginCommand implements Command {
             user.setPassword(request.getParameter("password"));
             user.setId(userDao.findIdUser(user));
 
-            Service<User, Reader> loginService = LoginService.getInstance();
-            Reader reader = null;
+            Service<User, User> loginService = LoginService.getInstance();
+            User foundUser = null;
 
             try {
-                reader = loginService.execute(user);
+                foundUser = loginService.execute(user);
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            if (reader == null) {
+            if (foundUser == null) {
                 return "login.jsp" + "?" + "message" + "=incorrect";
             }
 
-            request.getSession(true).setAttribute("user", user);
+            request.getSession(true).setAttribute("user", foundUser);
 
             return "index.jsp";
         }

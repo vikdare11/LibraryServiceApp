@@ -13,6 +13,7 @@
     <title></title>
 </head>
 <body>
+<a href="index.jsp">Main page</a>
 <c:if test="${not empty user}">
   <form action="controller" enctype="multipart/form-data" method="post">
     <input type="hidden" name="command" value="logout">
@@ -48,5 +49,9 @@
       </form>
     </c:if>
   </c:forEach>
+<c:if test="${empty user}">
+  <a href="login.jsp">Sign in</a>
+  <a href="registration.jsp">Sign up</a>
+</c:if>
 </body>
 </html>

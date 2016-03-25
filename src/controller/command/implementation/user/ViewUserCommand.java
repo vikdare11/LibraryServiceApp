@@ -20,10 +20,10 @@ public class ViewUserCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         Integer userId = Integer.parseInt(request.getParameter(("user_id")));
-        Service<Integer, UserViewObject> getBookInfoService = GetUserInfoService.getInstance();
-        UserViewObject book = getBookInfoService.execute(userId);
+        Service<Integer, UserViewObject> getUserInfoService = GetUserInfoService.getInstance();
+        UserViewObject user = getUserInfoService.execute(userId);
 
-        request.setAttribute("userVO", book);
+        request.setAttribute("userVO", user);
 
         return "user.jsp";
     }

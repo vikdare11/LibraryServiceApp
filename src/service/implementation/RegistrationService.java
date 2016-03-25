@@ -31,7 +31,7 @@ public class RegistrationService implements Service<Registration, Boolean> {
         Reader reader = new Reader();
         reader.setEmail(registrationData.getEmail());
         try {
-            if (userDao.findIdUser(user) != -1) {
+            if (userDao.isLoginExist(user.getLogin())) {
                 return false;
             }
             int id = userDao.create(user);
