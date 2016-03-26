@@ -13,6 +13,7 @@
     <title></title>
 </head>
 <body>
+<a href="index.jsp">Main page</a>
 <form method="post" action="controller">
   <input type="hidden" name="command" value="register">
   <input type="text" required name="login" placeholder="Login">

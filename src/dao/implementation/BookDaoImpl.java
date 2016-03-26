@@ -145,7 +145,7 @@ public class BookDaoImpl implements BookDao {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM `bookcollectionofreader` WHERE `idbook`=? and `idreader`=?")) {
             statement.setInt(1, idBook);
-            statement.setInt(2, idBook);
+            statement.setInt(2, idReader);
             try(ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     readerHasBook = true;

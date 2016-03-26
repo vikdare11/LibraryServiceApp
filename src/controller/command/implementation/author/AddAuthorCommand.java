@@ -27,7 +27,10 @@ public class AddAuthorCommand implements Command {
         author.setName(name);
         author.setSurname(surname);
 
-        authorDao.create(author);
+        if (!surname.isEmpty() && !name.isEmpty()){
+
+            authorDao.create(author);
+        }
 
         return GetAuthorsCommand.getInstance().execute(request);
     }

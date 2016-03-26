@@ -10,6 +10,12 @@
         <input type="hidden" name="command" value="logout">
         <input type="submit" value="Logout">
     </form>
+
+    <form action="controller" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="command" value="get_users">
+        <input type="submit" value="Go back">
+    </form>
+
 <form action="controller" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
     <h1>Login: ${userVO.login}</h1>
     <h1>Email: ${userVO.email}</h1>

@@ -2,7 +2,9 @@ package controller.command.implementation.book;
 
 import controller.command.Command;
 import dao.BookDao;
+import dao.ReaderDao;
 import dao.implementation.BookDaoImpl;
+import dao.implementation.ReaderDaoImpl;
 import domain.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,8 +22,9 @@ public class AddBookToReaderCollectionCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         BookDao bookDao = BookDaoImpl.getInstance();
-
-        int idReader = ((User)request.getSession().getAttribute("user")).getId();
+        ReaderDao readerDao = ReaderDaoImpl.getInstance();
+        int idUser = ((User)request.getSession().getAttribute("user")).getId();
+        int idReader = readerDao.getReaderByUserId(idUser);
         int idBook = Integer.parseInt(request.getParameter("book_id"));
 
         if (!bookDao.readerHasBook(idReader, idBook)) {

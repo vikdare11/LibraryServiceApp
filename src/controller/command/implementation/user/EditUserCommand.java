@@ -23,14 +23,10 @@ public class EditUserCommand implements Command {
         UserDao userDao = UserDaoImpl.getInstance();
 
         int id = Integer.parseInt(request.getParameter("user_id"));
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
         boolean isAdmin = Boolean.valueOf(request.getParameter("isadmin"));
 
         User user = new User();
         user.setId(id);
-        user.setPassword(password);
-        user.setLogin(login);
         user.setAdmin(isAdmin);
 
         userDao.update(user);

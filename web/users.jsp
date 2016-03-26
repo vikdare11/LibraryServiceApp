@@ -5,7 +5,6 @@
 <head>
     <title></title>
 </head>
-<body>
 <a href="index.jsp">Main page</a>
     <form action="controller" enctype="multipart/form-data" method="post">
         <input type="hidden" name="command" value="logout">
@@ -19,6 +18,23 @@
         <input type="submit" value="View information"/>
     </form>
     <c:if test="${user.admin == true}">
+        <c:if test="${person.id != user.id && person.admin == false}">
+
+            <form action="controller" enctype="multipart/form-data" method="post">
+                <input type="hidden" name="command" value="edit_user">
+                <input type="hidden" name="user_id" value="${person.id}">
+                <input type="hidden" name="isadmin" value=true>
+                <input type="submit" value="Make this user an admin"/>
+            </form>
+        </c:if>
+        <c:if test="${person.admin == true && person.login != 'admin'}">
+            <form action="controller" enctype="multipart/form-data" method="post">
+                <input type="hidden" name="command" value="edit_user">
+                <input type="hidden" name="user_id" value="${person.id}">
+                <input type="hidden" name="isadmin" value=false>
+                <input type="submit" value="Make this user not admin"/>
+            </form>
+        </c:if>
     <form action="controller" enctype="multipart/form-data" method="post">
         <input type="hidden" name="command" value="delete_user">
         <input type="hidden" name="user_id" value="${person.id}">

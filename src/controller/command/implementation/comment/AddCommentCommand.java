@@ -32,8 +32,9 @@ public class AddCommentCommand implements Command {
         comment.setReview(review);
         comment.setIdReader(readerId);
 
-
-        commentDao.create(comment);
+        if (!review.isEmpty()) {
+            commentDao.create(comment);
+        }
         request.setAttribute("bookid", idBook);
         return ViewBookCommand.getInstance().execute(request);
     }

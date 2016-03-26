@@ -20,6 +20,7 @@
     <input type="submit" value="Logout">
   </form>
 </c:if>
+
   <c:if test="${user.admin == true}">
     <a href="add_author.jsp">Add author</a>
   </c:if>

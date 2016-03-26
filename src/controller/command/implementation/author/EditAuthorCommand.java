@@ -29,7 +29,9 @@ public class EditAuthorCommand implements Command {
         author.setName(name);
         author.setSurname(surname);
 
-        authorDao.update(author);
+        if (!name.isEmpty() && !surname.isEmpty()) {
+            authorDao.update(author);
+        }
 
         return GetAuthorsCommand.getInstance().execute(request);
     }

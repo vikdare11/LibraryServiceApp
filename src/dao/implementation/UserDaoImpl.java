@@ -64,11 +64,9 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void update(User user) {
         try (Connection connection = DbUtil.getConnection();
-            PreparedStatement statement = connection.prepareStatement("update `user` set login=?, password=? "+
-                    "where iduser=?")) {
-            statement.setString(1, user.getLogin());
-            statement.setString(2, user.getPassword());
-            statement.setInt(3, user.getId());
+            PreparedStatement statement = connection.prepareStatement("update `user` set isadmin=? where iduser=?")) {
+            statement.setBoolean(1, user.isAdmin());
+            statement.setInt(2, user.getId());
             statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();

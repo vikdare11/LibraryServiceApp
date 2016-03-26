@@ -13,6 +13,10 @@
         <input type="submit" value="Logout">
     </form>
 </c:if>
+<form action="controller" enctype="multipart/form-data" method="post">
+    <input type="hidden" name="command" value="get_authors">
+    <input type="submit" value="Go back">
+</form>
 <form action="controller" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
   <input type="hidden" name="author_id" value="${author.id}">
     <h3>${author.name} ${author.surname}</h3>
@@ -32,6 +36,15 @@
                                 <input type="hidden" name="command" value="view_book">
                                 <input type="hidden" name="bookid" value="${book.id}">
                                 <input type="submit" value="View"/>
+                            </form>
+                        </td>
+                    </c:if>
+                    <c:if test="${user.admin == true}">
+                        <td>
+                            <form action="controller" enctype="multipart/form-data" method="post">
+                                <input type="hidden" name="command" value="delete_book">
+                                <input type="hidden" name="bookid" value="${book.id}">
+                                <input type="submit" value="Delete">
                             </form>
                         </td>
                     </c:if>

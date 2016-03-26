@@ -7,10 +7,25 @@
 </head>
 <body>
 <a href="index.jsp">Main page</a>
+
     <form action="controller" enctype="multipart/form-data" method="post">
         <input type="hidden" name="command" value="logout">
         <input type="submit" value="Logout">
     </form>
+<form action="controller" enctype="multipart/form-data" method="post">
+    <input type="hidden" name="command" value="get_books">
+    <input type="submit" value="All books">
+</form>
+<form action="controller" enctype="multipart/form-data" method="post">
+    <input type="hidden" name="command" value="open_user">
+    <input type="hidden" name="user_id" value="${user.id}">
+    <input type="submit" value="My profile">
+</form>
+<form action="controller" enctype="multipart/form-data" method="post">
+    <input type="hidden" name="command" value="open_author">
+    <input type="hidden" name="author_id" value="${bookVO.author.id}">
+    <input type="submit" value="View author of book">
+</form>
     <h1>Author: ${bookVO.author.name} ${bookVO.author.surname}</h1>
     <h1>Title: ${bookVO.book.name}</h1>
     <h1>Description: ${bookVO.book.description}</h1>

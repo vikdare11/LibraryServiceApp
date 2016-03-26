@@ -131,4 +131,22 @@ public class ReaderDaoImpl implements ReaderDao {
         }
         return bookCollectionOfReader;
     }
+
+    @Override
+    public int getReaderByUserId(int userId) {
+        int readerId = -1;
+        try (Connection connection = DbUtil.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT idreader FROM reader WHERE iduser=?")) {
+            statement.setInt(1, userId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    readerId = resultSet.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return readerId;
+    }
 }
