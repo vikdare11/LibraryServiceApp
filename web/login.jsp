@@ -12,6 +12,8 @@
     <title></title>
 </head>
 <body>
+<FORM><INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;"></FORM>
+
 <a href="index.jsp">Main page</a>
 <form method="post" action="controller">
   <input type="hidden" name="command" value="login">

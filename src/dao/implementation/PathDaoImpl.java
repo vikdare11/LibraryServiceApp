@@ -24,11 +24,11 @@ public class PathDaoImpl implements PathDao {
         int id = 0;
 
         try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement("insert into `path` (path, format, idbook) " +
+             PreparedStatement statement = connection.prepareStatement("insert into `path` (path, `format`, idbook) " +
                      "values (?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, path.getPath());
             statement.setString(2, path.getFormat());
-            statement.setInt(3, path.getId());
+            statement.setInt(3, path.getIdBook());
             statement.execute();
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
                 if (resultSet.next()) {
@@ -81,8 +81,8 @@ public class PathDaoImpl implements PathDao {
     @Override
     public void delete(Path path) {
         try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement("delete from `path` where idpath=?")){
-            statement.setInt(1, path.getId());
+             PreparedStatement statement = connection.prepareStatement("delete from `path` where idbook=?")){
+            statement.setInt(1, path.getIdBook());
             statement.execute();
 
         } catch (SQLException e) {

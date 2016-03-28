@@ -13,15 +13,14 @@
     <title></title>
 </head>
 <body>
+<FORM><INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;"></FORM>
+
 <a href="index.jsp">Main page</a>
-  <form action="controller" enctype="multipart/form-data" method="post">
+  <form action="controller" enctype="multipart/form-data" method="get">
     <input type="hidden" name="command" value="logout">
     <input type="submit" value="Logout">
   </form>
-<form action="controller" enctype="multipart/form-data" method="post">
-  <input type="hidden" name="command" value="get_books">
-  <input type="submit" value="Go back">
-</form>
+
 <form action="controller" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
   <input type="hidden"name="command" value="add_book">
   <input type="hidden" name="author_id" value="${author_id}">
@@ -32,11 +31,11 @@
   <h3>Description:</h3>
   <textarea maxlength="10000" name="description" placeholder="Input book description here..."></textarea>
 
-  <h3>Path for online reading:</h3>
-  <input maxlength="255" type="text" name="readPath" placeholder="Books/book.html">
+  <%--<h3>Path for online reading:</h3>
+  <input maxlength="255" type="text" name="readPath" placeholder="Books/book.html">--%>
 
   <h3>Path for download:</h3>
-  <input maxlength="255" type="text" name="downloadPath" placeholder="Books/book.fb2">
+  <input type="file" name="file">
 
   <input type="submit" value="Add book">
 

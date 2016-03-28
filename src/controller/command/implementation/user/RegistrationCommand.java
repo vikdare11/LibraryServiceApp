@@ -2,6 +2,7 @@ package controller.command.implementation.user;
 
 import controller.command.Command;
 import domain.Registration;
+import org.apache.commons.codec.digest.DigestUtils;
 import service.Service;
 import service.implementation.RegistrationService;
 
@@ -28,7 +29,7 @@ public class RegistrationCommand implements Command {
             Registration registrationData = new Registration();
 
             registrationData.setLogin(request.getParameter("login"));
-            registrationData.setPassword(request.getParameter("password"));
+            registrationData.setPassword(DigestUtils.md5Hex(request.getParameter("password")));
             registrationData.setEmail(request.getParameter("email"));
 
             try {

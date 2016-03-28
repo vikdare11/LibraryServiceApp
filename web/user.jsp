@@ -5,15 +5,12 @@
 <head>
     <title></title>
 </head>
+<FORM><INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;"></FORM>
+
 <body>
     <form action="controller" enctype="multipart/form-data" method="post">
         <input type="hidden" name="command" value="logout">
         <input type="submit" value="Logout">
-    </form>
-
-    <form action="controller" enctype="multipart/form-data" method="post">
-        <input type="hidden" name="command" value="get_users">
-        <input type="submit" value="Go back">
     </form>
 
 <form action="controller" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
@@ -32,7 +29,7 @@
                 <td>${book.name}</td>
                 <td>${book.description}</td>
                 <td>
-                    <form action="controller" enctype="multipart/form-data" method="post">
+                    <form action="controller" enctype="multipart/form-data" method="get">
                         <input type="hidden" name="command" value="view_book">
                         <input type="hidden" name="bookid" value="${book.id}">
                         <input type="submit" value="View"/>
@@ -40,7 +37,7 @@
                 </td>
                 <c:if test="${user.login == userVO.login}">
                 <td>
-                    <form action="controller" enctype="multipart/form-data" method="post">
+                    <form action="controller" enctype="multipart/form-data" method="get">
                         <input type="hidden" name="command" value="remove_book_from_reader_collection">
                         <input type="hidden" name="bookid" value="${book.id}">
                         <input type="submit" value="Remove from my collection"/>

@@ -4,6 +4,7 @@ import controller.command.Command;
 import dao.UserDao;
 import dao.implementation.UserDaoImpl;
 import domain.User;
+import org.apache.commons.codec.digest.DigestUtils;
 import service.Service;
 import service.implementation.LoginService;
 
@@ -29,7 +30,7 @@ public class LoginCommand implements Command {
             UserDao userDao = UserDaoImpl.getInstance();
             User user = new User();
             user.setLogin(request.getParameter("login"));
-            user.setPassword(request.getParameter("password"));
+            user.setPassword(DigestUtils.md5Hex(request.getParameter("password")));
             user.setId(userDao.findIdUser(user));
 
             Service<User, User> loginService = LoginService.getInstance();

@@ -13,9 +13,11 @@
     <title></title>
 </head>
 <body>
+<FORM><INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;"></FORM>
+
 <a href="index.jsp">Main page</a>
 <c:if test="${not empty user}">
-  <form action="controller" enctype="multipart/form-data" method="post">
+  <form action="controller" enctype="multipart/form-data" method="get">
     <input type="hidden" name="command" value="logout">
     <input type="submit" value="Logout">
   </form>
@@ -33,17 +35,17 @@
       <input type="submit" value="View books"/>
     </form>
     <c:if test="${user.admin == true}">
-      <form action="controller" enctype="multipart/form-data" method="post">
+      <form action="controller" enctype="multipart/form-data" method="get">
         <input type="hidden" name="command" value="prepare_add_book">
         <input type="hidden" name="author_id" value="${author.id}">
         <input type="submit" value="Add book"/>
       </form>
-      <form action="controller" enctype="multipart/form-data" method="post">
+      <form action="controller" enctype="multipart/form-data" method="get">
         <input type="hidden" name="command" value="open_edit_author">
         <input type="hidden" name="author_id" value="${author.id}">
         <input type="submit" value="Edit">
       </form>
-      <form action="controller" enctype="multipart/form-data" method="post">
+      <form action="controller" enctype="multipart/form-data" method="get">
         <input type="hidden" name="command" value="delete_author">
         <input type="hidden" name="author_id" value="${author.id}">
         <input type="submit" value="Delete">

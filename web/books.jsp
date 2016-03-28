@@ -13,9 +13,11 @@
     <title></title>
 </head>
 <body>
+<FORM><INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;"></FORM>
+
 <a href="index.jsp">Main page</a>
 <c:if test="${not empty user}">
-  <form action="controller" enctype="multipart/form-data" method="post">
+  <form action="controller" enctype="multipart/form-data" method="get">
     <input type="hidden" name="command" value="logout">
     <input type="submit" value="Logout">
   </form>
@@ -36,7 +38,7 @@
           <c:choose>
             <c:when test="${user.admin}">
               <td>
-                <form action="controller" enctype="multipart/form-data" method="post">
+                <form action="controller" enctype="multipart/form-data" method="get">
                   <input type="hidden" name="command" value="delete_book">
                   <input type="hidden" name="bookid" value="${book.id}">
                   <input type="submit" value="Delete">
@@ -44,7 +46,7 @@
               </td>
 
               <td>
-                <form action="controller" enctype="multipart/form-data" method="post">
+                <form action="controller" enctype="multipart/form-data" method="get">
                   <input type="hidden" name="command" value="view_book">
                   <input type="hidden" name="bookid" value="${book.id}">
                   <input type="submit" value="View"/>
@@ -53,7 +55,7 @@
             </c:when>
             <c:otherwise>
             <td>
-              <form action="controller" enctype="multipart/form-data" method="post">
+              <form action="controller" enctype="multipart/form-data" method="get">
                 <input type="hidden" name="command" value="view_book">
                 <input type="hidden" name="bookid" value="${book.id}">
                 <input type="submit" value="View"/>

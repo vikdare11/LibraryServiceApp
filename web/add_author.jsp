@@ -13,15 +13,15 @@
     <title></title>
 </head>
 <body>
+
+<FORM><INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;"></FORM>
+
 <a href="index.jsp">Main page</a>
-  <form action="controller" enctype="multipart/form-data" method="post">
+  <form action="controller" enctype="multipart/form-data" method="get">
     <input type="hidden" name="command" value="logout">
     <input type="submit" value="Logout">
   </form>
-<form action="controller" enctype="multipart/form-data" method="post">
-  <input type="hidden" name="command" value="get_authors">
-  <input type="submit" value="Go back">
-</form>
+
 <form action="controller" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
   <input type="hidden"name="command" value="add_author">
 
