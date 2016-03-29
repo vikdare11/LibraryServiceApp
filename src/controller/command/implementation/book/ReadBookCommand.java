@@ -8,9 +8,6 @@ import domain.Path;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by Vika on 3/28/2016.
- */
 public class ReadBookCommand implements Command {
     private static ReadBookCommand instance = new ReadBookCommand();
 

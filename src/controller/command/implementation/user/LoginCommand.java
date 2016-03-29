@@ -24,13 +24,14 @@ public class LoginCommand implements Command {
     public String execute(HttpServletRequest request) {
 
         String page;
+        String salt = "eio4nrvy3874cy2x873ryc873xt263rcvojt";
 
         if (validateRequest(request)) {
 
             UserDao userDao = UserDaoImpl.getInstance();
             User user = new User();
             user.setLogin(request.getParameter("login"));
-            user.setPassword(DigestUtils.md5Hex(request.getParameter("password")));
+            user.setPassword(DigestUtils.md5Hex(request.getParameter("password")+salt));
             user.setId(userDao.findIdUser(user));
 
             Service<User, User> loginService = LoginService.getInstance();

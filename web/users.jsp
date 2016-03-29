@@ -37,11 +37,13 @@
                 <input type="submit" value="Make this user not admin"/>
             </form>
         </c:if>
-    <form action="controller" enctype="multipart/form-data" method="get">
-        <input type="hidden" name="command" value="delete_user">
-        <input type="hidden" name="user_id" value="${person.id}">
-        <input type="submit" value="Delete">
-    </form>
+        <c:if test="${person.login != 'admin'}">
+            <form action="controller" enctype="multipart/form-data" method="get">
+                <input type="hidden" name="command" value="delete_user">
+                <input type="hidden" name="user_id" value="${person.id}">
+                <input type="submit" value="Delete">
+            </form>
+        </c:if>
     </c:if>
 </c:forEach>
 </body>

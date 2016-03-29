@@ -292,12 +292,16 @@ public class Controller extends HttpServlet {
             if (command != null) {
                 if (!availableOperations.contains(commandName)) {
                     User user = (User) req.getSession().getAttribute("user");
-
-                    if (user.isAdmin()) {
-                        access = availableAdminOperations.contains(commandName);
+                    if (user != null) {
+                        if (user.isAdmin()) {
+                            access = availableAdminOperations.contains(commandName);
+                        }
+                        else {
+                            access = availableUserOperations.contains(commandName);
+                        }
                     }
                     else {
-                        access = availableUserOperations.contains(commandName);
+                        access = false;
                     }
 
                 }
@@ -308,6 +312,11 @@ public class Controller extends HttpServlet {
                 }
                 page = command.execute(req);
             }
+        }
+        if (page.equals("login.jsp")) {
+            resp.setHeader("Cache-Control", "no-cache, no-store");
+            resp.setHeader("Pragma", "no-cache");
+            resp.sendRedirect("login.jsp");
         }
         if (page != null) {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher(page);

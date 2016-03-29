@@ -32,8 +32,19 @@ public class DeleteBookCommand implements Command {
 
         Book book = new Book();
         book.setId(id);
+
         Path path = pathDao.getPathsList("html", book);
         deleteBookFile(path.getPath(), request);
+
+        path = pathDao.getPathsList("fb2", book);
+        deleteBookFile(path.getPath(), request);
+
+        path = pathDao.getPathsList("pdf", book);
+        deleteBookFile(path.getPath(), request);
+
+        path = pathDao.getPathsList("txt", book);
+        deleteBookFile(path.getPath(), request);
+
         pathDao.delete(new Path(){{setIdBook(id);}});
         bookDao.delete(book);
 

@@ -44,6 +44,15 @@
                     </form>
                 </td>
                 </c:if>
+                <c:if test="${user.admin == true}">
+                    <td>
+                        <form action="controller" enctype="multipart/form-data" method="get">
+                            <input type="hidden" name="command" value="delete_book">
+                            <input type="hidden" name="bookid" value="${book.id}">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
+                </c:if>
             </tr>
         </c:forEach>
     </table>

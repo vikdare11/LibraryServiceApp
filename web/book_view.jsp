@@ -62,6 +62,7 @@
     </form>
     <form action="controller" method="get" enctype="multipart/form-data">
         <input type="hidden" name="command" value="add_book_to_reader_collection">
+        <input type="hidden" name="user_id" value="${user.id}">
         <input type="hidden" name="book_id" value="${bookVO.book.id}">
         <input type="submit" value="Add to my collection">
     </form>
@@ -70,10 +71,23 @@
         <input type="hidden" name="book_id" value="${bookVO.book.id}">
         <input type="submit" value="Read online">
     </form>
+
     <form action="download" method="get" enctype="multipart/form-data">
         <input type="hidden" name="command" value="download_book">
-        <input type="hidden" name="bookPath" value="${bookVO.downloadPath.path}">
-        <input type="submit" value="Download">
+        <input type="hidden" name="bookPath" value="${bookVO.downloadPaths[0].path}">
+        <input type="submit" value="Download FB2">
+    </form>
+
+    <form action="download" method="get" enctype="multipart/form-data">
+        <input type="hidden" name="command" value="download_book">
+        <input type="hidden" name="bookPath" value="${bookVO.downloadPaths[1].path}">
+        <input type="submit" value="Download PDF">
+    </form>
+
+    <form action="download" method="get" enctype="multipart/form-data">
+        <input type="hidden" name="command" value="download_book">
+        <input type="hidden" name="bookPath" value="${bookVO.downloadPaths[2].path}">
+        <input type="submit" value="Download TXT">
     </form>
 </body>
 </html>

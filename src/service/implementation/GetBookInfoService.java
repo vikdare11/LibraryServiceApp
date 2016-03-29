@@ -11,6 +11,7 @@ import dao.implementation.PathDaoImpl;
 import domain.*;
 import service.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GetBookInfoService implements Service<Integer, BookViewObject> {
@@ -34,14 +35,18 @@ public class GetBookInfoService implements Service<Integer, BookViewObject> {
         Author author = authorDao.getAuthorByBook(book);
         List<Comment> listOfComments = commentDao.getCommentsByBookId(bookId);
         Path readPath = pathDao.getPathsList("html", book);
-        Path downloadPath = pathDao.getPathsList("fb2", book);
+        List<Path> downloadPaths = new ArrayList<Path>();
+        downloadPaths.add(pathDao.getPathsList("fb2", book));
+        downloadPaths.add(pathDao.getPathsList("pdf", book));
+        downloadPaths.add(pathDao.getPathsList("txt", book));
+
 
         BookViewObject bookViewObject = new BookViewObject();
         bookViewObject.setAuthor(author);
         bookViewObject.setBook(book);
         bookViewObject.setListOfComments(listOfComments);
         bookViewObject.setReadPath(readPath);
-        bookViewObject.setDownloadPath(downloadPath);
+        bookViewObject.setDownloadPaths(downloadPaths);
         book.setCountOfViews(book.getCountOfViews() + 1);
         bookDao.update(book);
 

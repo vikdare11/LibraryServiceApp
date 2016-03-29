@@ -23,6 +23,8 @@ public class BookDownloadController extends HttpServlet {
         String bookPath = req.getParameter("bookPath");
         String savingFileName = bookPath.split("/")[1];
 
+        bookPath = "WEB-INF/" + bookPath;
+
         resp.setContentType("text/plain");
         resp.setHeader("Content-Disposition",
                 "attachment;filename="+savingFileName);

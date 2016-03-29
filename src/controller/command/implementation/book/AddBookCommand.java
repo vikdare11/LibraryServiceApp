@@ -45,37 +45,73 @@ public class AddBookCommand implements Command {
         }
         if (bookId != -1) {
             Path path = new Path();
-            String downloadPath = null;
+            String readPath = null;
             try {
-                downloadPath = uploadBook(request);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ServletException e) {
+                readPath = uploadBook(request, "read_file");
+            } catch (IOException | ServletException e) {
                 e.printStackTrace();
             }
 
             path.setIdBook(bookId);
-            path.setPath(downloadPath);
-            path.setFormat(downloadPath.split("\\.")[1]);
+            path.setPath(readPath);
+            path.setFormat(readPath.split("\\.")[1]);
             PathDao pathDao = PathDaoImpl.getInstance();
 
-            /*Path read = new Path();
-            String readPath = request.getParameter("readPath");
-            read.setPath(readPath);
-            read.setFormat(readPath.split("\\.")[1]);*/
-
-            if (!downloadPath.isEmpty()) {
+            if (!readPath.isEmpty()) {
                 pathDao.create(path);
-                //pathDao.create(read);
+            }
+            bookDao.insertBookAuthorLink(bookId, authorId);
+
+            String fb2Path = null;
+            try {
+                fb2Path = uploadBook(request, "fb2_file");
+            } catch (IOException | ServletException e) {
+                e.printStackTrace();
             }
 
+            path.setIdBook(bookId);
+            path.setPath(fb2Path);
+            path.setFormat(fb2Path.split("\\.")[1]);
 
-            bookDao.insertBookAuthorLink(bookId, authorId);
+            if (!fb2Path.isEmpty()) {
+                pathDao.create(path);
+            }
+
+            String pdfPath = null;
+            try {
+                pdfPath = uploadBook(request, "pdf_file");
+            } catch (IOException | ServletException e) {
+                e.printStackTrace();
+            }
+
+            path.setIdBook(bookId);
+            path.setPath(pdfPath);
+            path.setFormat(pdfPath.split("\\.")[1]);
+
+            if (!pdfPath.isEmpty()) {
+                pathDao.create(path);
+            }
+
+            String txtPath = null;
+            try {
+                txtPath = uploadBook(request, "txt_file");
+            } catch (IOException | ServletException e) {
+                e.printStackTrace();
+            }
+
+            path.setIdBook(bookId);
+            path.setPath(txtPath);
+            path.setFormat(txtPath.split("\\.")[1]);
+
+            if (!txtPath.isEmpty()) {
+                pathDao.create(path);
+            }
+
         }
         return GetBooksCommand.getInstance().execute(request);
     }
 
-    private String uploadBook(HttpServletRequest request) throws IOException, ServletException {
+    private String uploadBook(HttpServletRequest request, String format) throws IOException, ServletException {
         String bookPath = request.getServletContext().getRealPath("WEB-INF/Books/");
         try {
             if (!Files.exists(Paths.get(bookPath))) {
@@ -85,7 +121,7 @@ public class AddBookCommand implements Command {
             e.printStackTrace();
         }
 
-        Part part = request.getPart("file");
+        Part part = request.getPart(format);
 
         String fileName = getSubmittedFileName(part);
 
@@ -98,7 +134,7 @@ public class AddBookCommand implements Command {
         }
 
         try(
-                InputStream inputStream = request.getPart("file").getInputStream();
+                InputStream inputStream = request.getPart(format).getInputStream();
                 FileOutputStream outputStream = new FileOutputStream(file)
         )
         {

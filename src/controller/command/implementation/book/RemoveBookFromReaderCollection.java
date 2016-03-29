@@ -1,6 +1,7 @@
 package controller.command.implementation.book;
 
 import controller.command.Command;
+import controller.command.implementation.user.ViewUserCommand;
 import dao.BookDao;
 import dao.implementation.BookDaoImpl;
 import domain.User;
@@ -28,6 +29,7 @@ public class RemoveBookFromReaderCollection implements Command {
             bookDao.removeBookFromReaderCollection(idReader, idBook);
         }
 
-        return GetBooksCommand.getInstance().execute(request);
+        return ViewUserCommand.getInstance().execute(request);
+
     }
 }

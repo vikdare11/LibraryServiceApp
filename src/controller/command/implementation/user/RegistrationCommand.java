@@ -21,6 +21,7 @@ public class RegistrationCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         String page = new String("");
+        String salt = "eio4nrvy3874cy2x873ryc873xt263rcvojt";
 
         if (validateRequest(request)) {
 
@@ -29,7 +30,7 @@ public class RegistrationCommand implements Command {
             Registration registrationData = new Registration();
 
             registrationData.setLogin(request.getParameter("login"));
-            registrationData.setPassword(DigestUtils.md5Hex(request.getParameter("password")));
+            registrationData.setPassword(DigestUtils.md5Hex(request.getParameter("password") + salt));
             registrationData.setEmail(request.getParameter("email"));
 
             try {

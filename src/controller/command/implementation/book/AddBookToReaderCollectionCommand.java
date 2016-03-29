@@ -1,6 +1,7 @@
 package controller.command.implementation.book;
 
 import controller.command.Command;
+import controller.command.implementation.user.ViewUserCommand;
 import dao.BookDao;
 import dao.ReaderDao;
 import dao.implementation.BookDaoImpl;
@@ -31,6 +32,6 @@ public class AddBookToReaderCollectionCommand implements Command {
             bookDao.addBookToReaderCollection(idBook, idReader);
         }
 
-        return GetBooksCommand.getInstance().execute(request);
+        return ViewUserCommand.getInstance().execute(request);
     }
 }
