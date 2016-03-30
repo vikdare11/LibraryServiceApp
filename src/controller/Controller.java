@@ -50,6 +50,8 @@ public class Controller extends HttpServlet {
         availableAdminOperations.add("remove_book_from_reader_collection");
         availableAdminOperations.add("edit_user");
         availableAdminOperations.add("read_online");
+        availableAdminOperations.add("edit_book");
+        availableAdminOperations.add("open_edit_book");
 
 
         availableUserOperations.add("view_book");
@@ -155,6 +157,10 @@ public class Controller extends HttpServlet {
                 }
                 case "edit_user" : {
                     command = EditUserCommand.getInstance();
+                    break;
+                }
+                case "edit_book" : {
+                    command = EditBookCommand.getInstance();
                     break;
                 }
             }
@@ -284,6 +290,10 @@ public class Controller extends HttpServlet {
                 }
                 case "edit_user" : {
                     command = EditUserCommand.getInstance();
+                    break;
+                }
+                case "open_edit_book" : {
+                    command = OpenEditBookCommand.getInstance();
                     break;
                 }
             }

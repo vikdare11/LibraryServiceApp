@@ -66,8 +66,8 @@ public class PathDaoImpl implements PathDao {
     @Override
     public void update(Path path) {
         try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement("update `reader` set path=?, format=?, idbook=? "+
-                     "where id=?")) {
+             PreparedStatement statement = connection.prepareStatement("update `path` set path=?, format=?, idbook=? "+
+                     "where idpath=?")) {
             statement.setString(1, path.getPath());
             statement.setString(2, path.getFormat());
             statement.setInt(3, path.getIdBook());
@@ -130,5 +130,26 @@ public class PathDaoImpl implements PathDao {
             e.printStackTrace();
         }
         return path;
+    }
+
+    @Override
+    public int getPathIdByFormatAndBookId(String format, int bookId) {
+        int id = -1;
+        try (Connection connection = DbUtil.getConnection();
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT idpath FROM path WHERE idbook=? AND format=?")) {
+            statement.setInt(1, bookId);
+            statement.setString(2, format);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    id = resultSet.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return id;
     }
 }

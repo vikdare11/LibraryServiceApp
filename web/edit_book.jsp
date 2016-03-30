@@ -30,7 +30,7 @@
   <input maxlength="45" type="text" name="title" value="${book.name}">
 
   <h3>Description:</h3>
-  <textarea maxlength="10000" name="description" value="${author.description}"></textarea>
+  <textarea maxlength="10000" name="description" value="${book.description}"></textarea>
 
   <h3>Path for online reading:</h3>
   <input type="file" name="read_file">

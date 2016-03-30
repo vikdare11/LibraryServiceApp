@@ -60,6 +60,15 @@
         <textarea maxlength="10000" name="review" placeholder="Input your review here..."></textarea>
         <input type="submit" value="Add comment">
     </form>
+
+    <c:if test="${user.admin == true}">
+        <form action="controller" enctype="multipart/form-data" method="get">
+            <input type="hidden" name="command" value="open_edit_book">
+            <input type="hidden" name="book_id" value="${bookVO.book.id}">
+            <input type="submit" value="Edit book">
+        </form>
+    </c:if>
+
     <form action="controller" method="get" enctype="multipart/form-data">
         <input type="hidden" name="command" value="add_book_to_reader_collection">
         <input type="hidden" name="user_id" value="${user.id}">

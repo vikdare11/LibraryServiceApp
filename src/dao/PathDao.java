@@ -12,4 +12,5 @@ public interface PathDao {
     void delete(Path path);
     List<Path> getPathsList(Book book);
     Path getPathsList(String format, Book book);
+    int getPathIdByFormatAndBookId(String format, int bookId);
 }
