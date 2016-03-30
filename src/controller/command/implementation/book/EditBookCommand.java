@@ -50,7 +50,7 @@ public class EditBookCommand implements Command{
             try {
                 readPath = uploadBook(request, "read_file");
             } catch (IOException | ServletException e) {
-                return GetBooksCommand.getInstance().execute(request);
+                return OpenEditBookCommand.getInstance().execute(request);
             }
 
             path.setIdBook(bookId);
@@ -65,7 +65,7 @@ public class EditBookCommand implements Command{
             try {
                 fb2Path = uploadBook(request, "fb2_file");
             } catch (IOException | ServletException e) {
-                return GetBooksCommand.getInstance().execute(request);
+                return OpenEditBookCommand.getInstance().execute(request);
             }
 
             path.setIdBook(bookId);
@@ -81,7 +81,7 @@ public class EditBookCommand implements Command{
             try {
                 pdfPath = uploadBook(request, "pdf_file");
             } catch (IOException | ServletException e) {
-                return GetBooksCommand.getInstance().execute(request);
+                return OpenEditBookCommand.getInstance().execute(request);
             }
 
             path.setIdBook(bookId);
@@ -97,7 +97,7 @@ public class EditBookCommand implements Command{
             try {
                 txtPath = uploadBook(request, "txt_file");
             } catch (IOException | ServletException e) {
-                return GetBooksCommand.getInstance().execute(request);
+                return OpenEditBookCommand.getInstance().execute(request);
             }
 
             path.setIdBook(bookId);
@@ -120,7 +120,7 @@ public class EditBookCommand implements Command{
                 Files.createDirectory(Paths.get(bookPath));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            return OpenEditBookCommand.getInstance().execute(request);
         }
 
         Part part = request.getPart(format);
@@ -132,7 +132,7 @@ public class EditBookCommand implements Command{
         try {
             file.createNewFile();
         } catch (IOException e) {
-            e.printStackTrace();
+            return OpenEditBookCommand.getInstance().execute(request);
         }
 
         try(
@@ -146,7 +146,7 @@ public class EditBookCommand implements Command{
                 outputStream.write(buffer, 0, length);
             }
         } catch (ServletException | IOException e) {
-            return GetBooksCommand.getInstance().execute(request);
+            return OpenEditBookCommand.getInstance().execute(request);
         }
 
         return "Books/"+ fileName;

@@ -323,10 +323,11 @@ public class Controller extends HttpServlet {
                 page = command.execute(req);
             }
         }
-        if (page.equals("login.jsp")) {
+        if (command.getClass() == LogoutCommand.class) {
             resp.setHeader("Cache-Control", "no-cache, no-store");
             resp.setHeader("Pragma", "no-cache");
             resp.sendRedirect("login.jsp");
+            return;
         }
         if (page != null) {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher(page);

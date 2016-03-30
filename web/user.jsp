@@ -13,7 +13,6 @@
         <input type="submit" value="Logout">
     </form>
 
-<form action="controller" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
     <h1>Login: ${userVO.login}</h1>
     <h1>Email: ${userVO.email}</h1>
     <h1>Book collection of reader ${userVO.login}:</h1>
@@ -56,6 +55,5 @@
             </tr>
         </c:forEach>
     </table>
-</form>
 </body>
 </html>

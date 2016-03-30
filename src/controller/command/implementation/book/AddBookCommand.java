@@ -43,13 +43,15 @@ public class AddBookCommand implements Command {
         if (!title.isEmpty() && !description.isEmpty()) {
             bookId = bookDao.create(book);
         }
+        else
+            return PrepareAddBookCommand.getInstance().execute(request);
         if (bookId != -1) {
             Path path = new Path();
             String readPath = null;
             try {
                 readPath = uploadBook(request, "read_file");
             } catch (IOException | ServletException e) {
-                e.printStackTrace();
+                return PrepareAddBookCommand.getInstance().execute(request);
             }
 
             path.setIdBook(bookId);
@@ -59,14 +61,15 @@ public class AddBookCommand implements Command {
 
             if (!readPath.isEmpty()) {
                 pathDao.create(path);
-            }
+            }else
+                return PrepareAddBookCommand.getInstance().execute(request);
             bookDao.insertBookAuthorLink(bookId, authorId);
 
             String fb2Path = null;
             try {
                 fb2Path = uploadBook(request, "fb2_file");
             } catch (IOException | ServletException e) {
-                e.printStackTrace();
+                return PrepareAddBookCommand.getInstance().execute(request);
             }
 
             path.setIdBook(bookId);
@@ -75,13 +78,14 @@ public class AddBookCommand implements Command {
 
             if (!fb2Path.isEmpty()) {
                 pathDao.create(path);
-            }
+            }else
+                return PrepareAddBookCommand.getInstance().execute(request);
 
             String pdfPath = null;
             try {
                 pdfPath = uploadBook(request, "pdf_file");
             } catch (IOException | ServletException e) {
-                e.printStackTrace();
+                return PrepareAddBookCommand.getInstance().execute(request);
             }
 
             path.setIdBook(bookId);
@@ -91,12 +95,14 @@ public class AddBookCommand implements Command {
             if (!pdfPath.isEmpty()) {
                 pathDao.create(path);
             }
+            else
+                return PrepareAddBookCommand.getInstance().execute(request);
 
             String txtPath = null;
             try {
                 txtPath = uploadBook(request, "txt_file");
             } catch (IOException | ServletException e) {
-                e.printStackTrace();
+                return PrepareAddBookCommand.getInstance().execute(request);
             }
 
             path.setIdBook(bookId);
@@ -106,8 +112,12 @@ public class AddBookCommand implements Command {
             if (!txtPath.isEmpty()) {
                 pathDao.create(path);
             }
+            else
+                return PrepareAddBookCommand.getInstance().execute(request);
 
         }
+        else
+            return PrepareAddBookCommand.getInstance().execute(request);
         return GetBooksCommand.getInstance().execute(request);
     }
 

@@ -30,7 +30,8 @@ public class AddAuthorCommand implements Command {
         if (!surname.isEmpty() && !name.isEmpty()){
 
             authorDao.create(author);
-        }
+        } else
+            OpenAuthorCommand.getInstance().execute(request);
 
         return GetAuthorsCommand.getInstance().execute(request);
     }
