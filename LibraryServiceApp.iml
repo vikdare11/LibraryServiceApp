@@ -28,7 +28,7 @@
     <orderEntry type="library" name="jstl-1.2" level="project" />
     <orderEntry type="library" name="standard-1.1.2" level="project" />
     <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="module-library" scope="TEST">
+    <orderEntry type="module-library" exported="" scope="TEST">
       <library name="JUnit4">
         <CLASSES>
           <root url="jar://$APPLICATION_HOME_DIR$/lib/junit-4.11.jar!/" />
@@ -39,5 +39,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="junit" level="project" />
+    <orderEntry type="library" name="dbunit-2.4.9" level="project" />
   </component>
 </module>

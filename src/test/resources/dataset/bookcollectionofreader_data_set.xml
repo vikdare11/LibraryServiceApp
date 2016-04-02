@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <bookcollectionofreader idbook="1" idreader="1" lastReadPage="1"/>
+    <bookcollectionofreader idbook="2" idreader="2" lastReadPage="2"/>
+    <bookcollectionofreader idbook="3" idreader="3" lastReadPage="3"/>
+    <bookcollectionofreader idbook="4" idreader="4" lastReadPage="4"/>
+    <bookcollectionofreader idbook="5" idreader="5" lastReadPage="5"/>
+</dataset>

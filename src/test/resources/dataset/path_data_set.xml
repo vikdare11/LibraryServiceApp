@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <path idpath="1" path="Book/path1.html" format="html" idbook="1"/>
+    <path idpath="2" path="Book/path2.fb2" format="fb2" idbook="1"/>
+    <path idpath="3" path="Book/path3.pdf" format="pdf" idbook="1"/>
+    <path idpath="4" path="Book/path4.txt" format="txt" idbook="1"/>
+</dataset>

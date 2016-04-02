@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <book idbook="1" title="title1" description="description1" countOfViews="1"/>
+    <book idbook="2" title="title2" description="description2" countOfViews="2"/>
+    <book idbook="3" title="title3" description="description3" countOfViews="3"/>
+    <book idbook="4" title="title4" description="description4" countOfViews="4"/>
+    <book idbook="5" title="title5" description="description5" countOfViews="5"/>
+</dataset>

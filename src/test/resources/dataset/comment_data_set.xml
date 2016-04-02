@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <comment idcomment="1" idbook="1" idreader="1" review="review1"/>
+    <comment idcomment="2" idbook="2" idreader="2" review="review2"/>
+    <comment idcomment="3" idbook="3" idreader="3" review="review3"/>
+    <comment idcomment="4" idbook="4" idreader="4" review="review4"/>
+    <comment idcomment="5" idbook="5" idreader="5" review="review5"/>
+</dataset>

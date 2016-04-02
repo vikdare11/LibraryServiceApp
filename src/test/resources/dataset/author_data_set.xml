@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <author idauthor="1" surname="author_surname1" name="author_name1"/>
+    <author idauthor="2" surname="author_surname2" name="author_name2"/>
+    <author idauthor="3" surname="author_surname3" name="author_name3"/>
+    <author idauthor="4" surname="author_surname4" name="author_name4"/>
+    <author idauthor="5" surname="author_surname5" name="author_name5"/>
+</dataset>

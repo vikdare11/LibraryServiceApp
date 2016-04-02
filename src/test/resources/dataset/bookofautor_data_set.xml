@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <bookofauthor idauthor="1" idbook="1"/>
+    <bookofauthor idauthor="2" idbook="2"/>
+    <bookofauthor idauthor="3" idbook="3"/>
+    <bookofauthor idauthor="4" idbook="4"/>
+    <bookofauthor idauthor="5" idbook="5"/>
+</dataset>

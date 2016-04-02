@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <reader idreader="1" iduser="1" email="email1@domain.com"/>
+    <reader idreader="2" iduser="2" email="email2@domain.com"/>
+    <reader idreader="3" iduser="3" email="email3@domain.com"/>
+    <reader idreader="4" iduser="4" email="email4@domain.com"/>
+    <reader idreader="5" iduser="5" email="email5@domain.com"/>
+</dataset>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <user iduser="1" login="login1" password="password1" isadmin="true"/>
+    <user iduser="2" login="login2" password="password2" isadmin="false"/>
+    <user iduser="3" login="login3" password="password3" isadmin="false"/>
+    <user iduser="4" login="login4" password="password4" isadmin="false"/>
+    <user iduser="5" login="login5" password="password5" isadmin="false"/>
+</dataset>
