@@ -28,6 +28,10 @@ public class GetUserInfoService implements Service <Integer, UserViewObject>{
 
         User user = userDao.read(userId);
         Reader reader = readerDao.read(userId);
+
+        if (reader == null && user == null) {
+            return null;
+        }
         List<Book> bookCollectionOfReader = readerDao.getBookCollection(reader.getId());
 
         UserViewObject userViewObject = new UserViewObject();
