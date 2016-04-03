@@ -34,4 +34,24 @@ public class UserViewObject implements Serializable {
         this.login = login;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserViewObject that = (UserViewObject) o;
+
+        if (login != null ? !login.equals(that.login) : that.login != null) return false;
+        if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        return !(bookCollection != null ? !bookCollection.equals(that.bookCollection) : that.bookCollection != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = login != null ? login.hashCode() : 0;
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (bookCollection != null ? bookCollection.hashCode() : 0);
+        return result;
+    }
 }

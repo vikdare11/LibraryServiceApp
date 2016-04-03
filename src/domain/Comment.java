@@ -51,4 +51,29 @@ public class Comment implements Serializable {
     public void setReview(String review) {
         this.review = review;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Comment comment = (Comment) o;
+
+        if (id != comment.id) return false;
+        if (idBook != comment.idBook) return false;
+        if (idReader != comment.idReader) return false;
+        if (review != null ? !review.equals(comment.review) : comment.review != null) return false;
+        return !(user != null ? !user.equals(comment.user) : comment.user != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + idBook;
+        result = 31 * result + idReader;
+        result = 31 * result + (review != null ? review.hashCode() : 0);
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        return result;
+    }
 }
