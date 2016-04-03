@@ -46,7 +46,7 @@ public class UserDaoTest extends DBTestCase {
 
     @Override
     protected DatabaseOperation getTearDownOperation() throws Exception {
-        return DatabaseOperation.NONE;
+        return DatabaseOperation.DELETE_ALL;
     }
 
     @Test
@@ -129,23 +129,6 @@ public class UserDaoTest extends DBTestCase {
     }
 
     @Test
-    public void testDeleteIfUserExist() {
-        User expectedUser = new User();
-        expectedUser.setAdmin(false);
-        expectedUser.setId(2);
-        expectedUser.setLogin("login2");
-        expectedUser.setPassword("password2");
-
-        if (userDao.isLoginExist(expectedUser.getLogin())) {
-            userDao.delete(expectedUser);
-        }
-
-        User actualUser = userDao.read(expectedUser.getId());
-
-        Assert.assertNull(actualUser);
-    }
-
-    @Test
     public void testGetUsersList() {
         List<User> expectedUsers = new ArrayList<>();
 
@@ -187,6 +170,23 @@ public class UserDaoTest extends DBTestCase {
         List<User> actualUsers = userDao.getUsersList();
 
         Assert.assertEquals(actualUsers, expectedUsers);
+    }
+
+    @Test
+    public void testDeleteIfUserExist() {
+        User expectedUser = new User();
+        expectedUser.setAdmin(false);
+        expectedUser.setId(2);
+        expectedUser.setLogin("login2");
+        expectedUser.setPassword("password2");
+
+        if (userDao.isLoginExist(expectedUser.getLogin())) {
+            userDao.delete(expectedUser);
+        }
+
+        User actualUser = userDao.read(expectedUser.getId());
+
+        Assert.assertNull(actualUser);
     }
 
     @Test

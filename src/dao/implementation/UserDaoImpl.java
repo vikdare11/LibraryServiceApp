@@ -22,19 +22,21 @@ public class UserDaoImpl implements UserDao {
     public int create(User user) {
         int id = 0;
 
-        try (Connection connection = DbUtil.getConnection();
-            PreparedStatement statement = connection.prepareStatement("insert into `user` (login, `password`) " +
-                    "values (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, user.getLogin());
-            statement.setString(2, user.getPassword());
-            statement.execute();
-            try (ResultSet resultSet = statement.getGeneratedKeys()) {
-                if (resultSet.next()) {
-                    id = resultSet.getInt(1);
+        if (!isLoginExist(user.getLogin())) {
+            try (Connection connection = DbUtil.getConnection();
+                 PreparedStatement statement = connection.prepareStatement("INSERT INTO `user` (login, `password`) " +
+                         "VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+                statement.setString(1, user.getLogin());
+                statement.setString(2, user.getPassword());
+                statement.execute();
+                try (ResultSet resultSet = statement.getGeneratedKeys()) {
+                    if (resultSet.next()) {
+                        id = resultSet.getInt(1);
+                    }
                 }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         return id;
     }

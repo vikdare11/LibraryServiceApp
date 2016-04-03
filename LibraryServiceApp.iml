@@ -27,7 +27,6 @@
     <orderEntry type="library" name="commons-codec-1.9" level="project" />
     <orderEntry type="library" name="jstl-1.2" level="project" />
     <orderEntry type="library" name="standard-1.1.2" level="project" />
-    <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="module-library" exported="" scope="TEST">
       <library name="JUnit4">
         <CLASSES>
@@ -42,7 +41,8 @@
     <orderEntry type="library" name="junit" level="project" />
     <orderEntry type="library" name="dbunit-2.4.9" level="project" />
     <orderEntry type="library" name="log4j-1.2.9" level="project" />
-    <orderEntry type="library" name="slf4j-api-1.7.20" level="project" />
     <orderEntry type="library" name="com.mysql.jdbc_5.1.5" level="project" />
+    <orderEntry type="library" scope="TEST" name="slf4j-api-1.7.20" level="project" />
+    <orderEntry type="library" name="slf4j-simple-1.6.1" level="project" />
   </component>
 </module>
