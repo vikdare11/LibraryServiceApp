@@ -33,4 +33,25 @@ public class Reader implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Reader reader = (Reader) o;
+
+        if (id != reader.id) return false;
+        if (idUser != reader.idUser) return false;
+        return !(email != null ? !email.equals(reader.email) : reader.email != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + idUser;
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        return result;
+    }
 }

@@ -54,4 +54,30 @@ public class BookViewObject implements Serializable {
     public void setListOfComments(List<Comment> listOfComments) {
         this.listOfComments = listOfComments;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BookViewObject that = (BookViewObject) o;
+
+        if (book != null ? !book.equals(that.book) : that.book != null) return false;
+        if (author != null ? !author.equals(that.author) : that.author != null) return false;
+        if (listOfComments != null ? !listOfComments.equals(that.listOfComments) : that.listOfComments != null)
+            return false;
+        if (readPath != null ? !readPath.equals(that.readPath) : that.readPath != null) return false;
+        return !(downloadPaths != null ? !downloadPaths.equals(that.downloadPaths) : that.downloadPaths != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = book != null ? book.hashCode() : 0;
+        result = 31 * result + (author != null ? author.hashCode() : 0);
+        result = 31 * result + (listOfComments != null ? listOfComments.hashCode() : 0);
+        result = 31 * result + (readPath != null ? readPath.hashCode() : 0);
+        result = 31 * result + (downloadPaths != null ? downloadPaths.hashCode() : 0);
+        return result;
+    }
 }

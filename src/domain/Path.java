@@ -11,6 +11,29 @@ public class Path implements Serializable {
     private String format;
     private int idBook;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Path path1 = (Path) o;
+
+        if (id != path1.id) return false;
+        if (idBook != path1.idBook) return false;
+        if (path != null ? !path.equals(path1.path) : path1.path != null) return false;
+        return !(format != null ? !format.equals(path1.format) : path1.format != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (path != null ? path.hashCode() : 0);
+        result = 31 * result + (format != null ? format.hashCode() : 0);
+        result = 31 * result + idBook;
+        return result;
+    }
+
     public int getId() {
         return id;
     }
