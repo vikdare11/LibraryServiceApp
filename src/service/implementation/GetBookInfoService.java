@@ -32,7 +32,11 @@ public class GetBookInfoService implements Service<Integer, BookViewObject> {
         PathDao pathDao = PathDaoImpl.getInstance();
 
         Book book = bookDao.read(bookId);
+        if (book == null) {
+            return null;
+        }
         Author author = authorDao.getAuthorByBook(book);
+
         List<Comment> listOfComments = commentDao.getCommentsByBookId(bookId);
         Path readPath = pathDao.getPathsList("html", book);
         List<Path> downloadPaths = new ArrayList<Path>();

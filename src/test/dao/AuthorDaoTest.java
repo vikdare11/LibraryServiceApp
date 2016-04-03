@@ -36,9 +36,9 @@ public class AuthorDaoTest extends DBTestCase {
 
     @Override
     protected IDataSet getDataSet() throws Exception {
-        dataSets = new IDataSet[] { new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/author_data_set.xml")),
-                new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/bookofauthor_data_set.xml")),
-                new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/book_data_set.xml"))
+        dataSets = new IDataSet[] { new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/book_data_set.xml")),
+                new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/author_data_set.xml")),
+                new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/bookofauthor_data_set.xml"))
         };
         return new CompositeDataSet(dataSets);
     }
@@ -170,14 +170,14 @@ public class AuthorDaoTest extends DBTestCase {
     public void testGetAuthorByBookIfBookExist() {
         Book book = new Book();
         book.setId(1);
-        Author expextedAuthor = new Author();
-        expextedAuthor.setName("author_name1");
-        expextedAuthor.setSurname("author_surname2");
-        expextedAuthor.setId(1);
+        Author expectedAuthor = new Author();
+        expectedAuthor.setName("author_name1");
+        expectedAuthor.setSurname("author_surname2");
+        expectedAuthor.setId(1);
 
         Author actualAuthor = authorDao.getAuthorByBook(book);
 
-        Assert.assertEquals(actualAuthor, expextedAuthor);
+        Assert.assertEquals(actualAuthor, expectedAuthor);
     }
 
     @Test
