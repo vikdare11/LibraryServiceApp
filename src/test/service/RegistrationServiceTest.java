@@ -2,26 +2,22 @@ package service;
 
 import dao.UserDao;
 import dao.implementation.UserDaoImpl;
-import domain.User;
 import org.dbunit.DBTestCase;
 import org.dbunit.PropertiesBasedJdbcDatabaseTester;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
-import org.junit.Assert;
 import org.junit.Test;
-import service.implementation.LoginService;
 
 import java.io.FileInputStream;
 
-public class LoginServiceTest extends DBTestCase{
-
+public class RegistrationServiceTest extends DBTestCase {
     private UserDao userDao = UserDaoImpl.getInstance();
 
     private FlatXmlDataSet dataSet;
 
-    public LoginServiceTest(String name) {
+    public RegistrationServiceTest(String name) {
         super(name);
         System.setProperty(
                 PropertiesBasedJdbcDatabaseTester.DBUNIT_DRIVER_CLASS,
@@ -51,14 +47,6 @@ public class LoginServiceTest extends DBTestCase{
 
     @Test
     public void testExecute() {
-        User expectedUser = new User();
-        expectedUser.setLogin("login3");
-        expectedUser.setPassword("password3");
-        expectedUser.setId(userDao.findIdUser(expectedUser));
-        Service<User, User> loginService = LoginService.getInstance();
 
-        User actualUser = loginService.execute(expectedUser);
-
-        Assert.assertEquals(actualUser, expectedUser);
     }
 }

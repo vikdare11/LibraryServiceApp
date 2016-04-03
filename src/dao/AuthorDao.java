@@ -12,4 +12,6 @@ public interface AuthorDao {
     void delete(Author author);
     List<Author> getAuthorsList();
     Author getAuthorByBook(Book book);
+    boolean isSurnameExist(String surname);
+    boolean isNameExist(String name);
 }

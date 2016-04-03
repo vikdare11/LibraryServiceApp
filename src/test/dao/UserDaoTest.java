@@ -1,6 +1,5 @@
-package test.dao;
+package dao;
 
-import dao.UserDao;
 import dao.implementation.UserDaoImpl;
 import domain.User;
 import org.dbunit.DBTestCase;
