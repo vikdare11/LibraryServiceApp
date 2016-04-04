@@ -11,6 +11,7 @@ import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.Assert;
 import org.junit.Test;
+import org.omg.CORBA.PUBLIC_MEMBER;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -37,7 +38,10 @@ public class BookDaoTest extends DBTestCase {
     protected IDataSet getDataSet() throws Exception {
         dataSets = new IDataSet[] { new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/book_data_set.xml")),
                 new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/author_data_set.xml")),
-                new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/bookofauthor_data_set.xml"))
+                new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/bookofauthor_data_set.xml")),
+                new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/user_data_set.xml")),
+                new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/reader_data_set.xml")),
+                new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/bookcollectionofreader_data_set.xml"))
         };
         return new CompositeDataSet(dataSets);
     }
@@ -200,5 +204,96 @@ public class BookDaoTest extends DBTestCase {
         List<Book> actualBooks = bookDao.getBooksList();
 
         Assert.assertEquals(actualBooks, expectedBooks);
+    }
+
+    @Test
+    public void testIsTitleExistIfTitleExist() {
+        Assert.assertTrue(bookDao.isTitleExist("title1"));
+        Assert.assertTrue(bookDao.isTitleExist("title2"));
+        Assert.assertTrue(bookDao.isTitleExist("title3"));
+        Assert.assertTrue(bookDao.isTitleExist("title4"));
+        Assert.assertTrue(bookDao.isTitleExist("title5"));
+    }
+
+    @Test
+    public void testIsTitleExistIfTitleNotExist() {
+        Assert.assertFalse(bookDao.isTitleExist("title6"));
+        Assert.assertFalse(bookDao.isTitleExist("title7"));
+        Assert.assertFalse(bookDao.isTitleExist("title8"));
+        Assert.assertFalse(bookDao.isTitleExist("title9"));
+        Assert.assertFalse(bookDao.isTitleExist("title10"));
+    }
+
+    @Test
+    public void testInsertBookAuthorLinkIfAuthorAndBookExist() {
+        bookDao.insertBookAuthorLink(2, 3);
+        Assert.assertTrue(bookDao.authorWroteBook(2, 3));
+    }
+
+    @Test
+    public void testInsertBookAuthorLinkIfAuthorAndBookNotExist() {
+        bookDao.insertBookAuthorLink(10, 10);
+        Assert.assertFalse(bookDao.authorWroteBook(10, 10));
+    }
+
+    @Test
+    public void testAddBookToReaderCollectionIfBookAndReaderExist() {
+        bookDao.addBookToReaderCollection(4, 5);
+        Assert.assertTrue(bookDao.readerHasBook(5, 4));
+    }
+
+    @Test
+    public void testAddBookToReaderCollectionIfBookAndReaderNotExist() {
+        bookDao.addBookToReaderCollection(10, 10);
+        Assert.assertFalse(bookDao.readerHasBook(10, 10));
+    }
+
+    @Test
+    public void testRemoveBookFromReaderCollectionIfBookAndReaderExist() {
+        Assert.assertTrue(bookDao.readerHasBook(4, 4));
+        bookDao.removeBookFromReaderCollection(4, 4);
+        Assert.assertFalse(bookDao.readerHasBook(4, 4));
+    }
+
+    @Test
+    public void testRemoveBookFromReaderCollectionIfBookAndReaderNotExist() {
+        bookDao.removeBookFromReaderCollection(10, 10);
+        Assert.assertFalse(bookDao.readerHasBook(10, 10));
+    }
+
+    @Test
+    public void testReaderHasBookIfReaderHasBook() {
+        Assert.assertTrue(bookDao.readerHasBook(1, 1));
+        Assert.assertTrue(bookDao.readerHasBook(2, 2));
+        Assert.assertTrue(bookDao.readerHasBook(3, 3));
+        Assert.assertTrue(bookDao.readerHasBook(4, 4));
+        Assert.assertTrue(bookDao.readerHasBook(5, 5));
+    }
+
+    @Test
+    public void testReaderHasBookIfReaderHasNotBook() {
+        Assert.assertFalse(bookDao.readerHasBook(1, 2));
+        Assert.assertFalse(bookDao.readerHasBook(2, 3));
+        Assert.assertFalse(bookDao.readerHasBook(3, 4));
+        Assert.assertFalse(bookDao.readerHasBook(4, 5));
+        Assert.assertFalse(bookDao.readerHasBook(5, 6));
+    }
+
+    @Test
+    public void testAuthorWroteBookIfAuthorWroteBook() {
+        Assert.assertTrue(bookDao.authorWroteBook(1, 1));
+        Assert.assertTrue(bookDao.authorWroteBook(2, 2));
+        Assert.assertTrue(bookDao.authorWroteBook(3, 3));
+        Assert.assertTrue(bookDao.authorWroteBook(4, 4));
+        Assert.assertTrue(bookDao.authorWroteBook(5, 5));
+    }
+
+    @Test
+    public void testAuthorWroteBookIfAuthorDidNotWriteBook() {
+        Assert.assertFalse(bookDao.authorWroteBook(1, 2));
+        Assert.assertFalse(bookDao.authorWroteBook(2, 3));
+        Assert.assertFalse(bookDao.authorWroteBook(3, 4));
+        Assert.assertFalse(bookDao.authorWroteBook(4, 5));
+        Assert.assertFalse(bookDao.authorWroteBook(5, 6));
     }
 }

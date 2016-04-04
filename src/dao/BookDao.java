@@ -15,4 +15,5 @@ public interface BookDao {
     boolean readerHasBook(int idReader, int idBook);
     void removeBookFromReaderCollection(int idReader, int idBook);
     boolean isTitleExist(String title);
+    boolean authorWroteBook(Integer bookId, Integer authorId);
 }
