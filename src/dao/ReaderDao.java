@@ -12,6 +12,6 @@ public interface ReaderDao {
     void delete(Reader reader);
     List<Reader> getReadersList();
     List<Book> getBookCollection(int idReader);
-    int getReaderByUserId(int userId);
+    int getReaderIdByUserId(int userId);
     boolean isEmailExist(String email);
 }

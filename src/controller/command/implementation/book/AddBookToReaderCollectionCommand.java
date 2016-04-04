@@ -25,7 +25,7 @@ public class AddBookToReaderCollectionCommand implements Command {
         BookDao bookDao = BookDaoImpl.getInstance();
         ReaderDao readerDao = ReaderDaoImpl.getInstance();
         int idUser = ((User)request.getSession().getAttribute("user")).getId();
-        int idReader = readerDao.getReaderByUserId(idUser);
+        int idReader = readerDao.getReaderIdByUserId(idUser);
         int idBook = Integer.parseInt(request.getParameter("book_id"));
 
         if (!bookDao.readerHasBook(idReader, idBook)) {

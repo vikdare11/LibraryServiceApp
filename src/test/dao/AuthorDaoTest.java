@@ -224,4 +224,21 @@ public class AuthorDaoTest extends DBTestCase {
         Assert.assertFalse(authorDao.isNameExist("author_name10"));
     }
 
+    @Test
+    public void testIsSurnameExistIfSurnameExist() {
+        Assert.assertTrue(authorDao.isSurnameExist("author_surname1"));
+        Assert.assertTrue(authorDao.isSurnameExist("author_surname2"));
+        Assert.assertTrue(authorDao.isSurnameExist("author_surname3"));
+        Assert.assertTrue(authorDao.isSurnameExist("author_surname4"));
+        Assert.assertTrue(authorDao.isSurnameExist("author_surname5"));
+    }
+
+    @Test
+    public void testIsSurnameExistIfSurnameNotExist() {
+        Assert.assertFalse(authorDao.isSurnameExist("author_surname6"));
+        Assert.assertFalse(authorDao.isSurnameExist("author_surname7"));
+        Assert.assertFalse(authorDao.isSurnameExist("author_surname8"));
+        Assert.assertFalse(authorDao.isSurnameExist("author_surname9"));
+        Assert.assertFalse(authorDao.isSurnameExist("author_surname10"));
+    }
 }

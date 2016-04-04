@@ -208,5 +208,21 @@ public class PathDaoTest extends DBTestCase {
 
         Assert.assertEquals(actualPath, expectedPath.getId());
     }
+
+    @Test
+    public void testIsPathExistIfPathExist() {
+        Assert.assertTrue(pathDao.isPathExist("Book/path1.html"));
+        Assert.assertTrue(pathDao.isPathExist("Book/path2.fb2"));
+        Assert.assertTrue(pathDao.isPathExist("Book/path3.pdf"));
+        Assert.assertTrue(pathDao.isPathExist("Book/path4.txt"));
+    }
+
+    @Test
+    public void testIsPathExistIfPathNotExist() {
+        Assert.assertFalse(pathDao.isPathExist("Book/path5.html"));
+        Assert.assertFalse(pathDao.isPathExist("Book/path6.fb2"));
+        Assert.assertFalse(pathDao.isPathExist("Book/path7.pdf"));
+        Assert.assertFalse(pathDao.isPathExist("Book/path8.txt"));
+    }
 }
 

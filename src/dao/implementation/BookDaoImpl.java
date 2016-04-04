@@ -122,7 +122,7 @@ public class BookDaoImpl implements BookDao {
             statement.setInt(2, bookId);
             statement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            return;
         }
     }
 
@@ -135,7 +135,7 @@ public class BookDaoImpl implements BookDao {
             statement.setInt(2, readerId);
             statement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            return;
         }
     }
 
@@ -165,7 +165,7 @@ public class BookDaoImpl implements BookDao {
             statement.setInt(2, idReader);
             statement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            return;
         }
     }
 
@@ -186,6 +186,26 @@ public class BookDaoImpl implements BookDao {
         }
 
         return titleExist;
+    }
+
+    @Override
+    public boolean authorWroteBook(Integer bookId, Integer authorId) {
+        boolean authorWroteBook = false;
+
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM `bookofauthor` WHERE idauthor=? and idbook=?")) {
+            statement.setInt(1, authorId);
+            statement.setInt(2, bookId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    authorWroteBook = true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return authorWroteBook;
     }
 
 }

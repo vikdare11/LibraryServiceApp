@@ -175,9 +175,7 @@ public class CommentDaoTest extends DBTestCase {
     @Test
     public void testGetLoginByReader() {
         String expectedLogin = "login1";
-
         String actualLogin = commentDao.getLoginByReader(1);
-
         Assert.assertEquals(actualLogin, expectedLogin);
     }
 }

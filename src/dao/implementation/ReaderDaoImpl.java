@@ -134,7 +134,7 @@ public class ReaderDaoImpl implements ReaderDao {
     }
 
     @Override
-    public int getReaderByUserId(int userId) {
+    public int getReaderIdByUserId(int userId) {
         int readerId = -1;
         try (Connection connection = DbUtil.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT idreader FROM reader WHERE iduser=?")) {
