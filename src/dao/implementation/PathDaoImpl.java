@@ -21,22 +21,23 @@ public class PathDaoImpl implements PathDao {
 
     @Override
     public int create(Path path) {
-        int id = 0;
-
-        try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement("insert into `path` (path, `format`, idbook) " +
-                     "values (?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, path.getPath());
-            statement.setString(2, path.getFormat());
-            statement.setInt(3, path.getIdBook());
-            statement.execute();
-            try (ResultSet resultSet = statement.getGeneratedKeys()) {
-                if (resultSet.next()) {
-                    id = resultSet.getInt(1);
+        int id = -1;
+        if (!isPathExist(path.getPath())) {
+            try (Connection connection = DbUtil.getConnection();
+                 PreparedStatement statement = connection.prepareStatement("INSERT INTO `path` (path, `format`, idbook) " +
+                         "VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+                statement.setString(1, path.getPath());
+                statement.setString(2, path.getFormat());
+                statement.setInt(3, path.getIdBook());
+                statement.execute();
+                try (ResultSet resultSet = statement.getGeneratedKeys()) {
+                    if (resultSet.next()) {
+                        id = resultSet.getInt(1);
+                    }
                 }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         return id;
     }
@@ -151,5 +152,24 @@ public class PathDaoImpl implements PathDao {
         }
 
         return id;
+    }
+
+    @Override
+    public boolean isPathExist(String path) {
+        boolean pathExist = false;
+
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT path FROM `path` WHERE path=?")) {
+            statement.setString(1, path);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    pathExist = true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return pathExist;
     }
 }

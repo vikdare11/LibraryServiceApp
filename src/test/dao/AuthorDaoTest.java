@@ -172,7 +172,7 @@ public class AuthorDaoTest extends DBTestCase {
         book.setId(1);
         Author expectedAuthor = new Author();
         expectedAuthor.setName("author_name1");
-        expectedAuthor.setSurname("author_surname2");
+        expectedAuthor.setSurname("author_surname1");
         expectedAuthor.setId(1);
 
         Author actualAuthor = authorDao.getAuthorByBook(book);

@@ -167,6 +167,13 @@ public class UserDaoTest extends DBTestCase {
         expectedUser5.setPassword("password5");
         expectedUsers.add(expectedUser5);
 
+        User expectedUser6 = new User();
+        expectedUser6.setAdmin(false);
+        expectedUser6.setId(6);
+        expectedUser6.setLogin("login6");
+        expectedUser6.setPassword("password6");
+        expectedUsers.add(expectedUser6);
+
         List<User> actualUsers = userDao.getUsersList();
 
         Assert.assertEquals(actualUsers, expectedUsers);
@@ -196,11 +203,11 @@ public class UserDaoTest extends DBTestCase {
         Assert.assertTrue(userDao.isLoginExist("login3"));
         Assert.assertTrue(userDao.isLoginExist("login4"));
         Assert.assertTrue(userDao.isLoginExist("login5"));
+        Assert.assertTrue(userDao.isLoginExist("login6"));
     }
 
     @Test
     public void testIsLoginExistIfLoginNotExist() {
-        Assert.assertFalse(userDao.isLoginExist("login6"));
         Assert.assertFalse(userDao.isLoginExist("login7"));
         Assert.assertFalse(userDao.isLoginExist("login8"));
         Assert.assertFalse(userDao.isLoginExist("login9"));

@@ -51,6 +51,8 @@ public class GetBookInfoServiceTest extends DBTestCase {
                 new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/author_data_set.xml")),
                 new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/bookofauthor_data_set.xml")),
                 new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/path_data_set.xml")),
+                new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/user_data_set.xml")),
+                new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/reader_data_set.xml")),
                 new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/comment_data_set.xml"))
         };
         return new CompositeDataSet(dataSets);
@@ -83,8 +85,9 @@ public class GetBookInfoServiceTest extends DBTestCase {
         expectedBookViewObject.setListOfComments(listOfComments);
         expectedBookViewObject.setReadPath(readPath);
         expectedBookViewObject.setDownloadPaths(downloadPaths);
-        book.setCountOfViews(book.getCountOfViews() + 1);
+        book.setCountOfViews(5);
         bookDao.update(book);
+        book.setCountOfViews(book.getCountOfViews()+1);
 
         BookViewObject actualBookViewObject = getBookInfoService.execute(1);
 

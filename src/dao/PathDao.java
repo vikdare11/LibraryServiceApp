@@ -13,4 +13,5 @@ public interface PathDao {
     List<Path> getPathsList(Book book);
     Path getPathsList(String format, Book book);
     int getPathIdByFormatAndBookId(String format, int bookId);
+    boolean isPathExist(String path);
 }

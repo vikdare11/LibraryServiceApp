@@ -42,6 +42,9 @@ public class GetUserInfoTest extends DBTestCase {
     protected IDataSet getDataSet() throws Exception {
         dataSets = new IDataSet[] { new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/user_data_set.xml")),
                 new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/reader_data_set.xml")),
+                new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/book_data_set.xml")),
+                new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/author_data_set.xml")),
+                new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/bookofauthor_data_set.xml")),
                 new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/dataset/bookcollectionofreader_data_set.xml"))
         };
         return new CompositeDataSet(dataSets);
