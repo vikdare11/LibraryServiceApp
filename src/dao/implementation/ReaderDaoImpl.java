@@ -23,20 +23,21 @@ public class ReaderDaoImpl implements ReaderDao {
     @Override
     public int create(Reader reader) {
         int id = 0;
-
-        try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement("insert into `reader` (iduser, email) " +
-                     "values (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
-            statement.setInt(1, reader.getIdUser());
-            statement.setString(2, reader.getEmail());
-            statement.execute();
-            try (ResultSet resultSet = statement.getGeneratedKeys()) {
-                if (resultSet.next()) {
-                    id = resultSet.getInt(1);
+        if (!isEmailExist(reader.getEmail())) {
+            try (Connection connection = DbUtil.getConnection();
+                 PreparedStatement statement = connection.prepareStatement("insert into `reader` (iduser, email) " +
+                         "values (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+                statement.setInt(1, reader.getIdUser());
+                statement.setString(2, reader.getEmail());
+                statement.execute();
+                try (ResultSet resultSet = statement.getGeneratedKeys()) {
+                    if (resultSet.next()) {
+                        id = resultSet.getInt(1);
+                    }
                 }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         return id;
     }
@@ -66,7 +67,7 @@ public class ReaderDaoImpl implements ReaderDao {
     public void update(Reader reader) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement("update `reader` set iduser=?, email=? "+
-                     "where id=?")) {
+                     "where idreader=?")) {
             statement.setInt(1, reader.getIdUser());
             statement.setString(2, reader.getEmail());
             statement.setInt(3, reader.getId());
@@ -79,7 +80,7 @@ public class ReaderDaoImpl implements ReaderDao {
     @Override
     public void delete(Reader reader) {
         try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement("delete from `reader` where id=?")){
+             PreparedStatement statement = connection.prepareStatement("delete from `reader` where idreader=?")){
             statement.setInt(1, reader.getId());
             statement.execute();
 
@@ -148,5 +149,25 @@ public class ReaderDaoImpl implements ReaderDao {
         }
 
         return readerId;
+    }
+
+
+    @Override
+    public boolean isEmailExist(String email) {
+        boolean emailExist = false;
+
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT email FROM `reader` WHERE email=?")) {
+            statement.setString(1, email);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    emailExist = true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return emailExist;
     }
 }

@@ -5,4 +5,5 @@
     <user iduser="3" login="login3" password="password3" isadmin="false"/>
     <user iduser="4" login="login4" password="password4" isadmin="false"/>
     <user iduser="5" login="login5" password="password5" isadmin="false"/>
+    <user iduser="6" login="login6" password="password6" isadmin="false"/>
 </dataset>

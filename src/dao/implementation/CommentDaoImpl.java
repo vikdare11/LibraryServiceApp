@@ -48,7 +48,7 @@ public class CommentDaoImpl implements CommentDao {
     public Comment read(int idComment) {
         Comment comment = null;
         try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement("select * from `comment` where id=?")) {
+             PreparedStatement statement = connection.prepareStatement("select * from `comment` where idcomment=?")) {
             statement.setInt(1, idComment);
 
             try(ResultSet resultSet = statement.executeQuery()) {
@@ -70,7 +70,7 @@ public class CommentDaoImpl implements CommentDao {
     public void update(Comment comment) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement("update `comment` set idbook=?, idreader=?, review=? "+
-                     "where id=?")) {
+                     "where idcomment=?")) {
             statement.setInt(1, comment.getIdBook());
             statement.setInt(2, comment.getIdReader());
             statement.setString(3, comment.getReview());
@@ -107,7 +107,7 @@ public class CommentDaoImpl implements CommentDao {
                     comment.setIdBook(resultSet.getInt("idbook"));
                     comment.setIdReader(resultSet.getInt("idreader"));
                     comment.setReview(resultSet.getString("review"));
-                    comment.setUser(this.getCommentByReader(resultSet.getInt("idreader")));
+                    comment.setUser(this.getLoginByReader(resultSet.getInt("idreader")));
                     comments.add(comment);
                 }
             }
@@ -118,7 +118,7 @@ public class CommentDaoImpl implements CommentDao {
     }
 
     @Override
-    public String getCommentByReader(int idReader) {
+    public String getLoginByReader(int idReader) {
         ReaderDao readerDao = ReaderDaoImpl.getInstance();
         UserDao userDao = UserDaoImpl.getInstance();
         Reader reader = readerDao.read(idReader);

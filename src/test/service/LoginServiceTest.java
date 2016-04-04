@@ -50,7 +50,7 @@ public class LoginServiceTest extends DBTestCase{
     }
 
     @Test
-    public void testExecute() {
+    public void testExecuteIfUserExist() {
         User expectedUser = new User();
         expectedUser.setLogin("login3");
         expectedUser.setPassword("password3");
@@ -60,5 +60,17 @@ public class LoginServiceTest extends DBTestCase{
         User actualUser = loginService.execute(expectedUser);
 
         Assert.assertEquals(actualUser, expectedUser);
+    }
+
+    public void testExecuteIfUserNotExist() {
+        User expectedUser = new User();
+        expectedUser.setLogin("login10");
+        expectedUser.setPassword("password10");
+        expectedUser.setId(userDao.findIdUser(expectedUser));
+        Service<User, User> loginService = LoginService.getInstance();
+
+        User actualUser = loginService.execute(expectedUser);
+
+        Assert.assertNull(actualUser);
     }
 }

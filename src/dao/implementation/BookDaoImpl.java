@@ -169,4 +169,23 @@ public class BookDaoImpl implements BookDao {
         }
     }
 
+    @Override
+    public boolean isTitleExist(String title) {
+        boolean titleExist = false;
+
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT title FROM `book` WHERE title=?")) {
+            statement.setString(1, title);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    titleExist = true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return titleExist;
+    }
+
 }
