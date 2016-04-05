@@ -62,6 +62,7 @@ public class LoginServiceTest extends DBTestCase{
         Assert.assertEquals(actualUser, expectedUser);
     }
 
+    @Test
     public void testExecuteIfUserNotExist() {
         User expectedUser = new User();
         expectedUser.setLogin("login10");

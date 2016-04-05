@@ -9,6 +9,15 @@ public class UserViewObject implements Serializable {
     private String login;
     private String email;
     private List<Book> bookCollection;
+    private boolean isAdmin;
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
 
     public List<Book> getBookCollection() {
         return bookCollection;

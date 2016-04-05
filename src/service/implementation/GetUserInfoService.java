@@ -38,6 +38,7 @@ public class GetUserInfoService implements Service <Integer, UserViewObject>{
         userViewObject.setBookCollection(bookCollectionOfReader);
         userViewObject.setEmail(reader.getEmail());
         userViewObject.setLogin(user.getLogin());
+        userViewObject.setIsAdmin(user.isAdmin());
 
         return userViewObject;
     }

@@ -15,6 +15,7 @@
   <body>
 <c:if test="${not empty user}">
   <h3>Hello, ${user.login}! Have a nice day.</h3>
+
     <form action="controller" enctype="multipart/form-data" method="get">
       <input type="hidden" name="command" value="logout">
       <input type="submit" value="Logout">
@@ -28,6 +29,7 @@
       <input type="hidden" name="command" value="get_users">
       <input type="submit" value="Users list">
     </form>
+
 </c:if>
 <form action="controller" enctype="multipart/form-data" method="get">
   <input type="hidden" name="command" value="get_authors">
