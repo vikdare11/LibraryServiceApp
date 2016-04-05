@@ -17,6 +17,7 @@ import service.implementation.GetUserInfoService;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,11 +40,14 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
     private List<Book> booksList;
     private List<UserViewObject> readersList = new ArrayList<>();
     private List<BookViewObject> booksInfoList = new ArrayList<>();
+    private static String USER_PASS = "";
+    private static String OWNER_PASS = "owner-pass";
 
     @Override
-    public void generateBooksList(String outputFile) throws FileNotFoundException, DocumentException {
+    public void generateBooksList(String outputFile) throws IOException, DocumentException {
         booksListDocument = new Document(PageSize.A4, 50, 50, 50, 50);
         PdfWriter writer = PdfWriter.getInstance(booksListDocument, new FileOutputStream(outputFile));
+        writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
         booksListDocument.open();
         booksList = bookDao.getBooksList();
         Paragraph title = new Paragraph("Books list: ", FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLD, new CMYKColor(0, 255, 255,17)));
@@ -70,6 +74,7 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
     public void generateUsersList(String outputFile) throws FileNotFoundException, DocumentException {
         usersListDocument = new Document(PageSize.A4, 50, 50, 50, 50);
         PdfWriter writer = PdfWriter.getInstance(usersListDocument, new FileOutputStream(outputFile));
+        writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
         usersListDocument.open();
         List<User> usersList = userDao.getUsersList();
         for (User user : usersList) {
@@ -102,6 +107,7 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
     public void generateBooksInfo(String outputFile) throws FileNotFoundException, DocumentException {
         booksInfoDocument = new Document(PageSize.A4, 50, 50, 50, 50);
         PdfWriter writer = PdfWriter.getInstance(booksInfoDocument, new FileOutputStream(outputFile));
+        writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
         booksInfoDocument.open();
         booksList = bookDao.getBooksList();
         Service<Integer, BookViewObject> getBookInfoService = GetBookInfoService.getInstance();
@@ -147,6 +153,7 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
     public void generateViewsStatistic(String outputFile) throws FileNotFoundException, DocumentException {
         booksListDocument = new Document(PageSize.A4, 50, 50, 50, 50);
         PdfWriter writer = PdfWriter.getInstance(booksListDocument, new FileOutputStream(outputFile));
+        writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
         booksListDocument.open();
         booksList = bookDao.getBooksList();
         Paragraph title = new Paragraph("Books list: ",
@@ -175,6 +182,7 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
     public void generateBookCollectionsOfReaders(String outputFile) throws FileNotFoundException, DocumentException {
         usersListDocument = new Document(PageSize.A4, 50, 50, 50, 50);
         PdfWriter writer = PdfWriter.getInstance(usersListDocument, new FileOutputStream(outputFile));
+        writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
         usersListDocument.open();
         Paragraph title = new Paragraph("Users list: ",
                 FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLD, new CMYKColor(0, 255, 255,17)));

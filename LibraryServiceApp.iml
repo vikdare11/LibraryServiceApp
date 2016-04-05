@@ -44,7 +44,10 @@
     <orderEntry type="library" name="com.mysql.jdbc_5.1.5" level="project" />
     <orderEntry type="library" scope="TEST" name="slf4j-api-1.7.20" level="project" />
     <orderEntry type="library" name="slf4j-simple-1.6.1" level="project" />
-    <orderEntry type="library" name="itextpdf-5.4.0" level="project" />
     <orderEntry type="library" name="poi-3.9" level="project" />
+    <orderEntry type="library" name="itextpdf-5.2.1" level="project" />
+    <orderEntry type="library" name="bcmail-jdk16-1.46" level="project" />
+    <orderEntry type="library" name="bcprov-jdk16-1.46" level="project" />
+    <orderEntry type="library" name="bctsp-jdk16-1.46" level="project" />
   </component>
 </module>
