@@ -1,11 +1,14 @@
 package controller;
 
+import com.itextpdf.text.DocumentException;
 import controller.command.Command;
 import controller.command.implementation.author.*;
 import controller.command.implementation.book.*;
 import controller.command.implementation.comment.AddCommentCommand;
 import controller.command.implementation.comment.DeleteCommentCommand;
 import controller.command.implementation.user.*;
+import document.IDocumentGenerator;
+import document.implementation.XlsDocumentGenerator;
 import domain.User;
 
 import javax.servlet.RequestDispatcher;
@@ -234,6 +237,12 @@ public class Controller extends HttpServlet {
                 }
                 case "view_book" : {
                     command = ViewBookCommand.getInstance();
+                    IDocumentGenerator generator = XlsDocumentGenerator.getInstance();
+                    try {
+                        generator.generateBooksList();
+                    } catch (DocumentException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 }
                 case "open_edit_author" : {

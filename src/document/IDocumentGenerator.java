@@ -3,11 +3,12 @@ package document;
 import com.itextpdf.text.DocumentException;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public interface IDocumentGenerator {
-    void generateBooksList() throws FileNotFoundException, DocumentException;
-    void generateUsersList() throws FileNotFoundException, DocumentException;
-    void generateBooksInfo() throws FileNotFoundException, DocumentException;
-    void generateViewsStatistic() throws FileNotFoundException, DocumentException;
-    void generateBookCollectionsOfReaders() throws FileNotFoundException, DocumentException;
+    void generateBooksList() throws IOException, DocumentException;
+    void generateUsersList() throws IOException, DocumentException;
+    void generateBooksInfo() throws IOException, DocumentException;
+    void generateViewsStatistic() throws IOException, DocumentException;
+    void generateBookCollectionsOfReaders() throws IOException, DocumentException;
 }
