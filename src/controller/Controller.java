@@ -1,14 +1,14 @@
 package controller;
 
-import com.itextpdf.text.DocumentException;
 import controller.command.Command;
 import controller.command.implementation.author.*;
 import controller.command.implementation.book.*;
 import controller.command.implementation.comment.AddCommentCommand;
 import controller.command.implementation.comment.DeleteCommentCommand;
+import controller.command.implementation.documents.CsvDocumentsGenerateCommand;
+import controller.command.implementation.documents.PdfDocumentsGenerateCommand;
+import controller.command.implementation.documents.XlsDocumentsGenerateCommand;
 import controller.command.implementation.user.*;
-import document.IDocumentGenerator;
-import document.implementation.XlsDocumentGenerator;
 import domain.User;
 
 import javax.servlet.RequestDispatcher;
@@ -55,7 +55,9 @@ public class Controller extends HttpServlet {
         availableAdminOperations.add("read_online");
         availableAdminOperations.add("edit_book");
         availableAdminOperations.add("open_edit_book");
-
+        availableAdminOperations.add("generate_pdf_documents");
+        availableAdminOperations.add("generate_xls_documents");
+        availableAdminOperations.add("generate_csv_documents");
 
         availableUserOperations.add("view_book");
         availableUserOperations.add("add_comment");
@@ -65,6 +67,9 @@ public class Controller extends HttpServlet {
         availableUserOperations.add("add_book_to_reader_collection");
         availableUserOperations.add("remove_book_from_reader_collection");
         availableUserOperations.add("read_online");
+        availableUserOperations.add("generate_pdf_documents");
+        availableUserOperations.add("generate_xls_documents");
+        availableUserOperations.add("generate_csv_documents");
     }
 
     @Override
@@ -166,6 +171,18 @@ public class Controller extends HttpServlet {
                     command = EditBookCommand.getInstance();
                     break;
                 }
+                case "generate_pdf_documents" : {
+                    command = PdfDocumentsGenerateCommand.getInstance();
+                    break;
+                }
+                case "generate_xls_documents" : {
+                    command = XlsDocumentsGenerateCommand.getInstance();
+                    break;
+                }
+                case "generate_csv_documents" : {
+                    command = CsvDocumentsGenerateCommand.getInstance();
+                    break;
+                }
             }
 
             boolean access = true;
@@ -237,12 +254,6 @@ public class Controller extends HttpServlet {
                 }
                 case "view_book" : {
                     command = ViewBookCommand.getInstance();
-                    IDocumentGenerator generator = XlsDocumentGenerator.getInstance();
-                    try {
-                        generator.generateBooksList();
-                    } catch (DocumentException e) {
-                        e.printStackTrace();
-                    }
                     break;
                 }
                 case "open_edit_author" : {
@@ -303,6 +314,18 @@ public class Controller extends HttpServlet {
                 }
                 case "open_edit_book" : {
                     command = OpenEditBookCommand.getInstance();
+                    break;
+                }
+                case "generate_pdf_documents" : {
+                    command = PdfDocumentsGenerateCommand.getInstance();
+                    break;
+                }
+                case "generate_xls_documents" : {
+                    command = XlsDocumentsGenerateCommand.getInstance();
+                    break;
+                }
+                case "generate_csv_documents" : {
+                    command = CsvDocumentsGenerateCommand.getInstance();
                     break;
                 }
             }
