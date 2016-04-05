@@ -184,21 +184,21 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
         Chapter chapter = new Chapter(title, 1);
         chapter.setNumberDepth(0);
         Section section = chapter.addSection(title);
-           for (UserViewObject reader : readersList) {
-               section.add(new Paragraph(reader.getLogin(), FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17))));
-               PdfPTable table = new PdfPTable(3);
-               table.setSpacingBefore(25);
-               table.setSpacingAfter(25);
-               table.addCell(new PdfPCell(new Phrase("Author", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17)))));
-               table.addCell(new PdfPCell(new Phrase("Title", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17)))));
-               table.addCell(new PdfPCell(new Phrase("Count of views", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17)))));
-               for (Book book : reader.getBookCollection()) {
-                   table.addCell(book.getAuthor());
-                   table.addCell(book.getName());
-                   table.addCell(book.getDescription());
-               }
-               section.add(table);
-           }
+        for (UserViewObject reader : readersList) {
+            section.add(new Paragraph(reader.getLogin(), FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17))));
+            PdfPTable table = new PdfPTable(3);
+            table.setSpacingBefore(25);
+            table.setSpacingAfter(25);
+            table.addCell(new PdfPCell(new Phrase("Author", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17)))));
+            table.addCell(new PdfPCell(new Phrase("Title", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17)))));
+            table.addCell(new PdfPCell(new Phrase("Description", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17)))));
+            for (Book book : reader.getBookCollection()) {
+                table.addCell(book.getAuthor());
+                table.addCell(book.getName());
+                table.addCell(book.getDescription());
+            }
+            section.add(table);
+        }
         usersListDocument.add(section);
         usersListDocument.close();
     }
