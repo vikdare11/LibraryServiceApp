@@ -39,7 +39,7 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
     private List<BookViewObject> booksInfoList = new ArrayList<>();
 
     @Override
-    public void generateBooksList() throws IOException, DocumentException {
+    public void generateBooksList(String outputFile) throws IOException, DocumentException {
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("Books list");
         int i = 0;
@@ -61,12 +61,12 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
             tempRow.createCell(2).setCellValue(book.getDescription());
         }
         sheet.autoSizeColumn(1);
-        workbook.write(new FileOutputStream("D:\\documents\\booksListDocument.xls"));
+        workbook.write(new FileOutputStream(outputFile));
         //book.close();
     }
 
     @Override
-    public void generateUsersList() throws IOException, DocumentException {
+    public void generateUsersList(String outputFile) throws IOException, DocumentException {
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("Users list");
         int i = 0;
@@ -92,11 +92,11 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
             tempRow.createCell(2).setCellValue(reader.isAdmin() ? "Admin" : "Not admin");
         }
         sheet.autoSizeColumn(1);
-        workbook.write(new FileOutputStream("D:\\documents\\usersListDocument.xls"));
+        workbook.write(new FileOutputStream(outputFile));
     }
 
     @Override
-    public void generateBooksInfo() throws IOException, DocumentException {
+    public void generateBooksInfo(String outputFile) throws IOException, DocumentException {
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("Books list with full information");
         int i = 0;
@@ -136,11 +136,11 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
                 tempRow.createCell(k).setCellValue(comment.getUser() + ": " + comment.getReview());
             }
         }
-        workbook.write(new FileOutputStream("D:\\documents\\booksInfoDocument.xls"));
+        workbook.write(new FileOutputStream(outputFile));
     }
 
     @Override
-    public void generateViewsStatistic() throws IOException, DocumentException {
+    public void generateViewsStatistic(String outputFile) throws IOException, DocumentException {
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("Books list");
         int i = 0;
@@ -162,11 +162,11 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
             tempRow.createCell(2).setCellValue(book.getCountOfViews());
         }
         sheet.autoSizeColumn(1);
-        workbook.write(new FileOutputStream("D:\\documents\\booksViewStatistic.xls"));
+        workbook.write(new FileOutputStream(outputFile));
     }
 
     @Override
-    public void generateBookCollectionsOfReaders() throws IOException, DocumentException {
+    public void generateBookCollectionsOfReaders(String outputFile) throws IOException, DocumentException {
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("Books list");
         for (UserViewObject reader : readersList) {
@@ -192,6 +192,6 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
             }
         }
         sheet.autoSizeColumn(1);
-        workbook.write(new FileOutputStream("D:\\documents\\usersBookCollections.xls"));
+        workbook.write(new FileOutputStream(outputFile));
     }
 }

@@ -41,9 +41,9 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
     private List<BookViewObject> booksInfoList = new ArrayList<>();
 
     @Override
-    public void generateBooksList() throws FileNotFoundException, DocumentException {
+    public void generateBooksList(String outputFile) throws FileNotFoundException, DocumentException {
         booksListDocument = new Document(PageSize.A4, 50, 50, 50, 50);
-        PdfWriter writer = PdfWriter.getInstance(booksListDocument, new FileOutputStream("D:\\documents\\booksListDocument.pdf"));
+        PdfWriter writer = PdfWriter.getInstance(booksListDocument, new FileOutputStream(outputFile));
         booksListDocument.open();
         booksList = bookDao.getBooksList();
         Paragraph title = new Paragraph("Books list: ",
@@ -69,9 +69,9 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
     }
 
     @Override
-    public void generateUsersList() throws FileNotFoundException, DocumentException {
+    public void generateUsersList(String outputFile) throws FileNotFoundException, DocumentException {
         usersListDocument = new Document(PageSize.A4, 50, 50, 50, 50);
-        PdfWriter writer = PdfWriter.getInstance(usersListDocument, new FileOutputStream("D:\\documents\\usersListDocument.pdf"));
+        PdfWriter writer = PdfWriter.getInstance(usersListDocument, new FileOutputStream(outputFile));
         usersListDocument.open();
         List<User> usersList = userDao.getUsersList();
         for (User user : usersList) {
@@ -101,9 +101,9 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
     }
 
     @Override
-    public void generateBooksInfo() throws FileNotFoundException, DocumentException {
+    public void generateBooksInfo(String outputFile) throws FileNotFoundException, DocumentException {
         booksInfoDocument = new Document(PageSize.A4, 50, 50, 50, 50);
-        PdfWriter writer = PdfWriter.getInstance(booksInfoDocument, new FileOutputStream("D:\\documents\\booksInfoDocument.pdf"));
+        PdfWriter writer = PdfWriter.getInstance(booksInfoDocument, new FileOutputStream(outputFile));
         booksInfoDocument.open();
         booksList = bookDao.getBooksList();
         Service<Integer, BookViewObject> getBookInfoService = GetBookInfoService.getInstance();
@@ -146,9 +146,9 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
     }
 
     @Override
-    public void generateViewsStatistic() throws FileNotFoundException, DocumentException {
+    public void generateViewsStatistic(String outputFile) throws FileNotFoundException, DocumentException {
         booksListDocument = new Document(PageSize.A4, 50, 50, 50, 50);
-        PdfWriter writer = PdfWriter.getInstance(booksListDocument, new FileOutputStream("D:\\documents\\booksViewStatistic.pdf"));
+        PdfWriter writer = PdfWriter.getInstance(booksListDocument, new FileOutputStream(outputFile));
         booksListDocument.open();
         booksList = bookDao.getBooksList();
         Paragraph title = new Paragraph("Books list: ",
@@ -174,9 +174,9 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
     }
 
     @Override
-    public void generateBookCollectionsOfReaders() throws FileNotFoundException, DocumentException {
+    public void generateBookCollectionsOfReaders(String outputFile) throws FileNotFoundException, DocumentException {
         usersListDocument = new Document(PageSize.A4, 50, 50, 50, 50);
-        PdfWriter writer = PdfWriter.getInstance(usersListDocument, new FileOutputStream("D:\\documents\\usersBookCollections.pdf"));
+        PdfWriter writer = PdfWriter.getInstance(usersListDocument, new FileOutputStream(outputFile));
         usersListDocument.open();
         Paragraph title = new Paragraph("Users list: ",
                 FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLD, new CMYKColor(0, 255, 255,17)));
