@@ -45,5 +45,6 @@
     <orderEntry type="library" scope="TEST" name="slf4j-api-1.7.20" level="project" />
     <orderEntry type="library" name="slf4j-simple-1.6.1" level="project" />
     <orderEntry type="library" name="itextpdf-5.4.0" level="project" />
+    <orderEntry type="library" name="poi-3.9" level="project" />
   </component>
 </module>
