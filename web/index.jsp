@@ -31,6 +31,18 @@
             <input type="hidden" name="command" value="get_users">
             <input type="submit" value="Users list">
           </form>
+          <form action="controller" enctype="multipart/form-data" method="get">
+            <input type="hidden" name="command" value="generate_pdf_documents">
+            <input type="submit" value="Generate pdf documents">
+          </form>
+          <form action="controller" enctype="multipart/form-data" method="get">
+            <input type="hidden" name="command" value="generate_xls_documents">
+            <input type="submit" value="Generate xls documents">
+          </form>
+          <form action="controller" enctype="multipart/form-data" method="get">
+            <input type="hidden" name="command" value="generate_csv_documents">
+            <input type="submit" value="Generate csv documents">
+          </form>
         </c:if>
       </ul>
       <ul class="right hide-on-med-and-down">

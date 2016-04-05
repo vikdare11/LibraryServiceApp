@@ -32,28 +32,28 @@ public class CsvDocumentGenerator implements IDocumentGenerator {
     @Override
     public void generateUsersList(String outputFile) throws IOException, DocumentException {
         String xlsFile = "D://temp//usersListDocument.xls";
-        xlsGenerator.generateBooksList(xlsFile);
+        xlsGenerator.generateUsersList(xlsFile);
         convertXlsToCsv(xlsFile, outputFile);
     }
 
     @Override
     public void generateBooksInfo(String outputFile) throws IOException, DocumentException {
         String xlsFile = "D://temp//booksInfoDocument.xls";
-        xlsGenerator.generateBooksList(xlsFile);
+        xlsGenerator.generateBooksInfo(xlsFile);
         convertXlsToCsv(xlsFile, outputFile);
     }
 
     @Override
     public void generateViewsStatistic(String outputFile) throws IOException, DocumentException {
         String xlsFile = "D://temp//booksViewStatistic.xls";
-        xlsGenerator.generateBooksList(xlsFile);
+        xlsGenerator.generateViewsStatistic(xlsFile);
         convertXlsToCsv(xlsFile, outputFile);
     }
 
     @Override
     public void generateBookCollectionsOfReaders(String outputFile) throws IOException, DocumentException {
         String xlsFile = "D://temp//usersBookCollections.xls";
-        xlsGenerator.generateBooksList(xlsFile);
+        xlsGenerator.generateBookCollectionsOfReaders(xlsFile);
         convertXlsToCsv(xlsFile, outputFile);
     }
 
@@ -74,33 +74,29 @@ public class CsvDocumentGenerator implements IDocumentGenerator {
                 while (cellIterator.hasNext())
                 {
                     cell = cellIterator.next();
-
                     switch (cell.getCellType())
                     {
                         case Cell.CELL_TYPE_BOOLEAN:
-                            data.append(cell.getBooleanCellValue() + ",");
+                            data.append(cell.getBooleanCellValue() + ";");
                             break;
 
                         case Cell.CELL_TYPE_NUMERIC:
-                            data.append(cell.getNumericCellValue() + ",");
+                            data.append(cell.getNumericCellValue() + ";");
                             break;
 
                         case Cell.CELL_TYPE_STRING:
-                            data.append(cell.getStringCellValue() + ",");
+                            data.append(cell.getStringCellValue() + ";");
                             break;
 
                         case Cell.CELL_TYPE_BLANK:
-                            data.append("" + ",");
+                            data.append("" + ";");
                             break;
-
                         default:
-                            data.append(cell + ",");
+                            data.append(cell + ";");
                     }
-
-                    data.append('\n');
                 }
+                data.append('\n');
             }
-
             fos.write(data.toString().getBytes());
             fos.close();
         }

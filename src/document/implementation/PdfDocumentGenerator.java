@@ -46,9 +46,7 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
         PdfWriter writer = PdfWriter.getInstance(booksListDocument, new FileOutputStream(outputFile));
         booksListDocument.open();
         booksList = bookDao.getBooksList();
-        Paragraph title = new Paragraph("Books list: ",
-                FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLD, new CMYKColor(0, 255, 255,17)));
-
+        Paragraph title = new Paragraph("Books list: ", FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLD, new CMYKColor(0, 255, 255,17)));
         Chapter chapter = new Chapter(title, 1);
         chapter.setNumberDepth(0);
         Section section = chapter.addSection(title);
@@ -139,7 +137,7 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
             for (Path path : book.getDownloadPaths()) {
                 formats += ", " + path.getFormat();
             }
-            section.add(new Paragraph(formats + "\n\n\n"));
+            section.add(new Paragraph(formats + "\n\n\n\n\n"));
         }
         booksInfoDocument.add(section);
         booksInfoDocument.close();

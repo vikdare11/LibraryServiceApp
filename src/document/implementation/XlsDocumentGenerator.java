@@ -49,8 +49,6 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
         author.setCellValue("Author");
         Cell title = row.createCell(1);
         title.setCellValue("Title");
-        Cell description = row.createCell(2);
-        description.setCellValue("Description");
 
         booksList = bookDao.getBooksList();
         for (Book book : booksList) {
@@ -58,11 +56,13 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
             Row tempRow = sheet.createRow(i);
             tempRow.createCell(0).setCellValue(book.getAuthor());
             tempRow.createCell(1).setCellValue(book.getName());
-            tempRow.createCell(2).setCellValue(book.getDescription());
         }
+        sheet.autoSizeColumn(0);
         sheet.autoSizeColumn(1);
-        workbook.write(new FileOutputStream(outputFile));
-        //book.close();
+        sheet.autoSizeColumn(2);
+        FileOutputStream fos = new FileOutputStream(outputFile);
+        workbook.write(fos);
+        fos.close();
     }
 
     @Override
@@ -91,52 +91,71 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
             tempRow.createCell(1).setCellValue(reader.getEmail());
             tempRow.createCell(2).setCellValue(reader.isAdmin() ? "Admin" : "Not admin");
         }
+        sheet.autoSizeColumn(0);
         sheet.autoSizeColumn(1);
-        workbook.write(new FileOutputStream(outputFile));
+        sheet.autoSizeColumn(2);
+        FileOutputStream fos = new FileOutputStream(outputFile);
+        workbook.write(fos);
+        fos.close();
     }
 
     @Override
     public void generateBooksInfo(String outputFile) throws IOException, DocumentException {
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("Books list with full information");
-        int i = 0;
-        Row row = sheet.createRow(i);
-
-        Cell author = row.createCell(0);
-        author.setCellValue("Author");
-        Cell title = row.createCell(1);
-        title.setCellValue("Title");
-        Cell description = row.createCell(2);
-        description.setCellValue("Description");
-        Cell paths = row.createCell(3);
-        paths.setCellValue("Available paths");
-        Cell comments = row.createCell(4);
-        comments.setCellValue("Comments");
-
         booksList = bookDao.getBooksList();
         Service<Integer, BookViewObject> getBookInfoService = GetBookInfoService.getInstance();
         for (Book book : booksList) {
             booksInfoList.add(getBookInfoService.execute(book.getId()));
         }
 
+        int i = 0;
         for (BookViewObject book : booksInfoList) {
+            Row row = sheet.createRow(i);
+            Cell author = row.createCell(0);
+            author.setCellValue("Author");
+            Cell title = row.createCell(1);
+            title.setCellValue("Title");
+            Cell formatsCell = row.createCell(2);
+            formatsCell.setCellValue("Available paths");
             i++;
             Row tempRow = sheet.createRow(i);
             tempRow.createCell(0).setCellValue(book.getAuthor().getName() + " " + book.getAuthor().getSurname());
             tempRow.createCell(1).setCellValue(book.getBook().getName());
-            tempRow.createCell(2).setCellValue(book.getBook().getDescription());
             String formats = book.getReadPath().getFormat();
             for (Path path : book.getDownloadPaths()) {
                 formats += ", " + path.getFormat();
             }
-            tempRow.createCell(3).setCellValue(formats);
-            int k = 3;
+            tempRow.createCell(2).setCellValue(formats);
+            i++;
+            row = sheet.createRow(i);
+            Cell description = row.createCell(0);
+            description.setCellValue("Description");
+            i++;
+            tempRow = sheet.createRow(i);
+            tempRow.createCell(0).setCellValue(book.getBook().getDescription());
+            i++;
+            row = sheet.createRow(i);
+            Cell comments = row.createCell(0);
+            comments.setCellValue("Comments");
             for (Comment comment: book.getListOfComments()) {
-                k++;
+                i++;
+                tempRow = sheet.createRow(i);
+                int k = 0;
                 tempRow.createCell(k).setCellValue(comment.getUser() + ": " + comment.getReview());
+                k++;
             }
+            i += 3;
         }
-        workbook.write(new FileOutputStream(outputFile));
+        sheet.setColumnWidth(0, 64);
+        sheet.autoSizeColumn(1);
+        sheet.autoSizeColumn(2);
+        sheet.autoSizeColumn(3);
+        sheet.autoSizeColumn(4);
+        sheet.autoSizeColumn(5);
+        FileOutputStream fos = new FileOutputStream(outputFile);
+        workbook.write(fos);
+        fos.close();
     }
 
     @Override
@@ -161,37 +180,41 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
             tempRow.createCell(1).setCellValue(book.getName());
             tempRow.createCell(2).setCellValue(book.getCountOfViews());
         }
+        sheet.autoSizeColumn(0);
         sheet.autoSizeColumn(1);
-        workbook.write(new FileOutputStream(outputFile));
+        sheet.autoSizeColumn(2);
+        FileOutputStream fos = new FileOutputStream(outputFile);
+        workbook.write(fos);
+        fos.close();
     }
 
     @Override
     public void generateBookCollectionsOfReaders(String outputFile) throws IOException, DocumentException {
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("Books list");
+        int i = 0;
         for (UserViewObject reader : readersList) {
-            int i = 0;
             Row row = sheet.createRow(i);
             Cell login = row.createCell(0);
             login.setCellValue(reader.getLogin());
-
+            i++;
+            Row tempRow = sheet.createRow(i);
+            Cell author = tempRow.createCell(0);
+            author.setCellValue("Author");
+            Cell title = tempRow.createCell(1);
+            title.setCellValue("Title");
             for (Book book : reader.getBookCollection()) {
-                i++;
-                Row tempRow = sheet.createRow(i);
-                Cell author = tempRow.createCell(0);
-                author.setCellValue("Author");
-                Cell title = tempRow.createCell(1);
-                title.setCellValue("Title");
-                Cell description = tempRow.createCell(2);
-                description.setCellValue("Description");
                 i++;
                 tempRow = sheet.createRow(i);
                 tempRow.createCell(0).setCellValue(book.getAuthor());
                 tempRow.createCell(1).setCellValue(book.getName());
-                tempRow.createCell(2).setCellValue(book.getDescription());
             }
+            i += 2;
         }
+        sheet.autoSizeColumn(0);
         sheet.autoSizeColumn(1);
-        workbook.write(new FileOutputStream(outputFile));
+        FileOutputStream fos = new FileOutputStream(outputFile);
+        workbook.write(fos);
+        fos.close();
     }
 }
