@@ -16,17 +16,17 @@
     <div class="nav-wrapper">
       <a href="index.jsp" class="brand-logo center">Library Service</a>
       <ul class="right hide-on-med-and-down">
-        <a href="login.jsp.jsp">Sign in</a>
+        <a href="login.jsp">Sign in</a>
       </ul>
     </div>
   </nav>
 </div>
-
+<main>
 <form method="post" action="controller">
   <input type="hidden" name="command" value="register">
 
   <div class="row">
-    <div class="input-field col s6">
+    <div class="input-field col s6" id="log">
 
       <input type="text" id="login" maxlength="45" required name="login"  class="validate">
       <label class="active" for="login">Login</label>
@@ -35,7 +35,7 @@
 
 
   <div class="row">
-    <div class="input-field col s6">
+    <div class="input-field col s6" id="pass">
 
       <input type="password" id="password" maxlength="45" required name="password"  class="validate">
       <label class="active" for="password">Password</label>
@@ -43,14 +43,17 @@
   </div>
 
   <div class="row">
-    <div class="input-field col s6">
+    <div class="input-field col s6" id="mail">
 
       <input type="text" id="email" maxlength="45" required name="email"  class="validate">
       <label class="active" for="email">Email</label>
     </div>
   </div>
 
-  <button class="btn waves-effect waves-light" input type="submit" name="action">Submit
+
+
+
+  <button class="btn waves-effect waves-light" id="log_button" input type="submit" name="action">Submit
     <i class="material-icons right">send</i>
   </button>
 </form>
@@ -58,5 +61,12 @@
 <c:if test="${not empty param['message']}">
   <p>User with this login is already exist</p>
 </c:if>
+  </main>
 </body>
+<footer class="page-footer" id="footer">
+  <div class="container grey-text">
+    © 2016 Copyright
+    <span class="right">Made by LibraryServiceCompany</span>
+  </div>
+</footer>
 </html>
