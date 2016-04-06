@@ -1,14 +1,73 @@
 .nav-wrapper{
-  background-color: white;
+    background-color: white;
 }
 
 .brand-logo.center{
-  color: black;
+    color: black;
 }
 
 footer.page-footer{
-  background-color: #e0e0e0;
-}
+        background-color: #e0e0e0;
+    }
 nav ul a{
-  color: black;
+    color: black;
+}
+form#back.waves-effect.waves-light.btn{
+    margin-top: 13px;
+}
+form#logout.waves-effect.waves-light.btn{
+  margin-top: 13px;
+}
+
+form#all.waves-effect.waves-light.btn{
+  margin-top: 13px;
+}
+
+form#profile.waves-effect.waves-light.btn{
+  margin-top: 13px;
+}
+
+div#pass.input-field.col.s6{
+  margin-left: 510px;
+  margin-top: 30px;
+}
+
+div#log.input-field.col.s6{
+  margin-left: 510px;
+  margin-top: 100px;
+}
+
+div#mail.input-field.col.s6{
+  margin-left: 510px;
+}
+
+button#log_button.btn.waves-effect.waves-light{
+  margin-left: 610px;
+}
+
+
+div#desc.input-field.col.s6{
+  margin-left: 510px;
+}
+
+button#path_button.btn.waves-effect.waves-light{
+  margin-left: 100px;
+}
+
+form#path_button.waves-effect.waves-light.btn{
+  margin-left: 300px;
+}
+
+footer#footer{
+  margin-bottom: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;  /* высота веб-страницы больше или равна высоте окна браузера */
+  margin: 0;
+}
+main {
+  flex: 1;  /* если содержимое body меньше высоты окна, то main будет растянут до нужной величины */
 }
