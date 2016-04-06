@@ -15,63 +15,78 @@
     <nav>
         <div class="nav-wrapper">
             <a href="index.jsp" class="brand-logo center">Library Service</a>
-            <ul class="left hide-on-med-and-down">
-                <FORM><INPUT class="waves-effect waves-light btn" Type="button" VALUE="Back" onClick="history.go(-1);return true;"></FORM>
-            </ul>
             <ul class="right hide-on-med-and-down">
-
                 <c:if test="${not empty user}">
-                    <form  class="waves-effect waves-light btn" id="lo_button" action="controller" enctype="multipart/form-data" method="get">
-                        <input type="hidden" name="command" value="logout" >
-                        <input type="submit" value="Logout">
-                    </form>
+                <form class="waves-effect waves-light btn" id="profile" action="controller" enctype="multipart/form-data" method="get">
+                    <input type="hidden" name="command" value="open_user">
+                    <input type="hidden" name="user_id" value="${user.id}">
+                    <input type="submit" value="My profile">
+                </form>
+                <form  class="waves-effect waves-light btn" id="logout" action="controller" enctype="multipart/form-data" method="get">
+                    <input type="hidden" name="command" value="logout" >
+                    <input type="submit" value="Logout">
+                </form>
+            </ul>
+            <ul class="left hide-on-med-and-down">
+                <form  class="waves-effect waves-light btn" id="back" >
+                    <input type="submit" value="Back" onClick="history.go(-1);return true;">
+                </form>
+
+                <form class="waves-effect waves-light btn" id="all" action="controller" enctype="multipart/form-data" method="get">
+                    <input type="hidden" name="command" value="get_books">
+                    <input type="submit" value="All books">
+                </form>
+                </c:if>
+                <c:if test="${empty user}">
+                    <a href="login.jsp">Sign in</a>
+                    <a href="registration.jsp">Sign up</a>
                 </c:if>
             </ul>
         </div>
     </nav>
 </div>
-<main>
 
+<main>
     <form action="controller" method="get" accept-charset="UTF-8" enctype="multipart/form-data">
-        <input type="hidden" name="author_id" value="${author.id}">
-        <h3>${author.name} ${author.surname}</h3>
-        <table class="striped">
-            <thead>
-            <tr>
-                <th>Title</th>
-                <th>Description</th>
-            </tr>
-            </thead>
-            <c:forEach var="book" items="${books}">
-                <c:if test="${book.idAuthor == author.id}">
-                    <tr>
-                        <td>${book.name}</td>
-                        <td>${book.description}</td>
-                        <c:if test="${not empty user}">
-                            <td>
-                                <form class="waves-effect waves-light btn" action="controller" enctype="multipart/form-data" method="get">
-                                    <input type="hidden" name="command" value="view_book">
-                                    <input type="hidden" name="bookid" value="${book.id}">
-                                    <input type="submit" value="View">
-                                </form>
-                            </td>
-                        </c:if>
-                        <c:if test="${user.admin == true}">
-                            <td>
-                                <form class="waves-effect waves-light btn" action="controller" enctype="multipart/form-data" method="get">
-                                    <input type="hidden" name="command" value="delete_book">
-                                    <input type="hidden" name="bookid" value="${book.id}">
-                                    <input type="submit" value="Delete">
-                                </form>
-                            </td>
-                        </c:if>
-                    </tr>
-                </c:if>
-            </c:forEach>
-        </table>
-    </form>
+  <input type="hidden" name="author_id" value="${author.id}">
+    <h3>${author.name} ${author.surname}</h3>
+    <table class="striped">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <c:forEach var="book" items="${books}">
+            <c:if test="${book.idAuthor == author.id}">
+                <tr>
+                    <td>${book.name}</td>
+                    <td>${book.description}</td>
+                    <c:if test="${not empty user}">
+                        <td>
+                            <form class="waves-effect waves-light btn" action="controller" enctype="multipart/form-data" method="get">
+                                <input type="hidden" name="command" value="view_book">
+                                <input type="hidden" name="bookid" value="${book.id}">
+                                <input type="submit" value="View">
+                            </form>
+                        </td>
+                    </c:if>
+                    <c:if test="${user.admin == true}">
+                        <td>
+                            <form class="waves-effect waves-light btn" action="controller" enctype="multipart/form-data" method="get">
+                                <input type="hidden" name="command" value="delete_book">
+                                <input type="hidden" name="bookid" value="${book.id}">
+                                <input type="submit" value="Delete">
+                            </form>
+                        </td>
+                    </c:if>
+                </tr>
+            </c:if>
+        </c:forEach>
+    </table>
+</form>
 </main>
-<footer class="page-footer">
+<footer class="page-footer" id="footer">
     <div class="container grey-text">
         © 2016 Copyright
         <span class="right">Made by LibraryServiceCompany</span>
