@@ -59,7 +59,6 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
         }
         sheet.autoSizeColumn(0);
         sheet.autoSizeColumn(1);
-        sheet.autoSizeColumn(2);
         FileOutputStream fos = new FileOutputStream(outputFile);
         workbook.write(fos);
         fos.close();

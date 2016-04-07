@@ -46,40 +46,58 @@
     </nav>
 </div>
 <main>
+    <table class="striped">
+        <thead>
+        <tr>
+            <th>Login</th>
+        </tr>
+        </thead>
 <c:forEach var="person" items="${users}">
-    <h3>${person.login}</h3>
-    <form action="controller" enctype="multipart/form-data" method="get">
+        <tr>
+    <td>
+    <h5>${person.login}</h5>
+    </td>
+    <td>
+    <form class="waves-effect waves-light btn" action="controller" enctype="multipart/form-data" method="get">
         <input type="hidden" name="command" value="open_user">
         <input type="hidden" name="user_id" value="${person.id}">
         <input type="submit" value="View information"/>
     </form>
+    </td>
     <c:if test="${user.admin == true}">
         <c:if test="${person.id != user.id && person.admin == false}">
-
-            <form action="controller" enctype="multipart/form-data" method="get">
+            <td>
+            <form class="waves-effect waves-light btn" action="controller" enctype="multipart/form-data" method="get">
                 <input type="hidden" name="command" value="edit_user">
                 <input type="hidden" name="user_id" value="${person.id}">
                 <input type="hidden" name="isadmin" value=true>
                 <input type="submit" value="Make this user an admin"/>
             </form>
+            </td>
         </c:if>
         <c:if test="${person.admin == true && person.login != 'admin'}">
-            <form action="controller" enctype="multipart/form-data" method="get">
+            <td>
+            <form class="waves-effect waves-light btn" action="controller" enctype="multipart/form-data" method="get">
                 <input type="hidden" name="command" value="edit_user">
                 <input type="hidden" name="user_id" value="${person.id}">
                 <input type="hidden" name="isadmin" value=false>
                 <input type="submit" value="Make this user not admin"/>
             </form>
+            </td>
         </c:if>
         <c:if test="${person.login != 'admin'}">
-            <form action="controller" enctype="multipart/form-data" method="get">
+            <td>
+            <form class="waves-effect waves-light btn" action="controller" enctype="multipart/form-data" method="get">
                 <input type="hidden" name="command" value="delete_user">
                 <input type="hidden" name="user_id" value="${person.id}">
                 <input type="submit" value="Delete">
             </form>
+            </td>
         </c:if>
     </c:if>
 </c:forEach>
+        </tr>
+        </table>
     </main>
 
 </body>

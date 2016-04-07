@@ -46,9 +46,12 @@
   </nav>
 </div>
 <main>
-
+<br>
+  <br>
   <c:if test="${user.admin == true}">
-    <a href="add_author.jsp">Add author</a>
+    <form action="add_author.jsp" class="waves-effect waves-light btn" enctype="multipart/form-data">
+      <input type="submit" value="Add author"/>
+    </form>
   </c:if>
   <table class="striped">
     <thead>
@@ -57,7 +60,10 @@
     </tr>
     </thead>
   <c:forEach var="author" items="${authors}">
-    <h1>${author.name} ${author.surname}</h1>
+    <tr>
+    <td>
+    <h5>${author.name} ${author.surname}</h5>
+    </td>
     <td>
     <form class="waves-effect waves-light btn" action="controller" enctype="multipart/form-data" method="post">
       <input type="hidden" name="command" value="open_author">
@@ -90,6 +96,7 @@
       </td>
     </c:if>
   </c:forEach>
+    </tr>
     </table>
   </main>
 </body>

@@ -99,6 +99,19 @@
     <input type="hidden" name="user_id" value="${user.id}">
     <input type="submit" value="My profile">
   </form>
+    <br>
+    <form action="controller" enctype="multipart/form-data" method="get">
+        <input type="hidden" name="command" value="generate_pdf_documents">
+        <input type="submit" value="Generate pdf documents">
+    </form>
+    <form action="controller" enctype="multipart/form-data" method="get">
+        <input type="hidden" name="command" value="generate_xls_documents">
+        <input type="submit" value="Generate xls documents">
+    </form>
+    <form action="controller" enctype="multipart/form-data" method="get">
+        <input type="hidden" name="command" value="generate_csv_documents">
+        <input type="submit" value="Generate csv documents">
+    </form>
   </c:if>
           </div>
 

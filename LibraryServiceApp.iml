@@ -49,5 +49,6 @@
     <orderEntry type="library" name="bcmail-jdk16-1.46" level="project" />
     <orderEntry type="library" name="bcprov-jdk16-1.46" level="project" />
     <orderEntry type="library" name="bctsp-jdk16-1.46" level="project" />
+    <orderEntry type="library" name="jquery" level="application" />
   </component>
 </module>

@@ -58,21 +58,37 @@
       <label class="active" for="title">Title</label>
     </div>
   </div>
+  <div class="row">
+    <div class="input-field col s6" id="desc">
+  <input type="text" id="description" maxlength="1000"  name="description"  class="validate">
+  <label class="active" for="description">Description</label>
+  </div>
+  </div>
 
-  <h1>Description:</h1>
-  <textarea maxlength="10000" name="description" placeholder="Input book description here..."></textarea>
   <br>
-  <br>
 
-
-  <h1>Path for online reading</h1>
-  <button class="btn waves-effect waves-light"><input  id="path_button" type="file" name="read-file" ></button>
-  <h1>Path for download in fb2</h1>
-  <button class="btn waves-effect waves-light"><input   type="file" name="read-file" ></button>
-  <h1>Path for download in pdf</h1>
-  <button class="btn waves-effect waves-light"><input  type="file" name="read-file" ></button>
-  <h1>Path for download in txt</h1>
-  <button class="btn waves-effect waves-light"><input   type="file" name="read-file"></button>
+  <table>
+    <tr>
+      <td><h5>Path for online reading</h5></td>
+      <td><h5>Path for download in fb2</h5></td>
+      <td><h5>Path for download in pdf</h5></td>
+      <td><h5>Path for download in txt</h5></td>
+    </tr>
+    <tr>
+      <td>
+        <input  id="path_online" type="file" name="read_file" >
+      </td>
+      <td>
+        <input id="path_fb2"  type="file" name="fb2_file" >
+      </td>
+      <td>
+        <input id="path_pdf" type="file" name="pdf_file" >
+      </td>
+      <td>
+        <input id="path_txt" type="file" name="txt_file">
+      </td>
+    </tr>
+  </table>
   <br>
   <br>
   <button class="btn waves-effect waves-light"id="log_button" input type="submit" name="action">Submit
