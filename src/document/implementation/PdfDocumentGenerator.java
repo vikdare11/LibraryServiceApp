@@ -38,13 +38,15 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
     private UserDao userDao = UserDaoImpl.getInstance();
     Service<Integer, UserViewObject> getUserInfoService = GetUserInfoService.getInstance();
     private List<Book> booksList;
-    private List<UserViewObject> readersList = new ArrayList<>();
-    private List<BookViewObject> booksInfoList = new ArrayList<>();
+    private List<UserViewObject> readersList;
+    private List<BookViewObject> booksInfoList;
     private static String USER_PASS = "";
     private static String OWNER_PASS = "owner-pass";
 
     @Override
     public void generateBooksList(String outputFile) throws IOException, DocumentException {
+        readersList = new ArrayList<>();
+        booksInfoList = new ArrayList<>();
         booksListDocument = new Document(PageSize.A4, 50, 50, 50, 50);
         PdfWriter writer = PdfWriter.getInstance(booksListDocument, new FileOutputStream(outputFile));
         writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
@@ -72,6 +74,8 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
 
     @Override
     public void generateUsersList(String outputFile) throws FileNotFoundException, DocumentException {
+        readersList = new ArrayList<>();
+        booksInfoList = new ArrayList<>();
         usersListDocument = new Document(PageSize.A4, 50, 50, 50, 50);
         PdfWriter writer = PdfWriter.getInstance(usersListDocument, new FileOutputStream(outputFile));
         writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
@@ -105,6 +109,8 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
 
     @Override
     public void generateBooksInfo(String outputFile) throws FileNotFoundException, DocumentException {
+        readersList = new ArrayList<>();
+        booksInfoList = new ArrayList<>();
         booksInfoDocument = new Document(PageSize.A4, 50, 50, 50, 50);
         PdfWriter writer = PdfWriter.getInstance(booksInfoDocument, new FileOutputStream(outputFile));
         writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
@@ -151,6 +157,8 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
 
     @Override
     public void generateViewsStatistic(String outputFile) throws FileNotFoundException, DocumentException {
+        readersList = new ArrayList<>();
+        booksInfoList = new ArrayList<>();
         booksListDocument = new Document(PageSize.A4, 50, 50, 50, 50);
         PdfWriter writer = PdfWriter.getInstance(booksListDocument, new FileOutputStream(outputFile));
         writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
@@ -180,6 +188,8 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
 
     @Override
     public void generateBookCollectionsOfReaders(String outputFile) throws FileNotFoundException, DocumentException {
+        readersList = new ArrayList<>();
+        booksInfoList = new ArrayList<>();
         usersListDocument = new Document(PageSize.A4, 50, 50, 50, 50);
         PdfWriter writer = PdfWriter.getInstance(usersListDocument, new FileOutputStream(outputFile));
         writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
@@ -190,6 +200,10 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
         Chapter chapter = new Chapter(title, 1);
         chapter.setNumberDepth(0);
         Section section = chapter.addSection(title);
+        List<User> usersList = userDao.getUsersList();
+        for (User user : usersList) {
+            readersList.add(getUserInfoService.execute(user.getId()));
+        }
         for (UserViewObject reader : readersList) {
             section.add(new Paragraph(reader.getLogin(), FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17))));
             PdfPTable table = new PdfPTable(3);

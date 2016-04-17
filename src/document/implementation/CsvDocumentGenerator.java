@@ -77,22 +77,27 @@ public class CsvDocumentGenerator implements IDocumentGenerator {
                     switch (cell.getCellType())
                     {
                         case Cell.CELL_TYPE_BOOLEAN:
-                            data.append(cell.getBooleanCellValue() + ";");
+                            data.append(cell.getBooleanCellValue() + ",");
                             break;
 
                         case Cell.CELL_TYPE_NUMERIC:
-                            data.append(cell.getNumericCellValue() + ";");
+                            data.append(cell.getNumericCellValue() + ",");
                             break;
 
                         case Cell.CELL_TYPE_STRING:
-                            data.append(cell.getStringCellValue() + ";");
+                            String value = cell.getStringCellValue();
+                            if (value.split(",")[0] != value) {
+                                data.append('"' + cell.getStringCellValue() + '"' + ",");
+                            } else {
+                                data.append(cell.getStringCellValue() + ",");
+                            }
                             break;
 
                         case Cell.CELL_TYPE_BLANK:
-                            data.append("" + ";");
+                            data.append("" + ",");
                             break;
                         default:
-                            data.append(cell + ";");
+                            data.append(cell + ",");
                     }
                 }
                 data.append('\n');

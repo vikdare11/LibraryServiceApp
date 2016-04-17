@@ -35,11 +35,13 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
     private UserDao userDao = UserDaoImpl.getInstance();
     Service<Integer, UserViewObject> getUserInfoService = GetUserInfoService.getInstance();
     private List<Book> booksList;
-    private List<UserViewObject> readersList = new ArrayList<>();
-    private List<BookViewObject> booksInfoList = new ArrayList<>();
+    private List<UserViewObject> readersList;
+    private List<BookViewObject> booksInfoList;
 
     @Override
     public void generateBooksList(String outputFile) throws IOException, DocumentException {
+        readersList = new ArrayList<>();
+        booksInfoList = new ArrayList<>();
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("Books list");
         int i = 0;
@@ -66,6 +68,8 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
 
     @Override
     public void generateUsersList(String outputFile) throws IOException, DocumentException {
+        readersList = new ArrayList<>();
+        booksInfoList = new ArrayList<>();
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("Users list");
         int i = 0;
@@ -100,6 +104,8 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
 
     @Override
     public void generateBooksInfo(String outputFile) throws IOException, DocumentException {
+        readersList = new ArrayList<>();
+        booksInfoList = new ArrayList<>();
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("Books list with full information");
         booksList = bookDao.getBooksList();
@@ -159,6 +165,8 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
 
     @Override
     public void generateViewsStatistic(String outputFile) throws IOException, DocumentException {
+        readersList = new ArrayList<>();
+        booksInfoList = new ArrayList<>();
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("Books list");
         int i = 0;
@@ -189,9 +197,15 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
 
     @Override
     public void generateBookCollectionsOfReaders(String outputFile) throws IOException, DocumentException {
+        readersList = new ArrayList<>();
+        booksInfoList = new ArrayList<>();
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("Books list");
         int i = 0;
+        List<User> usersList = userDao.getUsersList();
+        for (User user : usersList) {
+            readersList.add(getUserInfoService.execute(user.getId()));
+        }
         for (UserViewObject reader : readersList) {
             Row row = sheet.createRow(i);
             Cell login = row.createCell(0);
