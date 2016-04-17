@@ -1,10 +1,7 @@
 package document.implementation;
 
 import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.CMYKColor;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.*;
 import dao.BookDao;
 import dao.UserDao;
 import dao.implementation.BookDaoImpl;
@@ -43,6 +40,12 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
     private static String USER_PASS = "";
     private static String OWNER_PASS = "owner-pass";
 
+    private String IMAGE_BACK;
+
+    public void setIMAGE_BACK(String IMAGE_BACK) {
+        this.IMAGE_BACK = IMAGE_BACK;
+    }
+
     @Override
     public void generateBooksList(String outputFile) throws IOException, DocumentException {
         readersList = new ArrayList<>();
@@ -50,12 +53,11 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
         booksListDocument = new Document(PageSize.A4, 50, 50, 50, 50);
         PdfWriter writer = PdfWriter.getInstance(booksListDocument, new FileOutputStream(outputFile));
         writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
+        MyEvent event = new MyEvent();
+        writer.setPageEvent(event);
         booksListDocument.open();
         booksList = bookDao.getBooksList();
         Paragraph title = new Paragraph("Books list: ", FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLD, new CMYKColor(0, 255, 255,17)));
-        Chapter chapter = new Chapter(title, 1);
-        chapter.setNumberDepth(0);
-        Section section = chapter.addSection(title);
         PdfPTable table = new PdfPTable(3);
         table.setSpacingBefore(25);
         table.setSpacingAfter(25);
@@ -67,8 +69,8 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
             table.addCell(book.getName());
             table.addCell(book.getDescription());
         }
-        section.add(table);
-        booksListDocument.add(section);
+        booksListDocument.add(title);
+        booksListDocument.add(table);
         booksListDocument.close();
     }
 
@@ -79,6 +81,8 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
         usersListDocument = new Document(PageSize.A4, 50, 50, 50, 50);
         PdfWriter writer = PdfWriter.getInstance(usersListDocument, new FileOutputStream(outputFile));
         writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
+        MyEvent event = new MyEvent();
+        writer.setPageEvent(event);
         usersListDocument.open();
         List<User> usersList = userDao.getUsersList();
         for (User user : usersList) {
@@ -87,9 +91,6 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
         Paragraph title = new Paragraph("Users list: ",
                 FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLD, new CMYKColor(0, 255, 255,17)));
 
-        Chapter chapter = new Chapter(title, 1);
-        chapter.setNumberDepth(0);
-        Section section = chapter.addSection(title);
         PdfPTable table = new PdfPTable(3);
         table.setSpacingBefore(25);
         table.setSpacingAfter(25);
@@ -101,8 +102,8 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
             table.addCell(reader.getEmail());
             table.addCell(reader.isAdmin() ? "Admin" : "Not admin");
         }
-        section.add(table);
-        usersListDocument.add(section);
+        usersListDocument.add(title);
+        usersListDocument.add(table);
         usersListDocument.close();
 
     }
@@ -114,32 +115,31 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
         booksInfoDocument = new Document(PageSize.A4, 50, 50, 50, 50);
         PdfWriter writer = PdfWriter.getInstance(booksInfoDocument, new FileOutputStream(outputFile));
         writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
+        MyEvent event = new MyEvent();
+        writer.setPageEvent(event);
         booksInfoDocument.open();
         booksList = bookDao.getBooksList();
         Service<Integer, BookViewObject> getBookInfoService = GetBookInfoService.getInstance();
         for (Book book : booksList) {
             booksInfoList.add(getBookInfoService.execute(book.getId()));
         }
-        Paragraph title = new Paragraph("Books list with full information: ",
+        Paragraph title = new Paragraph("Books list with full information: \n\n",
                 FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLD, new CMYKColor(0, 255, 255,17)));
 
+        booksInfoDocument.add(title);
         Chapter chapter = new Chapter(title, 1);
-        chapter.setNumberDepth(0);
-        Section section = chapter.addSection(title);
+
         for (BookViewObject book : booksInfoList) {
-            PdfPTable table = new PdfPTable(3);
-            table.setSpacingBefore(25);
-            table.setSpacingAfter(25);
-            table.addCell(new PdfPCell(new Phrase("Author", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17)))));
-            table.addCell(new PdfPCell(new Phrase("Title", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17)))));
-            table.addCell(new PdfPCell(new Phrase("Description", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17)))));
-
-            table.addCell(book.getAuthor().getName() + " " + book.getAuthor().getSurname());
-            table.addCell(book.getBook().getName());
-            table.addCell(book.getBook().getDescription());
-
-            section.add(table);
+            chapter.setNumberDepth(0);
+            Paragraph bookParagraph = new Paragraph(book.getAuthor().getName() + " " + book.getAuthor().getSurname() +
+                    " - " + book.getBook().getName(), FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17)));
+            Section section = chapter.addSection(bookParagraph);
+            section.add(new Paragraph("Description: ", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17))));
+            section.add(new Paragraph(book.getBook().getDescription()));
             section.add(new Paragraph("Comments: ", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17))));
+            if (book.getListOfComments().isEmpty()) {
+                section.add(new Paragraph("No comment."));
+            }
             for (Comment comment: book.getListOfComments()) {
                 section.add(new Paragraph(comment.getUser() + ": " + comment.getReview()));
             }
@@ -149,9 +149,9 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
             for (Path path : book.getDownloadPaths()) {
                 formats += ", " + path.getFormat();
             }
-            section.add(new Paragraph(formats + "\n\n\n\n\n"));
+            section.add(new Paragraph(formats + "\n\n"));
+            booksInfoDocument.add(section);
         }
-        booksInfoDocument.add(section);
         booksInfoDocument.close();
     }
 
@@ -162,14 +162,13 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
         booksListDocument = new Document(PageSize.A4, 50, 50, 50, 50);
         PdfWriter writer = PdfWriter.getInstance(booksListDocument, new FileOutputStream(outputFile));
         writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
+        MyEvent event = new MyEvent();
+        writer.setPageEvent(event);
         booksListDocument.open();
         booksList = bookDao.getBooksList();
-        Paragraph title = new Paragraph("Books list: ",
+        Paragraph title = new Paragraph("Book views statistic: ",
                 FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLD, new CMYKColor(0, 255, 255,17)));
 
-        Chapter chapter = new Chapter(title, 1);
-        chapter.setNumberDepth(0);
-        Section section = chapter.addSection(title);
         PdfPTable table = new PdfPTable(3);
         table.setSpacingBefore(25);
         table.setSpacingAfter(25);
@@ -181,8 +180,8 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
             table.addCell(book.getName());
             table.addCell(String.valueOf(book.getCountOfViews()));
         }
-        section.add(table);
-        booksListDocument.add(section);
+        booksListDocument.add(title);
+        booksListDocument.add(table);
         booksListDocument.close();
     }
 
@@ -193,19 +192,25 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
         usersListDocument = new Document(PageSize.A4, 50, 50, 50, 50);
         PdfWriter writer = PdfWriter.getInstance(usersListDocument, new FileOutputStream(outputFile));
         writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
+        MyEvent event = new MyEvent();
+        writer.setPageEvent(event);
         usersListDocument.open();
-        Paragraph title = new Paragraph("Users list: ",
-                FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLD, new CMYKColor(0, 255, 255,17)));
+       // Paragraph title = new Paragraph("Book collection of readers: ",
+         //       FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLD, new CMYKColor(0, 255, 255,17)));
 
-        Chapter chapter = new Chapter(title, 1);
-        chapter.setNumberDepth(0);
-        Section section = chapter.addSection(title);
+//        usersListDocument.add(title);
+
         List<User> usersList = userDao.getUsersList();
         for (User user : usersList) {
             readersList.add(getUserInfoService.execute(user.getId()));
         }
+        int i = 0;
         for (UserViewObject reader : readersList) {
-            section.add(new Paragraph(reader.getLogin(), FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17))));
+            i++;
+            Paragraph userTitle = new Paragraph(reader.getLogin(),
+                    FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLD, new CMYKColor(0, 255, 255,17)));
+            Chapter chapter = new Chapter(userTitle, i);
+            chapter.setNumberDepth(0);
             PdfPTable table = new PdfPTable(3);
             table.setSpacingBefore(25);
             table.setSpacingAfter(25);
@@ -217,9 +222,47 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
                 table.addCell(book.getName());
                 table.addCell(book.getDescription());
             }
-            section.add(table);
+            chapter.add(table);
+            usersListDocument.add(chapter);
         }
-        usersListDocument.add(section);
         usersListDocument.close();
     }
+
+    protected class MyEvent extends PdfPageEventHelper {
+        Image image = null;
+
+        @Override
+        public void onOpenDocument(PdfWriter writer, Document document) {
+            try {
+                image = Image.getInstance(IMAGE_BACK);
+            } catch (BadElementException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            image.setAbsolutePosition(12, 300);
+        }
+
+        @Override
+        public  void onEndPage(PdfWriter writer, Document document) {
+            try {
+                PdfContentByte canvas = writer.getDirectContentUnder();
+                if (image != null) {
+                    image.scaleAbsolute(PageSize.A4.getWidth(), PageSize.A4.getHeight());
+                    image.setAbsolutePosition(0, 0);
+                    canvas.saveState();
+                    PdfGState pdfGState = new PdfGState();
+                    pdfGState.setFillOpacity(0.8f);
+                    canvas.setGState(pdfGState);
+                    canvas.addImage(image);
+                    canvas.restoreState();
+                }
+            } catch (DocumentException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
+
+
+

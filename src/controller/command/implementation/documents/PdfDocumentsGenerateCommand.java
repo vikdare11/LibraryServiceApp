@@ -25,6 +25,8 @@ public class PdfDocumentsGenerateCommand implements Command {
         IDocumentGenerator generator = PdfDocumentGenerator.getInstance();
         try {
             List<String> paths = new ArrayList<>();
+            PdfDocumentGenerator pdfDocumentGenerator = (PdfDocumentGenerator) PdfDocumentGenerator.getInstance();
+            pdfDocumentGenerator.setIMAGE_BACK(request.getServletContext().getRealPath("/image/background.jpg"));
             generator.generateBooksList("D://documents//booksListDocument.pdf");
             generator.generateUsersList("D://documents//usersListDocument.pdf");
             generator.generateBooksInfo("D://documents//booksInfoDocument.pdf");

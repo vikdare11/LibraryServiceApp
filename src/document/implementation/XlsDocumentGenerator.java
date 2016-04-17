@@ -138,17 +138,45 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
             description.setCellValue("Description");
             i++;
             tempRow = sheet.createRow(i);
-            tempRow.createCell(0).setCellValue(book.getBook().getDescription());
-            i++;
+            if (book.getBook().getDescription().toCharArray().length > 135) {
+                int k  = 125;
+                while ((book.getBook().getDescription().toCharArray()[k] != " ".charAt(0))) {
+                    k++;
+                }
+                tempRow.createCell(0).setCellValue(book.getBook().getDescription().substring(0, k+1));
+                i++;
+                tempRow = sheet.createRow(i);
+                tempRow.createCell(0).setCellValue(book.getBook().getDescription().substring(k+1));
+                i++;
+
+            } else {
+                tempRow.createCell(0).setCellValue(book.getBook().getDescription());
+                i++;
+            }
             row = sheet.createRow(i);
             Cell comments = row.createCell(0);
             comments.setCellValue("Comments");
+            if (book.getListOfComments().isEmpty()) {
+                row.createCell(1).setCellValue("No comment.");
+            }
             for (Comment comment: book.getListOfComments()) {
                 i++;
                 tempRow = sheet.createRow(i);
                 int k = 0;
-                tempRow.createCell(k).setCellValue(comment.getUser() + ": " + comment.getReview());
-                k++;
+                if (comment.getReview().toCharArray().length > 135) {
+                    int j  = 125;
+                    while ((comment.getReview().toCharArray()[j] != " ".charAt(0))) {
+                        j++;
+                    }
+                    tempRow.createCell(0).setCellValue(comment.getUser() + ": " + comment.getReview().substring(0, j+1));
+                    i++;
+                    tempRow = sheet.createRow(i);
+                    tempRow.createCell(0).setCellValue(comment.getReview().substring(j+1));
+                    i++;
+                } else {
+                    tempRow.createCell(k).setCellValue(comment.getUser() + ": " + comment.getReview());
+                    k++;
+                }
             }
             i += 3;
         }
