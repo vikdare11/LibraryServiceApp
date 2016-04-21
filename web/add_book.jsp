@@ -7,49 +7,16 @@
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"  media="screen,projection"/>
   <link  rel="stylesheet" href="assets/style.scss" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 </head>
 <body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-<script type="text/javascript" src="assets/js/materialize.min.js"></script>
-<div class="navbar-fixed">
-  <nav>
-    <div class="nav-wrapper">
-      <a href="index.jsp" class="brand-logo center">Library Service</a>
-      <ul class="right hide-on-med-and-down">
-        <c:if test="${not empty user}">
-        <form class="waves-effect waves-light btn" id="profile" action="controller" enctype="multipart/form-data" method="get">
-          <input type="hidden" name="command" value="open_user">
-          <input type="hidden" name="user_id" value="${user.id}">
-          <input type="submit" value="My profile">
-        </form>
-        <form  class="waves-effect waves-light btn" id="logout" action="controller" enctype="multipart/form-data" method="get">
-          <input type="hidden" name="command" value="logout" >
-          <input type="submit" value="Logout">
-        </form>
-      </ul>
-      <ul class="left hide-on-med-and-down">
-        <form  class="waves-effect waves-light btn" id="back" >
-          <input type="submit" value="Back" onClick="history.go(-1);return true;">
-        </form>
-
-        <form class="waves-effect waves-light btn" id="all" action="controller" enctype="multipart/form-data" method="get">
-          <input type="hidden" name="command" value="get_books">
-          <input type="submit" value="All books">
-        </form>
-        </c:if>
-        <c:if test="${empty user}">
-          <a href="login.jsp">Sign in</a>
-          <a href="registration.jsp">Sign up</a>
-        </c:if>
-      </ul>
-    </div>
-  </nav>
-</div>
-
-<main>
-  <form action="controller" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-  <input type="hidden"name="command" value="add_book">
-  <input type="hidden" name="author_id" value="${author_id}">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/js/materialize.min.js"></script>
+  <%@include file = 'header.jsp' %>
+  <main>
+    <form action="controller" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+    <input type="hidden"name="command" value="add_book">
+    <input type="hidden" name="author_id" value="${author_id}">
 
     <div class="row">
       <div class="input-field col s6" id="log">
@@ -62,9 +29,8 @@
 
     <div class="row">
       <div class="input-field col s6" id="desc">
-
-        <input type="text" id="description" maxlength="1000"  name="description"  class="validate">
-        <label class="active" for="description">Description</label>
+          <textarea id="textarea1" name="description" class="materialize-textarea"></textarea>
+          <label for="textarea1">Description</label>
       </div>
     </div>
 
@@ -101,10 +67,5 @@
 </form>
   </main>
 </body>
-<footer class="page-footer">
-  <div class="container grey-text">
-    © 2016 Copyright
-    <span class="right">Made by LibraryServiceCompany</span>
-  </div>
-</footer>
+  <%@include file='footer.jsp'%>
 </html>

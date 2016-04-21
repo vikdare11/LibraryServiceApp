@@ -13,13 +13,23 @@ footer.page-footer{
 nav ul a{
     color: black;
 }
-form#back.waves-effect.waves-light.btn{
+form#back{
     margin-top: 13px;
     margin-left: 13px;
 }
-form#logout.waves-effect.waves-light.btn{
+
+
+form#logout {
   margin-top: 13px;
   margin-right: 10px;
+}
+
+i.fa.fa-reply{
+  line-height: 20px;
+}
+
+i.fa.fa-share{
+  line-height: 20px;
 }
 
 form#all.waves-effect.waves-light.btn{
@@ -69,6 +79,7 @@ form#path_button.waves-effect.waves-light.btn{
   margin-left: 300px;
 }
 
+
 input#path_online.btn.waves-effect.waves-light{
   width: 270px;
 }
@@ -76,13 +87,21 @@ input#path_online.btn.waves-effect.waves-light{
 
 footer#footer{
   margin-bottom: 0;
+
+}
+footer#footer.page-footer{
+  height: 50px;
+}
+.container .grey-text{
+  margin: auto;
 }
 
-div.container.grey-text{
-  span.right{
-    margin-top: 5px;
-    margin-right: 12px;
+span.right{
+    margin-left: 500px;
+    margin-top: -5px;
   }
+span.left{
+  margin-top: -5px;
 }
 
 body {
@@ -90,8 +109,16 @@ body {
   flex-direction: column;
   min-width: 100vh;
   min-height: 100vh;  /* высота веб-страницы больше или равна высоте окна браузера */
-  margin: 0;
 }
 main {
-  flex: 1;  /* если содержимое body меньше высоты окна, то main будет растянут до нужной величины */
+  flex: 1;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+form#add_author{
+  padding-left: 570px;
+}
+form#edit_book{
+  padding-left:570px ;
 }
