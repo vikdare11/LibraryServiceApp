@@ -18,9 +18,9 @@
 
 <main>
 
-    <h1>Login: ${userVO.login}</h1>
-    <h1>Email: ${userVO.email}</h1>
-    <h1>Book collection:</h1>
+    <h5>Login: ${userVO.login}</h5>
+    <h5>Email: ${userVO.email}</h5>
+    <h5>Book collection:</h5>
     <table class="striped">
         <thead>
         <tr>
@@ -56,11 +56,6 @@
                         ><i class="fa fa-minus" aria-hidden="true"></i></a>
                     </form>
 
-                    <form class="waves-effect waves-light btn" action="controller" enctype="multipart/form-data" method="get">
-                        <input type="hidden" name="command" value="remove_book_from_reader_collection">
-                        <input type="hidden" name="bookid" value="${book.id}">
-                        <input type="submit" value="Remove"/>
-                    </form>
                 </td>
                 </c:if>
                 <c:if test="${user.admin == true}">

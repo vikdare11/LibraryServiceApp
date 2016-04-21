@@ -1,7 +1,6 @@
 package controller.command.implementation.book;
 
 import controller.command.Command;
-import controller.command.implementation.user.ViewUserCommand;
 import dao.BookDao;
 import dao.implementation.BookDaoImpl;
 import domain.User;
@@ -29,7 +28,9 @@ public class RemoveBookFromReaderCollection implements Command {
             bookDao.removeBookFromReaderCollection(idReader, idBook);
         }
 
-        return ViewUserCommand.getInstance().execute(request);
+        //request.setAttribute("user_id", idReader);
+
+        return "controller?command=open_user&user_id="+idReader;
 
     }
 }

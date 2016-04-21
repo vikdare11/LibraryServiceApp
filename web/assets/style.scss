@@ -122,3 +122,16 @@ form#add_author{
 form#edit_book{
   padding-left:570px ;
 }
+
+.rightcol {
+  text-align: left;
+
+  border-color: white white rgba(0, 0, 0, .4) rgba(0, 0, 0, .4);
+}
+
+.leftcol {
+  text-align: right;
+
+  border-color: white white rgba(0, 0, 0, .4) white;
+}
+

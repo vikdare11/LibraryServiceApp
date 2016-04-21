@@ -19,7 +19,7 @@ public class ViewUserCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        Integer userId = Integer.parseInt(request.getParameter(("user_id")));
+        Integer userId = Integer.parseInt(request.getParameter("user_id"));
         Service<Integer, UserViewObject> getUserInfoService = GetUserInfoService.getInstance();
         UserViewObject user = getUserInfoService.execute(userId);
 

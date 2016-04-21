@@ -44,11 +44,11 @@
               </td>
 
               <td>
-                <form action="controller" enctype="multipart/form-data" method="get" id="view_book">
+                <form action="controller" enctype="multipart/form-data" method="get" id="${book.id}">
                   <input type="hidden" name="command" value="view_book">
                   <input type="hidden" name="bookid" value="${book.id}">
                   <a href="javascript:{}"
-                     onclick="document.getElementById('view_book').submit(); return false;"
+                     onclick="document.getElementById('${book.id}').submit(); return false;"
                      class="waves-effect waves-light btn"
                   ><i class="fa fa-eye" aria-hidden="true"></i> </a>
                 </form>
@@ -57,11 +57,11 @@
             </c:when>
             <c:otherwise>
             <td>
-              <form action="controller" enctype="multipart/form-data" method="get" id="view_book1">
+              <form action="controller" enctype="multipart/form-data" method="get" id="${book.id}">
                 <input type="hidden" name="command" value="view_book">
                 <input type="hidden" name="bookid" value="${book.id}">
                 <a href="javascript:{}"
-                   onclick="document.getElementById('view_book1').submit(); return false;"
+                   onclick="document.getElementById('${book.id}').submit(); return false;"
                    class="waves-effect waves-light btn"
                 ><i class="fa fa-eye" aria-hidden="true"></i> </a>
               </form>

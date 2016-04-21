@@ -38,11 +38,11 @@
     <h5>${author.name} ${author.surname}</h5>
     </td>
     <td>
-      <form action="controller" enctype="multipart/form-data" method="post" id="view_books">
+      <form action="controller" enctype="multipart/form-data" method="get" id="${author.id}">
         <input type="hidden" name="command" value="open_author">
         <input type="hidden" name="author_id" value="${author.id}">
         <a href="javascript:{}"
-           onclick="document.getElementById('view_books').submit(); return false;"
+           onclick="document.getElementById('${author.id}').submit(); return false;"
            class="waves-effect waves-light btn"
         ><i class="fa fa-eye" aria-hidden="true"></i></a>
       </form>
