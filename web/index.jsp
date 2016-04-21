@@ -8,37 +8,15 @@
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"  media="screen,projection"/>
   <link  rel="stylesheet" href="assets/style.scss" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 </head>
 <body>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script type="text/javascript" src="assets/js/materialize.min.js"></script>
-  <div class="navbar-fixed">
-    <nav>
-      <div class="nav-wrapper">
-        <a href="index.jsp" class="brand-logo center">Library Service</a>
-        <ul class="right hide-on-med-and-down">
-        <c:if test="${not empty user}">
-          <form  class="waves-effect waves-light btn" id="logout" action="controller" enctype="multipart/form-data" method="get">
-            <input type="hidden" name="command" value="logout" >
-            <input type="submit" value="Logout">
-          </form>
-          </ul>
-          <ul class="left hide-on-med-and-down">
-            <form  class="waves-effect waves-light btn" id="back"  >
-              <input type="submit" value="Back" onClick="history.go(-1);return true;">
-            </form>
-        </c:if>
 
-        <c:if test="${empty user}">
-          <a href="login.jsp">Sign in</a>
-          <a href="registration.jsp">Sign up</a>
-        </c:if>
-        </ul>
-      </div>
-    </nav>
-  </div>
+  <%@include file = 'header.jsp' %>
 
-<main>
+  <main>
   <div id="hero" style="height: 527px;">
     <div class="container" id="hero-text-container">
       <div class="row">
@@ -49,7 +27,7 @@
              Hello,</span>
   <span class="bold"> ${user.login}</span> <span class="thin">!
             <br>
-            Now all Your favorite books will always at hand.
+            Now all Your favourite books will be always with You.
 
             <br>
             Please, choose book or author to find interesting book.
@@ -64,7 +42,7 @@
           <span class="thin">
              Cafe, transport, home...
             <br>
-            Now all Your favorite books will always at hand.
+            Now all Your favourite books will be with You.
             </span>
       <br>
       <span class="bold">LibraryService</span>
@@ -80,55 +58,66 @@
       <div class="row">
         <div class="col s12">
           <div class="center-align">
-            <form class="waves-effect waves-light btn" action="controller" enctype="multipart/form-data" method="get">
-              <input type="hidden" name="command" value="get_books">
-              <input type="submit" value="Books">
+              <form action="controller" enctype="multipart/form-data" method="get" id="the_form">
+                  <input type="hidden" name="command" value="get_books">
+                  <a href="javascript:{}"
+                     onclick="document.getElementById('the_form').submit(); return false;"
+                     class="waves-effect waves-light btn"
+                  >Books <i class="fa fa-book" aria-hidden="true"></i></a>
               </form>
-            <form class="waves-effect waves-light btn" action="controller" enctype="multipart/form-data" method="get">
-              <input type="hidden" name="command" value="get_authors">
-              <input type="submit" value="Authors">
-            </form>
-<c:if test="${not empty user}">
-  <form class="waves-effect waves-light btn" action="controller" enctype="multipart/form-data" method="get">
-    <input type="hidden" name="command" value="get_users">
-    <input type="submit" value="Users">
-
-  </form>
-  <form class="waves-effect waves-light btn" action="controller" enctype="multipart/form-data" method="get">
-    <input type="hidden" name="command" value="open_user">
-    <input type="hidden" name="user_id" value="${user.id}">
-    <input type="submit" value="My profile">
-  </form>
-    <br>
-    <form action="download" method="get" enctype="multipart/form-data">
-        <input type="hidden" name="command" value="generate_pdf_documents">
-        <input type="submit" value="Generate pdf documents">
-    </form>
-    <form action="download" method="get" enctype="multipart/form-data">
-        <input type="hidden" name="command" value="generate_xls_documents">
-        <input type="submit" value="Generate xls documents">
-    </form>
-    <form action="download" method="get" enctype="multipart/form-data">
-        <input type="hidden" name="command" value="generate_csv_documents">
-        <input type="submit" value="Generate csv documents">
-    </form>
+              <form action="controller" enctype="multipart/form-data" method="get" id="authors">
+                  <input type="hidden" name="command" value="get_authors">
+                  <a href="javascript:{}"
+                     onclick="document.getElementById('authors').submit(); return false;"
+                     class="waves-effect waves-light btn"
+                  >Authors <i class="fa fa-users" aria-hidden="true"></i></a>
+              </form>
+                <c:if test="${not empty user}">
+                    <form action="controller" enctype="multipart/form-data" method="get" id="users">
+                        <input type="hidden" name="command" value="get_users">
+                        <a href="javascript:{}"
+                           onclick="document.getElementById('users').submit(); return false;"
+                           class="waves-effect waves-light btn"
+                        >Users <i class="fa fa-user" aria-hidden="true"></i></a>
+                    </form>
+                    <form action="controller" enctype="multipart/form-data" method="get" id="user">
+                        <input type="hidden" name="command" value="open_user">
+                        <input type="hidden" name="user_id" value="${user.id}">
+                        <a href="javascript:{}"
+                           onclick="document.getElementById('user').submit(); return false;"
+                           class="waves-effect waves-light btn"
+                        >My profile <i class="fa fa-user-secret" aria-hidden="true"></i></a>
+                    </form>
+                    <form action="controller" enctype="multipart/form-data" method="get" id="the_form">
+                        <input type="hidden" name="command" value="generate_pdf_documents">
+                        <a href="javascript:{}"
+                           onclick="document.getElementById('the_form').submit(); return false;"
+                           class="waves-effect waves-light btn"
+                        >Generate pdf documents <i class="fa fa-download" aria-hidden="true"></i></a>
+                    </form>
+                    <form action="controller" enctype="multipart/form-data" method="get" id="the_form">
+                        <input type="hidden" name="command" value="generate_xls_documents">
+                        <a href="javascript:{}"
+                           onclick="document.getElementById('the_form').submit(); return false;"
+                           class="waves-effect waves-light btn"
+                        >Generate xls documents <i class="fa fa-download" aria-hidden="true"></i></a>
+                    </form>
+                    <form action="controller" enctype="multipart/form-data" method="get" id="the_form">
+                        <input type="hidden" name="command" value="generate_csv_documents">
+                        <a href="javascript:{}"
+                           onclick="document.getElementById('the_form').submit(); return false;"
+                           class="waves-effect waves-light btn"
+                        >Generate csv documents <i class="fa fa-download" aria-hidden="true"></i></a>
+                    </form>
   </c:if>
           </div>
 
         </div>
       </div>
-    </div>
-  </div>
+
 </main>
 
 
 </body>
-<footer class="page-footer" id="footer">
-
-  <div class="container grey-text">
-    © 2016 Copyright
-    <span class="right">Made by LibraryServiceCompany</span>
-
-  </div>
-</footer>
+    <%@include file='footer.jsp'%>
 </html>

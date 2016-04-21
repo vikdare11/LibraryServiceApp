@@ -55,10 +55,5 @@
 </c:if>
 </main>
 </body>
-<footer class="page-footer" id="footer">
-  <div class="container grey-text">
-    © 2016 Copyright
-    <span class="right">Made by LibraryServiceCompany</span>
-  </div>
-</footer>
+  <%@include file='footer.jsp'%>
 </html>

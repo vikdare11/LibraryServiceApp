@@ -7,44 +7,12 @@
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"  media="screen,projection"/>
     <link  rel="stylesheet" href="assets/style.scss" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 </head>
 <body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script type="text/javascript" src="assets/js/materialize.min.js"></script>
-<div class="navbar-fixed">
-    <nav>
-        <div class="nav-wrapper">
-            <a href="index.jsp" class="brand-logo center">Library Service</a>
-            <ul class="right hide-on-med-and-down">
-                <c:if test="${not empty user}">
-                <form class="waves-effect waves-light btn" id="profile" action="controller" enctype="multipart/form-data" method="get">
-                    <input type="hidden" name="command" value="open_user">
-                    <input type="hidden" name="user_id" value="${user.id}">
-                    <input type="submit" value="My profile">
-                </form>
-                <form  class="waves-effect waves-light btn" id="logout" action="controller" enctype="multipart/form-data" method="get">
-                    <input type="hidden" name="command" value="logout" >
-                    <input type="submit" value="Logout">
-                </form>
-            </ul>
-            <ul class="left hide-on-med-and-down">
-                <form  class="waves-effect waves-light btn" id="back" >
-                    <input type="submit" value="Back" onClick="history.go(-1);return true;">
-                </form>
-
-                <form class="waves-effect waves-light btn" id="all" action="controller" enctype="multipart/form-data" method="get">
-                    <input type="hidden" name="command" value="get_books">
-                    <input type="submit" value="All books">
-                </form>
-                </c:if>
-                <c:if test="${empty user}">
-                    <a href="login.jsp">Sign in</a>
-                    <a href="registration.jsp">Sign up</a>
-                </c:if>
-            </ul>
-        </div>
-    </nav>
-</div>
+<%@include file = 'header.jsp' %>
 <main>
     <table class="striped">
         <thead>
@@ -58,40 +26,55 @@
     <h5>${person.login}</h5>
     </td>
     <td>
-    <form class="waves-effect waves-light btn" action="controller" enctype="multipart/form-data" method="get">
-        <input type="hidden" name="command" value="open_user">
-        <input type="hidden" name="user_id" value="${person.id}">
-        <input type="submit" value="View information"/>
-    </form>
+        <form action="controller" enctype="multipart/form-data" method="get" id="view_inf">
+            <input type="hidden" name="command" value="open_user">
+            <input type="hidden" name="user_id" value="${person.id}">
+            <a href="javascript:{}"
+               onclick="document.getElementById('view_inf').submit(); return false;"
+               class="waves-effect waves-light btn"
+            ><i class="fa fa-eye" aria-hidden="true"></i></a>
+        </form>
+
     </td>
     <c:if test="${user.admin == true}">
         <c:if test="${person.id != user.id && person.admin == false}">
             <td>
-            <form class="waves-effect waves-light btn" action="controller" enctype="multipart/form-data" method="get">
-                <input type="hidden" name="command" value="edit_user">
-                <input type="hidden" name="user_id" value="${person.id}">
-                <input type="hidden" name="isadmin" value=true>
-                <input type="submit" value="Make this user an admin"/>
-            </form>
+                <form action="controller" enctype="multipart/form-data" method="get" id="make_admin">
+                    <input type="hidden" name="command" value="edit_user">
+                    <input type="hidden" name="user_id" value="${person.id}">
+                    <input type="hidden" name="isadmin" value=true>
+                    <a href="javascript:{}"
+                       onclick="document.getElementById('make_admin').submit(); return false;"
+                       class="waves-effect waves-light btn"
+                    >Make an admin <i class="fa fa-check" aria-hidden="true"></i></a>
+                </form>
+
             </td>
         </c:if>
         <c:if test="${person.admin == true && person.login != 'admin'}">
             <td>
-            <form class="waves-effect waves-light btn" action="controller" enctype="multipart/form-data" method="get">
-                <input type="hidden" name="command" value="edit_user">
-                <input type="hidden" name="user_id" value="${person.id}">
-                <input type="hidden" name="isadmin" value=false>
-                <input type="submit" value="Make this user not admin"/>
-            </form>
+                <form action="controller" enctype="multipart/form-data" method="get" id="make_notadmin">
+                    <input type="hidden" name="command" value="edit_user">
+                    <input type="hidden" name="user_id" value="${person.id}">
+                    <input type="hidden" name="isadmin" value=false>
+                    <a href="javascript:{}"
+                       onclick="document.getElementById('make_notadmin').submit(); return false;"
+                       class="waves-effect waves-light btn"
+                    >Make not admin <i class="fa fa-remove" aria-hidden="true"></i></a>
+                </form>
+
             </td>
         </c:if>
         <c:if test="${person.login != 'admin'}">
             <td>
-            <form class="waves-effect waves-light btn" action="controller" enctype="multipart/form-data" method="get">
-                <input type="hidden" name="command" value="delete_user">
-                <input type="hidden" name="user_id" value="${person.id}">
-                <input type="submit" value="Delete">
-            </form>
+                <form action="controller" enctype="multipart/form-data" method="get" id="delete_user">
+                    <input type="hidden" name="command" value="delete_user">
+                    <input type="hidden" name="user_id" value="${person.id}">
+                    <a href="javascript:{}"
+                       onclick="if(confirm('Are you sure?')){document.getElementById('delete_user').submit();return true}else{return false;}"
+                       class="waves-effect waves-light btn"
+                    ><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </form>
             </td>
         </c:if>
     </c:if>
@@ -101,10 +84,5 @@
     </main>
 
 </body>
-<footer class="page-footer" id="footer">
-    <div class="container grey-text">
-        © 2016 Copyright
-        <span class="right">Made by LibraryServiceCompany</span>
-    </div>
-</footer>
+    <%@include file='footer.jsp'%>
 </html>
