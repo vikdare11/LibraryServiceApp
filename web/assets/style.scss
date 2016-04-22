@@ -125,12 +125,15 @@ form#edit_book{
 
 .rightcol {
   text-align: left;
+  vertical-align: top;
 
   border-color: white white rgba(0, 0, 0, .4) rgba(0, 0, 0, .4);
 }
 
 .leftcol {
   text-align: right;
+  vertical-align: top;
+  font-weight: bold;
 
   border-color: white white rgba(0, 0, 0, .4) white;
 }

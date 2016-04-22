@@ -61,6 +61,7 @@ public class CsvDocumentGenerator implements IDocumentGenerator {
         StringBuffer data = new StringBuffer();
         try
         {
+            File temp = File.createTempFile(outputFile, ".pdf");
             FileOutputStream fos = new FileOutputStream(outputFile);
             HSSFWorkbook workbook = new HSSFWorkbook(new FileInputStream(inputFile));
             HSSFSheet sheet = workbook.getSheetAt(0);

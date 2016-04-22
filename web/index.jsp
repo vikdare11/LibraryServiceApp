@@ -60,7 +60,7 @@
             <div class="center-align">
                 <table>
                     <tr>
-                        <td style="padding-left: 70px">
+                        <td style="padding-left: 100px">
                             <form action="controller" enctype="multipart/form-data" method="get" id="the_form">
                                 <input type="hidden" name="command" value="get_books">
                                 <a href="javascript:{}"
@@ -105,7 +105,7 @@
                     <tr>
                         <td>
                             <c:if test="${not empty user}">
-                            <form action="controller" enctype="multipart/form-data" method="get" id="pdf">
+                            <form action="download" enctype="multipart/form-data" method="get" id="pdf">
                                 <input type="hidden" name="command" value="generate_pdf_documents">
                                 <a href="javascript:{}"
                                    onclick="document.getElementById('pdf').submit(); return false;"
@@ -114,7 +114,7 @@
                             </form>
                         </td>
                         <td>
-                            <form action="controller" enctype="multipart/form-data" method="get" id="xls">
+                            <form action="download" enctype="multipart/form-data" method="get" id="xls">
                                 <input type="hidden" name="command" value="generate_xls_documents">
                                 <a href="javascript:{}"
                                    onclick="document.getElementById('xls').submit(); return false;"
@@ -123,7 +123,7 @@
                             </form>
                         </td>
                         <td>
-                            <form action="controller" enctype="multipart/form-data" method="get" id="csv">
+                            <form action="download" enctype="multipart/form-data" method="get" id="csv">
                                 <input type="hidden" name="command" value="generate_csv_documents">
                                 <a href="javascript:{}"
                                    onclick="document.getElementById('csv').submit(); return false;"

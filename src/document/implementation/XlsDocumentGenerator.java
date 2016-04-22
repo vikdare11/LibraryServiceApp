@@ -7,11 +7,9 @@ import dao.implementation.BookDaoImpl;
 import dao.implementation.UserDaoImpl;
 import document.IDocumentGenerator;
 import domain.*;
+import domain.Comment;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import service.Service;
 import service.implementation.GetBookInfoService;
 import service.implementation.GetUserInfoService;
@@ -43,14 +41,22 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
         readersList = new ArrayList<>();
         booksInfoList = new ArrayList<>();
         Workbook workbook = new HSSFWorkbook();
+
+        CellStyle style = workbook.createCellStyle();//Create style
+        Font font = workbook.createFont();//Create font
+        font.setBoldweight(Font.BOLDWEIGHT_BOLD);//Make font bold
+        style.setFont(font);//set it to bold
+
         Sheet sheet = workbook.createSheet("Books list");
         int i = 0;
         Row row = sheet.createRow(i);
 
         Cell author = row.createCell(0);
         author.setCellValue("Author");
+        author.setCellStyle(style);
         Cell title = row.createCell(1);
         title.setCellValue("Title");
+        title.setCellStyle(style);
 
         booksList = bookDao.getBooksList();
         for (Book book : booksList) {
@@ -75,12 +81,21 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
         int i = 0;
         Row row = sheet.createRow(i);
 
+        CellStyle style = workbook.createCellStyle();//Create style
+        Font font = workbook.createFont();//Create font
+        font.setBoldweight(Font.BOLDWEIGHT_BOLD);//Make font bold
+        style.setFont(font);//set it to bold
+
         Cell login = row.createCell(0);
+
         login.setCellValue("Login");
+        login.setCellStyle(style);
         Cell email = row.createCell(1);
         email.setCellValue("Email");
+        email.setCellStyle(style);
         Cell isAdmin = row.createCell(2);
         isAdmin.setCellValue("Is user admin");
+        isAdmin.setCellStyle(style);
 
         List<User> usersList = userDao.getUsersList();
         for (User user : usersList) {
@@ -107,6 +122,11 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
         readersList = new ArrayList<>();
         booksInfoList = new ArrayList<>();
         Workbook workbook = new HSSFWorkbook();
+
+        CellStyle style = workbook.createCellStyle();//Create style
+        Font font = workbook.createFont();//Create font
+        font.setBoldweight(Font.BOLDWEIGHT_BOLD);//Make font bold
+        style.setFont(font);//set it to bold
         Sheet sheet = workbook.createSheet("Books list with full information");
         booksList = bookDao.getBooksList();
         Service<Integer, BookViewObject> getBookInfoService = GetBookInfoService.getInstance();
@@ -119,10 +139,13 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
             Row row = sheet.createRow(i);
             Cell author = row.createCell(0);
             author.setCellValue("Author");
+            author.setCellStyle(style);
             Cell title = row.createCell(1);
             title.setCellValue("Title");
+            title.setCellStyle(style);
             Cell formatsCell = row.createCell(2);
             formatsCell.setCellValue("Available paths");
+            formatsCell.setCellStyle(style);
             i++;
             Row tempRow = sheet.createRow(i);
             tempRow.createCell(0).setCellValue(book.getAuthor().getName() + " " + book.getAuthor().getSurname());
@@ -136,6 +159,7 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
             row = sheet.createRow(i);
             Cell description = row.createCell(0);
             description.setCellValue("Description");
+            description.setCellStyle(style);
             i++;
             tempRow = sheet.createRow(i);
             if (book.getBook().getDescription().toCharArray().length > 135) {
@@ -156,6 +180,7 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
             row = sheet.createRow(i);
             Cell comments = row.createCell(0);
             comments.setCellValue("Comments");
+            comments.setCellStyle(style);
             if (book.getListOfComments().isEmpty()) {
                 row.createCell(1).setCellValue("No comment.");
             }
@@ -196,16 +221,23 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
         readersList = new ArrayList<>();
         booksInfoList = new ArrayList<>();
         Workbook workbook = new HSSFWorkbook();
+        CellStyle style = workbook.createCellStyle();//Create style
+        Font font = workbook.createFont();//Create font
+        font.setBoldweight(Font.BOLDWEIGHT_BOLD);//Make font bold
+        style.setFont(font);//set it to bold
         Sheet sheet = workbook.createSheet("Books list");
         int i = 0;
         Row row = sheet.createRow(i);
 
         Cell author = row.createCell(0);
         author.setCellValue("Author");
+        author.setCellStyle(style);
         Cell title = row.createCell(1);
         title.setCellValue("Title");
+        title.setCellStyle(style);
         Cell countOfViews = row.createCell(2);
         countOfViews.setCellValue("Count of views");
+        countOfViews.setCellStyle(style);
 
         booksList = bookDao.getBooksList();
         for (Book book : booksList) {
@@ -228,6 +260,10 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
         readersList = new ArrayList<>();
         booksInfoList = new ArrayList<>();
         Workbook workbook = new HSSFWorkbook();
+        CellStyle style = workbook.createCellStyle();//Create style
+        Font font = workbook.createFont();//Create font
+        font.setBoldweight(Font.BOLDWEIGHT_BOLD);//Make font bold
+        style.setFont(font);//set it to bold
         Sheet sheet = workbook.createSheet("Books list");
         int i = 0;
         List<User> usersList = userDao.getUsersList();
@@ -242,8 +278,10 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
             Row tempRow = sheet.createRow(i);
             Cell author = tempRow.createCell(0);
             author.setCellValue("Author");
+            author.setCellStyle(style);
             Cell title = tempRow.createCell(1);
             title.setCellValue("Title");
+            title.setCellStyle(style);
             for (Book book : reader.getBookCollection()) {
                 i++;
                 tempRow = sheet.createRow(i);
