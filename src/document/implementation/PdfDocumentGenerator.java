@@ -12,13 +12,14 @@ import service.Service;
 import service.implementation.GetBookInfoService;
 import service.implementation.GetUserInfoService;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PdfDocumentGenerator implements IDocumentGenerator{
+public class PdfDocumentGenerator implements IDocumentGenerator {
 
     private static final IDocumentGenerator instance = new PdfDocumentGenerator();
 
@@ -47,11 +48,14 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
     }
 
     @Override
-    public void generateBooksList(String outputFile) throws IOException, DocumentException {
+    public void generateBooksList(HttpServletResponse response) throws IOException, DocumentException {
         readersList = new ArrayList<>();
         booksInfoList = new ArrayList<>();
         booksListDocument = new Document(PageSize.A4, 50, 50, 50, 50);
-        PdfWriter writer = PdfWriter.getInstance(booksListDocument, new FileOutputStream(outputFile));
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        PdfWriter writer = PdfWriter.getInstance(booksListDocument, baos);
+
         writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
         MyEvent event = new MyEvent();
         writer.setPageEvent(event);
@@ -63,7 +67,7 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
         table.setSpacingAfter(25);
         table.addCell(new PdfPCell(new Phrase("Author", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17)))));
         table.addCell(new PdfPCell(new Phrase("Title", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17)))));
-        table.addCell(new PdfPCell(new Phrase("Description", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17)))));
+        table.addCell(new PdfPCell(new Phrase("Description", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255, 17)))));
         for (Book book : booksList) {
             table.addCell(book.getAuthor());
             table.addCell(book.getName());
@@ -72,14 +76,32 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
         booksListDocument.add(title);
         booksListDocument.add(table);
         booksListDocument.close();
+
+        response.setHeader("Expires", "0");
+        response.setHeader("Cache-Control",
+                "must-revalidate, post-check=0, pre-check=0");
+        response.setHeader("Pragma", "public");
+        // setting the content type
+        response.setContentType("application/pdf");
+        // the contentlength
+        response.setContentLength(baos.size());
+        // write ByteArrayOutputStream to the ServletOutputStream
+        OutputStream os = response.getOutputStream();
+        baos.writeTo(os);
+        os.flush();
+        os.close();
+
     }
 
     @Override
-    public void generateUsersList(String outputFile) throws FileNotFoundException, DocumentException {
+    public void generateUsersList(HttpServletResponse response) throws IOException, DocumentException {
         readersList = new ArrayList<>();
         booksInfoList = new ArrayList<>();
         usersListDocument = new Document(PageSize.A4, 50, 50, 50, 50);
-        PdfWriter writer = PdfWriter.getInstance(usersListDocument, new FileOutputStream(outputFile));
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        PdfWriter writer = PdfWriter.getInstance(usersListDocument, baos);
+
         writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
         MyEvent event = new MyEvent();
         writer.setPageEvent(event);
@@ -105,15 +127,30 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
         usersListDocument.add(title);
         usersListDocument.add(table);
         usersListDocument.close();
-
+        response.setHeader("Expires", "0");
+        response.setHeader("Cache-Control",
+                "must-revalidate, post-check=0, pre-check=0");
+        response.setHeader("Pragma", "public");
+        // setting the content type
+        response.setContentType("application/pdf");
+        // the contentlength
+        response.setContentLength(baos.size());
+        // write ByteArrayOutputStream to the ServletOutputStream
+        OutputStream os = response.getOutputStream();
+        baos.writeTo(os);
+        os.flush();
+        os.close();
     }
 
     @Override
-    public void generateBooksInfo(String outputFile) throws FileNotFoundException, DocumentException {
+    public void generateBooksInfo(HttpServletResponse response) throws IOException, DocumentException {
         readersList = new ArrayList<>();
         booksInfoList = new ArrayList<>();
         booksInfoDocument = new Document(PageSize.A4, 50, 50, 50, 50);
-        PdfWriter writer = PdfWriter.getInstance(booksInfoDocument, new FileOutputStream(outputFile));
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        PdfWriter writer = PdfWriter.getInstance(booksInfoDocument, baos);
+
         writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
         MyEvent event = new MyEvent();
         writer.setPageEvent(event);
@@ -153,14 +190,31 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
             booksInfoDocument.add(section);
         }
         booksInfoDocument.close();
+
+        response.setHeader("Expires", "0");
+        response.setHeader("Cache-Control",
+                "must-revalidate, post-check=0, pre-check=0");
+        response.setHeader("Pragma", "public");
+        // setting the content type
+        response.setContentType("application/pdf");
+        // the contentlength
+        response.setContentLength(baos.size());
+        // write ByteArrayOutputStream to the ServletOutputStream
+        OutputStream os = response.getOutputStream();
+        baos.writeTo(os);
+        os.flush();
+        os.close();
     }
 
     @Override
-    public void generateViewsStatistic(String outputFile) throws FileNotFoundException, DocumentException {
+    public void generateViewsStatistic(HttpServletResponse response) throws IOException, DocumentException {
         readersList = new ArrayList<>();
         booksInfoList = new ArrayList<>();
         booksListDocument = new Document(PageSize.A4, 50, 50, 50, 50);
-        PdfWriter writer = PdfWriter.getInstance(booksListDocument, new FileOutputStream(outputFile));
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        PdfWriter writer = PdfWriter.getInstance(booksListDocument, baos);
+
         writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
         MyEvent event = new MyEvent();
         writer.setPageEvent(event);
@@ -174,7 +228,7 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
         table.setSpacingAfter(25);
         table.addCell(new PdfPCell(new Phrase("Author", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17)))));
         table.addCell(new PdfPCell(new Phrase("Title", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17)))));
-        table.addCell(new PdfPCell(new Phrase("Count of views", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17)))));
+        table.addCell(new PdfPCell(new Phrase("Count of views", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255, 17)))));
         for (Book book : booksList) {
             table.addCell(book.getAuthor());
             table.addCell(book.getName());
@@ -183,22 +237,34 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
         booksListDocument.add(title);
         booksListDocument.add(table);
         booksListDocument.close();
+
+        response.setHeader("Expires", "0");
+        response.setHeader("Cache-Control",
+                "must-revalidate, post-check=0, pre-check=0");
+        response.setHeader("Pragma", "public");
+        // setting the content type
+        response.setContentType("application/pdf");
+        // the contentlength
+        response.setContentLength(baos.size());
+        // write ByteArrayOutputStream to the ServletOutputStream
+        OutputStream os = response.getOutputStream();
+        baos.writeTo(os);
+        os.flush();
+        os.close();
+
     }
 
     @Override
-    public void generateBookCollectionsOfReaders(String outputFile) throws FileNotFoundException, DocumentException {
+    public void generateBookCollectionsOfReaders(HttpServletResponse response) throws IOException, DocumentException {
         readersList = new ArrayList<>();
         booksInfoList = new ArrayList<>();
         usersListDocument = new Document(PageSize.A4, 50, 50, 50, 50);
-        PdfWriter writer = PdfWriter.getInstance(usersListDocument, new FileOutputStream(outputFile));
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PdfWriter writer = PdfWriter.getInstance(usersListDocument, baos);
         writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
         MyEvent event = new MyEvent();
         writer.setPageEvent(event);
         usersListDocument.open();
-       // Paragraph title = new Paragraph("Book collection of readers: ",
-         //       FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLD, new CMYKColor(0, 255, 255,17)));
-
-//        usersListDocument.add(title);
 
         List<User> usersList = userDao.getUsersList();
         for (User user : usersList) {
@@ -226,6 +292,19 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
             usersListDocument.add(chapter);
         }
         usersListDocument.close();
+        response.setHeader("Expires", "0");
+        response.setHeader("Cache-Control",
+                "must-revalidate, post-check=0, pre-check=0");
+        response.setHeader("Pragma", "public");
+        // setting the content type
+        response.setContentType("application/pdf");
+        // the contentlength
+        response.setContentLength(baos.size());
+        // write ByteArrayOutputStream to the ServletOutputStream
+        OutputStream os = response.getOutputStream();
+        baos.writeTo(os);
+        os.flush();
+        os.close();
     }
 
     protected class MyEvent extends PdfPageEventHelper {
@@ -244,7 +323,7 @@ public class PdfDocumentGenerator implements IDocumentGenerator{
         }
 
         @Override
-        public  void onEndPage(PdfWriter writer, Document document) {
+        public void onEndPage(PdfWriter writer, Document document) {
             try {
                 PdfContentByte canvas = writer.getDirectContentUnder();
                 if (image != null) {

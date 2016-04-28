@@ -7,6 +7,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Iterator;
 
@@ -23,47 +24,57 @@ public class CsvDocumentGenerator implements IDocumentGenerator {
     private IDocumentGenerator xlsGenerator = XlsDocumentGenerator.getInstance();
 
     @Override
-    public void generateBooksList(String outputFile) throws IOException, DocumentException {
-        String xlsFile = "D://temp//booksListDocument.xls";
-        xlsGenerator.generateBooksList(xlsFile);
-        convertXlsToCsv(xlsFile, outputFile);
+    public void generateBooksList(HttpServletResponse response) throws IOException, DocumentException {
+        xlsGenerator.generateBooksList(response);
+        gerenerateCsvFile(response);
     }
 
     @Override
-    public void generateUsersList(String outputFile) throws IOException, DocumentException {
-        String xlsFile = "D://temp//usersListDocument.xls";
-        xlsGenerator.generateUsersList(xlsFile);
-        convertXlsToCsv(xlsFile, outputFile);
+    public void generateUsersList(HttpServletResponse response) throws IOException, DocumentException {
+        xlsGenerator.generateUsersList(response);
+        gerenerateCsvFile(response);
     }
 
     @Override
-    public void generateBooksInfo(String outputFile) throws IOException, DocumentException {
-        String xlsFile = "D://temp//booksInfoDocument.xls";
-        xlsGenerator.generateBooksInfo(xlsFile);
-        convertXlsToCsv(xlsFile, outputFile);
+    public void generateBooksInfo(HttpServletResponse response) throws IOException, DocumentException {
+        xlsGenerator.generateBooksInfo(response);
+        gerenerateCsvFile(response);
     }
 
     @Override
-    public void generateViewsStatistic(String outputFile) throws IOException, DocumentException {
-        String xlsFile = "D://temp//booksViewStatistic.xls";
-        xlsGenerator.generateViewsStatistic(xlsFile);
-        convertXlsToCsv(xlsFile, outputFile);
+    public void generateViewsStatistic(HttpServletResponse response) throws IOException, DocumentException {
+        xlsGenerator.generateViewsStatistic(response);
+        gerenerateCsvFile(response);
     }
 
     @Override
-    public void generateBookCollectionsOfReaders(String outputFile) throws IOException, DocumentException {
-        String xlsFile = "D://temp//usersBookCollections.xls";
-        xlsGenerator.generateBookCollectionsOfReaders(xlsFile);
-        convertXlsToCsv(xlsFile, outputFile);
+    public void generateBookCollectionsOfReaders(HttpServletResponse response) throws IOException, DocumentException {
+        xlsGenerator.generateBookCollectionsOfReaders(response);
+        gerenerateCsvFile(response);
     }
 
-    private void convertXlsToCsv(String inputFile, String outputFile) {
+    private void gerenerateCsvFile(HttpServletResponse response) throws IOException {
+        OutputStream os = response.getOutputStream();
+        ByteArrayOutputStream baos = (ByteArrayOutputStream) os;
+        File tempFile = convertXlsToCsv(this.fromOutputStreamToInputStream(baos));
+        InputStream inputStream = new FileInputStream(tempFile);
+        int c = 0;
+        byte[] buf = new byte[8192];
+        while ((c = inputStream.read(buf, 0, buf.length)) > 0) {
+            os.write(buf, 0, c);
+            os.flush();
+        }
+        os.close();
+    }
+
+    private File convertXlsToCsv(InputStream inputStream) {
         StringBuffer data = new StringBuffer();
         try
         {
-            File temp = File.createTempFile(outputFile, ".pdf");
-            FileOutputStream fos = new FileOutputStream(outputFile);
-            HSSFWorkbook workbook = new HSSFWorkbook(new FileInputStream(inputFile));
+            File temp = File.createTempFile("tempfile", ".csv");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
+
+            HSSFWorkbook workbook = new HSSFWorkbook(inputStream);
             HSSFSheet sheet = workbook.getSheetAt(0);
             Cell cell;
             Row row;
@@ -103,8 +114,9 @@ public class CsvDocumentGenerator implements IDocumentGenerator {
                 }
                 data.append('\n');
             }
-            fos.write(data.toString().getBytes());
-            fos.close();
+            bw.write(data.toString());
+            bw.close();
+            return temp;
         }
         catch (FileNotFoundException e)
         {
@@ -114,5 +126,10 @@ public class CsvDocumentGenerator implements IDocumentGenerator {
         {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    public InputStream fromOutputStreamToInputStream(ByteArrayOutputStream outputStream){
+        return new ByteArrayInputStream(outputStream.toByteArray());
     }
 }

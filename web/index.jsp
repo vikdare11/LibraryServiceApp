@@ -16,7 +16,32 @@
 
 <%@include file='header.jsp' %>
 
+<script>
+    window.onload = function onLoadFunc() {
+        var type = "pdf_type";
+        document.getElementById("inputTypeId").value = type;
+        document.getElementById("inputTypeId1").value = type;
+        document.getElementById("inputTypeId2").value = type;
+        document.getElementById("inputTypeId3").value = type;
+        document.getElementById("inputTypeId4").value = type;
+    }
+
+</script>
+
+<script>
+    function onChangeSelect() {
+        var e = document.getElementById("selectId");
+        var type = e.options[e.selectedIndex].value;
+        document.getElementById("inputTypeId").value = type;
+        document.getElementById("inputTypeId1").value = type;
+        document.getElementById("inputTypeId2").value = type;
+        document.getElementById("inputTypeId3").value = type;
+        document.getElementById("inputTypeId4").value = type;
+    }
+</script>
+
 <main>
+
     <div id="hero" style="height: 527px;">
         <div class="container" id="hero-text-container">
             <div class="row">
@@ -101,42 +126,86 @@
                         </td>
                     </tr>
                 </table>
+
+                <c:if test="${not empty user}">
                 <table>
                     <tr>
-                        <td>
-                            <c:if test="${not empty user}">
-                            <form action="download" enctype="multipart/form-data" method="get" id="pdf">
-                                <input type="hidden" name="command" value="generate_pdf_documents">
-                                <a href="javascript:{}"
-                                   onclick="document.getElementById('pdf').submit(); return false;"
-                                   class="waves-effect waves-light btn"
-                                        >Generate pdf documents <i class="fa fa-download" aria-hidden="true"></i></a>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="download" enctype="multipart/form-data" method="get" id="xls">
-                                <input type="hidden" name="command" value="generate_xls_documents">
-                                <a href="javascript:{}"
-                                   onclick="document.getElementById('xls').submit(); return false;"
-                                   class="waves-effect waves-light btn"
-                                        >Generate xls documents <i class="fa fa-download" aria-hidden="true"></i></a>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="download" enctype="multipart/form-data" method="get" id="csv">
-                                <input type="hidden" name="command" value="generate_csv_documents">
-                                <a href="javascript:{}"
-                                   onclick="document.getElementById('csv').submit(); return false;"
-                                   class="waves-effect waves-light btn"
-                                        >Generate csv documents <i class="fa fa-download" aria-hidden="true"></i></a>
-                            </form>
-                            </c:if>
+                        <td id="choose">
+                            <p style="margin-left: 365px; font-weight: bold;">Choose document type:</p>
+                            <select class="browser-default" id="selectId" name="doc_type"
+                                    onchange="onChangeSelect()">
+                                <option value="pdf_type">pdf</option>
+                                <option value="xls_type">xls</option>
+                                <option value="csv_type">csv</option>
+                            </select>
                         </td>
                     </tr>
-
                 </table>
+                </c:if>
+                    <table>
+                        <tr>
+                            <td>
+                                <c:if test="${not empty user}">
+                                <form action="download" enctype="multipart/form-data" method="get" id="books_list">
+                                    <input type="hidden" name="command" value="generate_books_list">
+                                    <input type="hidden" id="inputTypeId" name="doc_type">
+                                    <a href="javascript:{}"
+                                       onclick="document.getElementById('books_list').submit(); return false;"
+                                       class="waves-effect waves-light btn"
+                                            >Generate books list <i class="fa fa-download" aria-hidden="true"></i></a>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="download" enctype="multipart/form-data" method="get" id="users_list">
+                                    <input type="hidden" name="command" value="generate_users_list">
+                                    <input type="hidden" id="inputTypeId1" name="doc_type">
+                                    <a href="javascript:{}"
+                                       onclick="document.getElementById('users_list').submit(); return false;"
+                                       class="waves-effect waves-light btn"
+                                            >Generate users list <i class="fa fa-download" aria-hidden="true"></i></a>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="download" enctype="multipart/form-data" method="get" id="books_info">
+                                    <input type="hidden" name="command" value="generate_books_info">
+                                    <input type="hidden" id="inputTypeId2" name="doc_type">
+                                    <a href="javascript:{}"
+                                       onclick="document.getElementById('books_info').submit(); return false;"
+                                       class="waves-effect waves-light btn"
+                                            >Generate books info <i class="fa fa-download" aria-hidden="true"></i></a>
+                                </form>
+                                </c:if>
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td>
+                                <c:if test="${not empty user}">
+                                <form action="download" enctype="multipart/form-data" method="get" id="views_statistic">
+                                    <input type="hidden" name="command" value="generate_views_statistic">
+                                    <input type="hidden" id="inputTypeId3" name="doc_type">
+                                    <a href="javascript:{}"
+                                       onclick="document.getElementById('views_statistic').submit(); return false;"
+                                       class="waves-effect waves-light btn"
+                                            >Generate views statistic <i class="fa fa-download" aria-hidden="true"></i></a>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="download" enctype="multipart/form-data" method="get"
+                                      id="book_collections">
+                                    <input type="hidden" name="command" value="generate_book_collections">
+                                    <input type="hidden" id="inputTypeId4" name="doc_type">
+                                    <a href="javascript:{}"
+                                       onclick="document.getElementById('book_collections').submit(); return false;"
+                                       class="waves-effect waves-light btn">Generate book collections of reader
+                                        <i class="fa fa-download" aria-hidden="true"></i></a>
+                                </form>
+                                </c:if>
+                            </td>
+                        </tr>
+                    </table>
             </div>
-
         </div>
     </div>
 

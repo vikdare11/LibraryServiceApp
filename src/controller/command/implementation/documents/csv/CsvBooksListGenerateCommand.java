@@ -1,0 +1,37 @@
+package controller.command.implementation.documents.csv;
+
+import com.itextpdf.text.DocumentException;
+import controller.command.DocumentGenerationCommand;
+import document.IDocumentGenerator;
+import document.implementation.CsvDocumentGenerator;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+public class CsvBooksListGenerateCommand implements DocumentGenerationCommand {
+    private static CsvBooksListGenerateCommand ourInstance = new CsvBooksListGenerateCommand();
+
+    public static CsvBooksListGenerateCommand getInstance() {
+        return ourInstance;
+    }
+
+    private CsvBooksListGenerateCommand() {
+    }
+
+    @Override
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
+        IDocumentGenerator generator = CsvDocumentGenerator.getInstance();
+        response.setContentType("application/csv");
+        response.setHeader("Content-Disposition",
+                "attachment;filename=" + "booksList.csv");
+        try {
+            generator.generateBooksList(response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+        return "index.jsp";
+    }
+}

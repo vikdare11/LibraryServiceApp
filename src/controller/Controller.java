@@ -5,9 +5,6 @@ import controller.command.implementation.author.*;
 import controller.command.implementation.book.*;
 import controller.command.implementation.comment.AddCommentCommand;
 import controller.command.implementation.comment.DeleteCommentCommand;
-import controller.command.implementation.documents.CsvDocumentsGenerateCommand;
-import controller.command.implementation.documents.PdfDocumentsGenerateCommand;
-import controller.command.implementation.documents.XlsDocumentsGenerateCommand;
 import controller.command.implementation.user.*;
 import domain.User;
 
@@ -171,18 +168,6 @@ public class Controller extends HttpServlet {
                     command = EditBookCommand.getInstance();
                     break;
                 }
-                case "generate_pdf_documents" : {
-                    command = PdfDocumentsGenerateCommand.getInstance();
-                    break;
-                }
-                case "generate_xls_documents" : {
-                    command = XlsDocumentsGenerateCommand.getInstance();
-                    break;
-                }
-                case "generate_csv_documents" : {
-                    command = CsvDocumentsGenerateCommand.getInstance();
-                    break;
-                }
             }
 
             boolean access = true;
@@ -314,18 +299,6 @@ public class Controller extends HttpServlet {
                 }
                 case "open_edit_book" : {
                     command = OpenEditBookCommand.getInstance();
-                    break;
-                }
-                case "generate_pdf_documents" : {
-                    command = PdfDocumentsGenerateCommand.getInstance();
-                    break;
-                }
-                case "generate_xls_documents" : {
-                    command = XlsDocumentsGenerateCommand.getInstance();
-                    break;
-                }
-                case "generate_csv_documents" : {
-                    command = CsvDocumentsGenerateCommand.getInstance();
                     break;
                 }
             }

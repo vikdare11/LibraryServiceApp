@@ -14,8 +14,9 @@ import service.Service;
 import service.implementation.GetBookInfoService;
 import service.implementation.GetUserInfoService;
 
-import java.io.FileOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
     private List<BookViewObject> booksInfoList;
 
     @Override
-    public void generateBooksList(String outputFile) throws IOException, DocumentException {
+    public void generateBooksList(HttpServletResponse response) throws IOException, DocumentException {
         readersList = new ArrayList<>();
         booksInfoList = new ArrayList<>();
         Workbook workbook = new HSSFWorkbook();
@@ -67,13 +68,16 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
         }
         sheet.autoSizeColumn(0);
         sheet.autoSizeColumn(1);
-        FileOutputStream fos = new FileOutputStream(outputFile);
+
+        OutputStream fos = response.getOutputStream();
+
         workbook.write(fos);
         fos.close();
+
     }
 
     @Override
-    public void generateUsersList(String outputFile) throws IOException, DocumentException {
+    public void generateUsersList(HttpServletResponse response) throws IOException, DocumentException {
         readersList = new ArrayList<>();
         booksInfoList = new ArrayList<>();
         Workbook workbook = new HSSFWorkbook();
@@ -112,13 +116,15 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
         sheet.autoSizeColumn(0);
         sheet.autoSizeColumn(1);
         sheet.autoSizeColumn(2);
-        FileOutputStream fos = new FileOutputStream(outputFile);
+
+        OutputStream fos = response.getOutputStream();
+
         workbook.write(fos);
         fos.close();
     }
 
     @Override
-    public void generateBooksInfo(String outputFile) throws IOException, DocumentException {
+    public void generateBooksInfo(HttpServletResponse response) throws IOException, DocumentException {
         readersList = new ArrayList<>();
         booksInfoList = new ArrayList<>();
         Workbook workbook = new HSSFWorkbook();
@@ -211,13 +217,15 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
         sheet.autoSizeColumn(3);
         sheet.autoSizeColumn(4);
         sheet.autoSizeColumn(5);
-        FileOutputStream fos = new FileOutputStream(outputFile);
+        OutputStream fos = response.getOutputStream();
+
         workbook.write(fos);
         fos.close();
+
     }
 
     @Override
-    public void generateViewsStatistic(String outputFile) throws IOException, DocumentException {
+    public void generateViewsStatistic(HttpServletResponse response) throws IOException, DocumentException {
         readersList = new ArrayList<>();
         booksInfoList = new ArrayList<>();
         Workbook workbook = new HSSFWorkbook();
@@ -250,13 +258,16 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
         sheet.autoSizeColumn(0);
         sheet.autoSizeColumn(1);
         sheet.autoSizeColumn(2);
-        FileOutputStream fos = new FileOutputStream(outputFile);
+
+        OutputStream fos = response.getOutputStream();
+
         workbook.write(fos);
         fos.close();
+
     }
 
     @Override
-    public void generateBookCollectionsOfReaders(String outputFile) throws IOException, DocumentException {
+    public void generateBookCollectionsOfReaders(HttpServletResponse response) throws IOException, DocumentException {
         readersList = new ArrayList<>();
         booksInfoList = new ArrayList<>();
         Workbook workbook = new HSSFWorkbook();
@@ -292,8 +303,11 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
         }
         sheet.autoSizeColumn(0);
         sheet.autoSizeColumn(1);
-        FileOutputStream fos = new FileOutputStream(outputFile);
+
+        OutputStream fos = response.getOutputStream();
+
         workbook.write(fos);
         fos.close();
+
     }
 }
