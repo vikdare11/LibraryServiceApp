@@ -88,6 +88,31 @@
             <result name="success">books.jsp</result>
             <result name="error">books.jsp</result>
         </action>
+
+        <action name="add_author" class="action.author.AddAuthorAction">
+            <result name="success">authors.jsp</result>
+            <result name="error">add_author.jsp</result>
+        </action>
+
+        <action name="delete_author" class="action.author.DeleteAuthorAction">
+            <result name="success">authors.jsp</result>
+            <result name="error">add_author.jsp</result>
+        </action>
+
+        <action name="edit_author" class="action.author.EditAuthorAction">
+            <result name="success">authors.jsp</result>
+            <result name="error">edit_author.jsp</result>
+        </action>
+
+        <action name="get_authors" class="action.author.GetAuthorsAction">
+            <result name="success">authors.jsp</result>
+            <result name="error">index.jsp</result>
+        </action>
+
+        <action name="open_author" class="action.author.OpenAuthorAction">
+            <result name="success">author.jsp</result>
+            <result name="error">authors.jsp</result>
+        </action>
     </package>
 
 </struts>
