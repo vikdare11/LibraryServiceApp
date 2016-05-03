@@ -113,6 +113,22 @@
             <result name="success">author.jsp</result>
             <result name="error">authors.jsp</result>
         </action>
+
+
+        <action name="add_comment" class="action.comment.AddCommentAction">
+            <result name="success">book_view.jsp</result>
+            <result name="error">book_view.jsp</result>
+        </action>
+
+        <action name="delete_comment" class="action.comment.DeleteCommentAction">
+            <result name="success">book_view.jsp</result>
+            <result name="error">book_view.jsp</result>
+        </action>
+
+        <action name="get_comments" class="action.comment.GetCommentsAction">
+            <result name="success">book_view.jsp</result>
+            <result name="error">book_view.jsp</result>
+        </action>
     </package>
 
 </struts>
