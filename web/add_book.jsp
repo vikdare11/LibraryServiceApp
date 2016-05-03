@@ -14,8 +14,7 @@
   <script type="text/javascript" src="assets/js/materialize.min.js"></script>
   <%@include file = 'header.jsp' %>
   <main>
-    <form action="controller" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-    <input type="hidden"name="command" value="add_book">
+    <form method="post" action="add_book.action">
     <input type="hidden" name="author_id" value="${author_id}">
 
     <div class="row">

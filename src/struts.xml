@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true"/>
+    <constant name="struts.convention.result.path" value="/"/>
+
+    <package name="bla" extends="struts-default">
+        <action name="loging" class="action.client.LoginAction">
+            <result name="success">index.jsp</result>
+            <result name="error">login.jsp</result>
+        </action>
+
+        <action name="logout" class="action.client.LogoutAction">
+            <result name="success">login.jsp</result>
+            <result name="error">index.jsp</result>
+        </action>
+
+        <action name="registration" class="action.client.RegistrationAction">
+            <result name="success">login.jsp</result>
+            <result name="error">registration.jsp</result>
+        </action>
+
+        <action name="get_users" class="action.client.GetUsersAction">
+            <result name="success">users.jsp</result>
+            <result name="error">index.jsp</result>
+        </action>
+
+        <action name="view_user" class="action.client.ViewUserAction">
+            <result name="success">user.jsp</result>
+            <result name="error">users.jsp</result>
+        </action>
+
+        <action name="edit_user" class="action.client.EditUserAction">
+            <result name="success">login.jsp</result>
+            <result name="error">users.jsp</result>
+        </action>
+
+        <action name="delete_user" class="action.client.DeleteUserAction">
+            <result name="success">users.jsp</result>
+            <result name="error">users.jsp</result>
+        </action>
+
+        <action name="add_book" class="action.book.AddBookAction">
+            <result name="success">books.jsp</result>
+            <result name="error">add_book.jsp</result>
+        </action>
+
+        <action name="get_books" class="action.book.GetBooksAction">
+            <result name="success">books.jsp</result>
+            <result name="error">index.jsp</result>
+        </action>
+
+        <action name="add_book_to_collection" class="action.book.AddBookToReaderCollectionAction">
+            <result name="success">user.jsp</result>
+            <result name="error">user.jsp</result>
+        </action>
+
+        <action name="view_book" class="action.book.ViewBookAction">
+            <result name="success">book_view.jsp</result>
+            <result name="error">book_view.jsp</result>
+        </action>
+
+        <action name="delete_book" class="action.book.DeleteBookAction">
+            <result name="success">books.jsp</result>
+            <result name="error">books.jsp</result>
+        </action>
+
+        <action name="edit_book" class="action.book.EditBookAction">
+            <result name="success">books.jsp</result>
+            <result name="error">edit_book.jsp</result>
+        </action>
+
+        <action name="get_book_by_author" class="action.book.GetBooksByAuthorAction">
+            <result name="success">author.jsp</result>
+            <result name="error">authors.jsp</result>
+        </action>
+
+        <action name="open_edit_book" class="action.book.OpenEditBookAction">
+            <result name="success">edit_book.jsp</result>
+            <result name="error">authors.jsp</result>
+        </action>
+
+        <action name="remove_book_from_collection" class="action.book.RemoveBookFromReaderCollectionAction">
+            <result name="success">books.jsp</result>
+            <result name="error">books.jsp</result>
+        </action>
+    </package>
+
+</struts>

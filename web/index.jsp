@@ -86,8 +86,7 @@
                 <table>
                     <tr>
                         <td style="padding-left: 100px">
-                            <form action="controller" enctype="multipart/form-data" method="get" id="the_form">
-                                <input type="hidden" name="command" value="get_books">
+                            <form method="post" action="get_books.action" id="the_form">
                                 <a href="javascript:{}"
                                    onclick="document.getElementById('the_form').submit(); return false;"
                                    class="waves-effect waves-light btn"
@@ -105,20 +104,19 @@
                         </td>
                         <td>
                             <c:if test="${not empty user}">
-                            <form action="controller" enctype="multipart/form-data" method="get" id="users">
-                                <input type="hidden" name="command" value="get_users">
-                                <a href="javascript:{}"
-                                   onclick="document.getElementById('users').submit(); return false;"
-                                   class="waves-effect waves-light btn"
-                                        >Users <i class="fa fa-user" aria-hidden="true"></i></a>
-                            </form>
+                                <form method="post" action="get_users.action" id="get_users">
+                                <input type="hidden" name="action">
+                                    <a href="javascript:{}"
+                                        onclick="document.getElementById('get_users').submit(); return false;"
+                                        class="waves-effect waves-light btn"
+                                            >Users <i class="fa fa-user" aria-hidden="true"></i></a>
+                                </form>
                         </td>
                         <td>
-                            <form action="controller" enctype="multipart/form-data" method="get" id="user">
-                                <input type="hidden" name="command" value="open_user">
+                            <form action="view_user.action" method="post" id="user${user.id}">
                                 <input type="hidden" name="user_id" value="${user.id}">
                                 <a href="javascript:{}"
-                                   onclick="document.getElementById('user').submit(); return false;"
+                                   onclick="document.getElementById('user${user.id}').submit(); return false;"
                                    class="waves-effect waves-light btn"
                                         >My profile <i class="fa fa-user-secret" aria-hidden="true"></i></a>
                             </form>

@@ -38,8 +38,7 @@
     <h5>${author.name} ${author.surname}</h5>
     </td>
     <td>
-      <form action="controller" enctype="multipart/form-data" method="get" id="${author.id}">
-        <input type="hidden" name="command" value="open_author">
+      <form action="get_book_by_author.action" method="post" id="${author.id}">
         <input type="hidden" name="author_id" value="${author.id}">
         <a href="javascript:{}"
            onclick="document.getElementById('${author.id}').submit(); return false;"

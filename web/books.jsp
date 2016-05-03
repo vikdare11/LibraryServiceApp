@@ -32,11 +32,10 @@
           <c:choose>
             <c:when test="${user.admin}">
               <td>
-                <form action="controller" enctype="multipart/form-data" method="get" id="delete_book">
-                  <input type="hidden" name="command" value="delete_book">
+                <form action="delete_book.action" method="post" id="delete_book${book.id}">
                   <input type="hidden" name="bookid" value="${book.id}">
                   <a href="javascript:{}"
-                     onclick="if(confirm('Are you sure?')){document.getElementById('delete_book').submit();return true}else{return false;}"
+                     onclick="if(confirm('Are you sure?')){document.getElementById('delete_book${book.id}').submit();return true}else{return false;}"
                      class="waves-effect waves-light btn"
                   ><i class="fa fa-trash" aria-hidden="true"></i> </a>
                 </form>
@@ -44,8 +43,7 @@
               </td>
 
               <td>
-                <form action="controller" enctype="multipart/form-data" method="get" id="${book.id}">
-                  <input type="hidden" name="command" value="view_book">
+                <form method="post" action="view_book.action" id="${book.id}">
                   <input type="hidden" name="bookid" value="${book.id}">
                   <a href="javascript:{}"
                      onclick="document.getElementById('${book.id}').submit(); return false;"
@@ -57,7 +55,7 @@
             </c:when>
             <c:otherwise>
             <td>
-              <form action="controller" enctype="multipart/form-data" method="get" id="${book.id}">
+              <form method="post" action="view_book.action" id="${book.id}">
                 <input type="hidden" name="command" value="view_book">
                 <input type="hidden" name="bookid" value="${book.id}">
                 <a href="javascript:{}"

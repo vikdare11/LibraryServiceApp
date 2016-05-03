@@ -4,8 +4,8 @@
             <a href="index.jsp" class="brand-logo center">Library Service</a>
             <ul class="right hide-on-med-and-down">
                 <c:if test="${not empty user}">
-                    <form action="controller" enctype="multipart/form-data" method="get" id="logout">
-                        <input type="hidden" name="command" value="logout">
+                    <form method="post" action="logout.action" id="logout">
+                        <input type="hidden" name="action">
                         <a href="javascript:{}"
                            onclick="document.getElementById('logout').submit(); return false;"
                            class="waves-effect waves-light btn"

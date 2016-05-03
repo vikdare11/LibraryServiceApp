@@ -26,8 +26,8 @@
     <h5>${person.login}</h5>
     </td>
     <td>
-        <form action="controller" enctype="multipart/form-data" method="get" id="view_inf">
-            <input type="hidden" name="command" value="open_user">
+        <form method="post" action="view_user.action" id="view_inf">
+            <input type="hidden" name="action">
             <input type="hidden" name="user_id" value="${person.id}">
             <a href="javascript:{}"
                onclick="document.getElementById('view_inf').submit(); return false;"
@@ -39,12 +39,12 @@
     <c:if test="${user.admin == true}">
         <c:if test="${person.id != user.id && person.admin == false}">
             <td>
-                <form action="controller" enctype="multipart/form-data" method="get" id="make_admin">
-                    <input type="hidden" name="command" value="edit_user">
+                <form method="post" action="edit_user.action" id="make_admin${person.id}">
+                    <input type="hidden" name="action">
                     <input type="hidden" name="user_id" value="${person.id}">
                     <input type="hidden" name="isadmin" value=true>
                     <a href="javascript:{}"
-                       onclick="document.getElementById('make_admin').submit(); return false;"
+                       onclick="document.getElementById('make_admin${person.id}').submit(); return false;"
                        class="waves-effect waves-light btn"
                     >Make an admin <i class="fa fa-check" aria-hidden="true"></i></a>
                 </form>
@@ -53,12 +53,11 @@
         </c:if>
         <c:if test="${person.admin == true && person.login != 'admin'}">
             <td>
-                <form action="controller" enctype="multipart/form-data" method="get" id="make_notadmin">
-                    <input type="hidden" name="command" value="edit_user">
+                <form method="post" action="edit_user.action" id="make_notadmin${person.id}">
                     <input type="hidden" name="user_id" value="${person.id}">
                     <input type="hidden" name="isadmin" value=false>
                     <a href="javascript:{}"
-                       onclick="document.getElementById('make_notadmin').submit(); return false;"
+                       onclick="document.getElementById('make_notadmin${person.id}').submit(); return false;"
                        class="waves-effect waves-light btn"
                     >Make not admin <i class="fa fa-remove" aria-hidden="true"></i></a>
                 </form>
@@ -67,11 +66,10 @@
         </c:if>
         <c:if test="${person.login != 'admin'}">
             <td>
-                <form action="controller" enctype="multipart/form-data" method="get" id="delete_user">
-                    <input type="hidden" name="command" value="delete_user">
+                <form method="post" action="delete_user.action" id="delete_user${person.id}">
                     <input type="hidden" name="user_id" value="${person.id}">
                     <a href="javascript:{}"
-                       onclick="if(confirm('Are you sure?')){document.getElementById('delete_user').submit();return true}else{return false;}"
+                       onclick="if(confirm('Are you sure?')){document.getElementById('delete_user${person.id}').submit();return true}else{return false;}"
                        class="waves-effect waves-light btn"
                     ><i class="fa fa-trash" aria-hidden="true"></i></a>
                 </form>

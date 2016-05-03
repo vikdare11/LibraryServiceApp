@@ -18,11 +18,10 @@
     <br>
     <br>
     <c:if test="${user.admin == true}">
-        <form action="controller" enctype="multipart/form-data" method="get" id="edit_book">
-            <input type="hidden" name="command" value="open_edit_book">
+        <form action="open_edit_book.action" method="post" id="edit_book${bookVO.book.id}">
             <input type="hidden" name="book_id" value="${bookVO.book.id}">
             <a href="javascript:{}"
-               onclick="document.getElementById('edit_book').submit(); return false;"
+               onclick="document.getElementById('edit_book${bookVO.book.id}').submit(); return false;"
                class="waves-effect waves-light btn"
                     >Edit book <i class="fa fa-edit" aria-hidden="true"></i></a>
         </form>
@@ -47,8 +46,7 @@
         </tr>
     </table>
 
-    <form class="waves-effect waves-light btn" action="controller" method="get" enctype="multipart/form-data">
-        <input type="hidden" name="command" value="add_book_to_reader_collection">
+    <form class="waves-effect waves-light btn" method="post" action="add_book_to_collection.action">
         <input type="hidden" name="user_id" value="${user.id}">
         <input type="hidden" name="book_id" value="${bookVO.book.id}">
         <input type="submit" value="Add to my collection">

@@ -98,7 +98,7 @@ public class XlsDocumentGenerator implements IDocumentGenerator {
         email.setCellValue("Email");
         email.setCellStyle(style);
         Cell isAdmin = row.createCell(2);
-        isAdmin.setCellValue("Is user admin");
+        isAdmin.setCellValue("Is client admin");
         isAdmin.setCellStyle(style);
 
         List<User> usersList = userDao.getUsersList();

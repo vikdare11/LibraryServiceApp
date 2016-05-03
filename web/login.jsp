@@ -21,7 +21,7 @@
     </nav>
   </div>
 <main>
-<form method="post" action="controller">
+<form method="post" action="loging.action">
   <input type="hidden" name="command" value="login">
 
 

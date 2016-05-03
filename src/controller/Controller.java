@@ -157,7 +157,7 @@ public class Controller extends HttpServlet {
                     break;
                 }
                 case "remove_book_from_reader_collection" : {
-                    command = RemoveBookFromReaderCollection.getInstance();
+                    command = RemoveBookFromReaderCollectionCommand.getInstance();
                     break;
                 }
                 case "edit_user" : {
@@ -173,7 +173,7 @@ public class Controller extends HttpServlet {
             boolean access = true;
             if (command != null) {
                 if (!availableOperations.contains(commandName)) {
-                    User user = (User) req.getSession().getAttribute("user");
+                    User user = (User) req.getSession().getAttribute("client");
 
                     if (user.isAdmin()) {
                         access = availableAdminOperations.contains(commandName);
@@ -290,7 +290,7 @@ public class Controller extends HttpServlet {
                     break;
                 }
                 case "remove_book_from_reader_collection" : {
-                    command = RemoveBookFromReaderCollection.getInstance();
+                    command = RemoveBookFromReaderCollectionCommand.getInstance();
                     break;
                 }
                 case "edit_user" : {
@@ -306,7 +306,7 @@ public class Controller extends HttpServlet {
             boolean access = true;
             if (command != null) {
                 if (!availableOperations.contains(commandName)) {
-                    User user = (User) req.getSession().getAttribute("user");
+                    User user = (User) req.getSession().getAttribute("client");
                     if (user != null) {
                         if (user.isAdmin()) {
                             access = availableAdminOperations.contains(commandName);

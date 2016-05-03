@@ -15,8 +15,7 @@
 <%@include file = 'header.jsp' %>
 <main>
 
-<form action="controller" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-  <input type="hidden"name="command" value="edit_book">
+<form action="edit_book.action" method="post">
   <input type="hidden" name="book_id" value="${book.id}">
 
   <div class="row">

@@ -22,7 +22,7 @@
   </nav>
 </div>
 <main>
-<form method="post" action="controller">
+  <form method="post" action="registration.action">
   <input type="hidden" name="command" value="register">
 
   <div class="row">

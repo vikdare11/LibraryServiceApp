@@ -23,6 +23,6 @@ public class LogoutCommand implements Command {
         session.removeAttribute("admin");
         session.invalidate();
 
-        return "index.jsp";
+        return "login.jsp";
     }
 }

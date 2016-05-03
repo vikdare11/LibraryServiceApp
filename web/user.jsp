@@ -35,11 +35,10 @@
                 <td>${book.name}</td>
                 <td>${book.description}</td>
                 <td>
-                    <form action="controller" enctype="multipart/form-data" method="get" id="view_book">
-                        <input type="hidden" name="command" value="view_book">
+                    <form action="view_book.action" method="post" id="view_book${book.id}">
                         <input type="hidden" name="bookid" value="${book.id}">
                         <a href="javascript:{}"
-                           onclick="document.getElementById('view_book').submit(); return false;"
+                           onclick="document.getElementById('view_book${book.id}').submit(); return false;"
                            class="waves-effect waves-light btn"
                         ><i class="fa fa-eye" aria-hidden="true"></i></a>
                     </form>
@@ -47,11 +46,10 @@
                 </td>
                 <c:if test="${user.login == userVO.login}">
                 <td>
-                    <form action="controller" enctype="multipart/form-data" method="get" id="remove_book">
-                        <input type="hidden" name="command" value="remove_book_from_reader_collection">
+                    <form action="remove_book_from_collection.action" method="post" id="remove_book${book.id}">
                         <input type="hidden" name="bookid" value="${book.id}">
                         <a href="javascript:{}"
-                           onclick="document.getElementById('remove_book').submit(); return false;"
+                           onclick="document.getElementById('remove_book${book.id}').submit(); return false;"
                            class="waves-effect waves-light btn"
                         ><i class="fa fa-minus" aria-hidden="true"></i></a>
                     </form>
@@ -60,11 +58,10 @@
                 </c:if>
                 <c:if test="${user.admin == true}">
                     <td>
-                        <form action="controller" enctype="multipart/form-data" method="get" id="delete_book">
-                            <input type="hidden" name="command" value="delete_book">
+                        <form action="delete_book.action" method="post" id="delete_book${book.id}">
                             <input type="hidden" name="bookid" value="${book.id}">
                             <a href="javascript:{}"
-                               onclick="if(confirm('Are you sure?')){document.getElementById('delete_book').submit();return true}else{return false;}"
+                               onclick="if(confirm('Are you sure?')){document.getElementById('delete_book${book.id}').submit();return true}else{return false;}"
                                class="waves-effect waves-light btn"
                             ><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </form>

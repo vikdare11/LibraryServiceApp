@@ -7,14 +7,14 @@ import domain.User;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class RemoveBookFromReaderCollection implements Command {
-    private static RemoveBookFromReaderCollection ourInstance = new RemoveBookFromReaderCollection();
+public class RemoveBookFromReaderCollectionCommand implements Command {
+    private static RemoveBookFromReaderCollectionCommand ourInstance = new RemoveBookFromReaderCollectionCommand();
 
-    public static RemoveBookFromReaderCollection getInstance() {
+    public static RemoveBookFromReaderCollectionCommand getInstance() {
         return ourInstance;
     }
 
-    private RemoveBookFromReaderCollection() {
+    private RemoveBookFromReaderCollectionCommand() {
     }
 
     @Override
@@ -28,9 +28,7 @@ public class RemoveBookFromReaderCollection implements Command {
             bookDao.removeBookFromReaderCollection(idReader, idBook);
         }
 
-        //request.setAttribute("user_id", idReader);
-
-        return "controller?command=open_user&user_id="+idReader;
+        return GetBooksCommand.getInstance().execute(request);
 
     }
 }

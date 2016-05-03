@@ -118,7 +118,7 @@ public class PdfDocumentGenerator implements IDocumentGenerator {
         table.setSpacingAfter(25);
         table.addCell(new PdfPCell(new Phrase("Login", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17)))));
         table.addCell(new PdfPCell(new Phrase("E-mail", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17)))));
-        table.addCell(new PdfPCell(new Phrase("Is user admin", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17)))));
+        table.addCell(new PdfPCell(new Phrase("Is client admin", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, new CMYKColor(0, 255, 255,17)))));
         for (UserViewObject reader : readersList) {
             table.addCell(reader.getLogin());
             table.addCell(reader.getEmail());

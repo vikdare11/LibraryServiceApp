@@ -23,6 +23,7 @@ public class EditUserCommand implements Command {
         UserDao userDao = UserDaoImpl.getInstance();
 
         boolean oldRights = ((User)(request.getSession().getAttribute("user"))).isAdmin();
+        int idUserFromSession = ((User)(request.getSession().getAttribute("user"))).getId();
 
         int id = Integer.parseInt(request.getParameter("user_id"));
         boolean isAdmin = Boolean.valueOf(request.getParameter("isadmin"));
@@ -33,7 +34,7 @@ public class EditUserCommand implements Command {
 
         userDao.update(user);
 
-        if (oldRights != isAdmin) {
+        if (oldRights != isAdmin && idUserFromSession == id) {
             return LogoutCommand.getInstance().execute(request);
         }
         else {
