@@ -53,8 +53,7 @@
         <i class="fa fa-plus" aria-hidden="true"></i>
     </form>
 
-    <form class="waves-effect waves-light btn" action="controller" enctype="multipart/form-data" method="get">
-        <input type="hidden" name="command" value="open_author">
+    <form class="waves-effect waves-light btn" action="open_author.action" method="post">
         <input type="hidden" name="author_id" value="${bookVO.author.id}">
         <input type="submit" value="View author of book">
         <i class="fa fa-eye" aria-hidden="true"></i>

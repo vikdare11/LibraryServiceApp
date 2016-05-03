@@ -16,8 +16,7 @@
 <%@include file = 'header.jsp' %>
 
 <main>
-  <form action="controller" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-  <input type="hidden"name="command" value="add_author">
+  <form action="add_author.action" method="post">
 
   <div class="row">
     <div class="input-field col s6" id="log">

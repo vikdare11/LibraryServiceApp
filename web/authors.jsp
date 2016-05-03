@@ -61,22 +61,20 @@
 
       </td>
     <td>
-      <form action="controller" enctype="multipart/form-data" method="get" id="edit_author">
-        <input type="hidden" name="command" value="open_edit_author">
+      <form action="open_author.action" method="post" id="edit_author${author.id}">
         <input type="hidden" name="author_id" value="${author.id}">
         <a href="javascript:{}"
-           onclick="document.getElementById('edit_author').submit(); return false;"
+           onclick="document.getElementById('edit_author${author.id}').submit(); return false;"
            class="waves-effect waves-light btn"
         ><i class="fa fa-edit" aria-hidden="true"></i></a>
       </form>
 
       </td>
     <td>
-      <form action="controller" enctype="multipart/form-data" method="get" id="delete_author">
-        <input type="hidden" name="command" value="delete_author">
+      <form action="delete_author.action" method="post" id="delete_author${author.id}">
         <input type="hidden" name="author_id" value="${author.id}">
         <a href="javascript:{}"
-           onclick="if(confirm('Are you sure?')){document.getElementById('delete_author').submit();return true}else{return false;}"
+           onclick="if(confirm('Are you sure?')){document.getElementById('delete_author${author.id}').submit();return true}else{return false;}"
            class="waves-effect waves-light btn"
         ><i class="fa fa-trash" aria-hidden="true"></i></a>
       </form>
