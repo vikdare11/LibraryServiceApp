@@ -73,12 +73,11 @@
                 <td>${comment.review}</td>
                 <c:if test="${user.admin == true}">
                     <td>
-                        <form action="controller" enctype="multipart/form-data" method="get" id="delete_comment">
-                            <input type="hidden" name="command" value="delete_comment">
+                        <form action="delete_comment.action" method="post" id="delete_comment${comment.id}">
                             <input type="hidden" name="comment_id" value="${comment.id}">
                             <input type="hidden" name="book_id" value="${bookVO.book.id}">
                             <a href="javascript:{}"
-                               onclick="if(confirm('Are you sure?')){document.getElementById('delete_comment').submit();return true}else{return false;}"
+                               onclick="if(confirm('Are you sure?')){document.getElementById('delete_comment${comment.id}').submit();return true}else{return false;}"
                                class="waves-effect waves-light btn">
                                 <i class="fa fa-trash" aria-hidden="true"></i> </a>
                         </form>
@@ -89,12 +88,12 @@
             </tr>
         </c:forEach>
     </table>
-    <form action="controller" enctype="multipart/form-data" method="post" id="add_comment">
+    <form action="add_comment.action" method="post" id="add_comment${bookVO.book.id}">
         <input type="hidden" name="command" value="add_comment">
         <input type="hidden" name="book_id" value="${bookVO.book.id}">
         <textarea maxlength="10000" name="review" placeholder="Input your review here..."></textarea>
         <a href="javascript:{}"
-           onclick="document.getElementById('add_comment').submit(); return false;"
+           onclick="document.getElementById('add_comment${bookVO.book.id}').submit(); return false;"
            class="waves-effect waves-light btn">
             Add comment </a>
     </form>
@@ -104,8 +103,7 @@
     <table>
         <tr>
             <td>
-                <form action="controller" enctype="multipart/form-data" method="get" id="read_online">
-                    <input type="hidden" name="command" value="read_online">
+                <form action="read_online.action" enctype="multipart/form-data" method="get" id="read_online">
                     <input type="hidden" name="book_id" value="${bookVO.book.id}">
                     <a href="javascript:{}"
                        onclick="document.getElementById('read_online').submit(); return false;"
@@ -114,8 +112,7 @@
                 </form>
             </td>
             <td>
-                <form action="controller" enctype="multipart/form-data" method="get" id="download_fb2">
-                    <input type="hidden" name="command" value="download_book">
+                <form action="download_book.action" method="get" id="download_fb2">
                     <input type="hidden" name="bookPath" value="${bookVO.downloadPaths[0].path}">
                     <a href="javascript:{}"
                        onclick="document.getElementById('download_fb2').submit(); return false;"
@@ -124,8 +121,7 @@
                 </form>
             </td>
             <td>
-                <form action="controller" enctype="multipart/form-data" method="get" id="download_pdf">
-                    <input type="hidden" name="command" value="download_book">
+                <form action="download_book.action" method="get" id="download_pdf">
                     <input type="hidden" name="bookPath" value="${bookVO.downloadPaths[1].path}">
                     <a href="javascript:{}"
                        onclick="document.getElementById('download_pdf').submit(); return false;"
@@ -134,8 +130,7 @@
                 </form>
             </td>
             <td>
-                <form action="controller" enctype="multipart/form-data" method="get" id="download_txt">
-                    <input type="hidden" name="command" value="download_book">
+                <form action="download_book.action" method="get" id="download_txt">
                     <input type="hidden" name="bookPath" value="${bookVO.downloadPaths[2].path}">
                     <a href="javascript:{}"
                        onclick="document.getElementById('download_txt').submit(); return false;"

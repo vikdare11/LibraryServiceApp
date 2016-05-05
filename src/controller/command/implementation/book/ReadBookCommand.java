@@ -26,7 +26,6 @@ public class ReadBookCommand implements Command {
         String page = path.getPath();
 
         page = "WEB-INF/" + page;
-
         return page;
     }
 }

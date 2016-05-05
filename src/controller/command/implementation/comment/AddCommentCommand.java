@@ -23,7 +23,7 @@ public class AddCommentCommand implements Command {
     public String execute(HttpServletRequest request) {
         CommentDao commentDao = CommentDaoImpl.getInstance();
 
-        int readerId = ((User)request.getSession().getAttribute("client")).getId();
+        int readerId = ((User)request.getSession().getAttribute("user")).getId();
         int idBook = Integer.parseInt(request.getParameter("book_id"));
         String review = request.getParameter("review");
 

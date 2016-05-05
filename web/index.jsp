@@ -94,8 +94,7 @@
                             </form>
                         </td>
                         <td>
-                            <form action="controller" enctype="multipart/form-data" method="get" id="authors">
-                                <input type="hidden" name="command" value="get_authors">
+                            <form action="get_authors.action" method="post" id="authors">
                                 <a href="javascript:{}"
                                    onclick="document.getElementById('authors').submit(); return false;"
                                    class="waves-effect waves-light btn"
@@ -144,8 +143,7 @@
                         <tr>
                             <td>
                                 <c:if test="${not empty user}">
-                                <form action="download" enctype="multipart/form-data" method="get" id="books_list">
-                                    <input type="hidden" name="command" value="generate_books_list">
+                                <form action="book_list_doc.action" enctype="multipart/form-data" method="get" id="books_list">
                                     <input type="hidden" id="inputTypeId" name="doc_type">
                                     <a href="javascript:{}"
                                        onclick="document.getElementById('books_list').submit(); return false;"
@@ -154,8 +152,7 @@
                                 </form>
                             </td>
                             <td>
-                                <form action="download" enctype="multipart/form-data" method="get" id="users_list">
-                                    <input type="hidden" name="command" value="generate_users_list">
+                                <form action="user_list_doc.action" enctype="multipart/form-data" method="get" id="users_list">
                                     <input type="hidden" id="inputTypeId1" name="doc_type">
                                     <a href="javascript:{}"
                                        onclick="document.getElementById('users_list').submit(); return false;"
@@ -164,8 +161,7 @@
                                 </form>
                             </td>
                             <td>
-                                <form action="download" enctype="multipart/form-data" method="get" id="books_info">
-                                    <input type="hidden" name="command" value="generate_books_info">
+                                <form action="book_info_doc.action" enctype="multipart/form-data" method="get" id="books_info">
                                     <input type="hidden" id="inputTypeId2" name="doc_type">
                                     <a href="javascript:{}"
                                        onclick="document.getElementById('books_info').submit(); return false;"
@@ -180,8 +176,7 @@
                         <tr>
                             <td>
                                 <c:if test="${not empty user}">
-                                <form action="download" enctype="multipart/form-data" method="get" id="views_statistic">
-                                    <input type="hidden" name="command" value="generate_views_statistic">
+                                <form action="view_statistic_doc.action" enctype="multipart/form-data" method="get" id="views_statistic">
                                     <input type="hidden" id="inputTypeId3" name="doc_type">
                                     <a href="javascript:{}"
                                        onclick="document.getElementById('views_statistic').submit(); return false;"
@@ -190,9 +185,8 @@
                                 </form>
                             </td>
                             <td>
-                                <form action="download" enctype="multipart/form-data" method="get"
+                                <form action="book_collection_doc.action" enctype="multipart/form-data" method="get"
                                       id="book_collections">
-                                    <input type="hidden" name="command" value="generate_book_collections">
                                     <input type="hidden" id="inputTypeId4" name="doc_type">
                                     <a href="javascript:{}"
                                        onclick="document.getElementById('book_collections').submit(); return false;"

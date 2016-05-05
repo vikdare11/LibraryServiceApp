@@ -43,10 +43,10 @@
               </td>
 
               <td>
-                <form method="post" action="view_book.action" id="${book.id}">
+                <form method="post" action="view_book.action" id="view${book.id}">
                   <input type="hidden" name="bookid" value="${book.id}">
                   <a href="javascript:{}"
-                     onclick="document.getElementById('${book.id}').submit(); return false;"
+                     onclick="document.getElementById('view${book.id}').submit(); return false;"
                      class="waves-effect waves-light btn"
                   ><i class="fa fa-eye" aria-hidden="true"></i> </a>
                 </form>

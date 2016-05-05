@@ -26,11 +26,11 @@
     <h5>${person.login}</h5>
     </td>
     <td>
-        <form method="post" action="view_user.action" id="view_inf">
+        <form method="post" action="view_user.action" id="view_inf${person.id}">
             <input type="hidden" name="action">
             <input type="hidden" name="user_id" value="${person.id}">
             <a href="javascript:{}"
-               onclick="document.getElementById('view_inf').submit(); return false;"
+               onclick="document.getElementById('view_inf${person.id}').submit(); return false;"
                class="waves-effect waves-light btn"
             ><i class="fa fa-eye" aria-hidden="true"></i></a>
         </form>

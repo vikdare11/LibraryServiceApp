@@ -112,7 +112,7 @@ public class Controller extends HttpServlet {
                     command = ViewBookCommand.getInstance();
                     break;
                 }
-                case "open_edit_author" : {
+                case "openopen_edit_author" : {
                     command = OpenAuthorCommand.getInstance();
                     break;
                 }

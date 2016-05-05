@@ -50,18 +50,17 @@
 
     <c:if test="${user.admin == true}">
     <td>
-      <form action="controller" enctype="multipart/form-data" method="get" id="add_book">
-        <input type="hidden" name="command" value="prepare_add_book">
+      <form action="prepare_add_book.action" method="post" id="add_book${author.id}">
         <input type="hidden" name="author_id" value="${author.id}">
         <a href="javascript:{}"
-           onclick="document.getElementById('add_book').submit(); return false;"
+           onclick="document.getElementById('add_book${author.id}').submit(); return false;"
            class="waves-effect waves-light btn"
         ><i class="fa fa-plus" aria-hidden="true"></i></a>
       </form>
 
       </td>
     <td>
-      <form action="open_author.action" method="post" id="edit_author${author.id}">
+      <form action="open_edit_author.action" method="post" id="edit_author${author.id}">
         <input type="hidden" name="author_id" value="${author.id}">
         <a href="javascript:{}"
            onclick="document.getElementById('edit_author${author.id}').submit(); return false;"

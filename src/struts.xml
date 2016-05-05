@@ -129,6 +129,51 @@
             <result name="success">book_view.jsp</result>
             <result name="error">book_view.jsp</result>
         </action>
+
+        <action name="prepare_add_book" class="action.book.PrepareAddBookAction">
+            <result name="success">add_book.jsp</result>
+            <result name="error">add_book.jsp</result>
+        </action>
+
+        <action name="open_edit_author" class="action.author.OpenEditAuthorAction">
+            <result name="success">edit_author.jsp</result>
+            <result name="error">authors.jsp</result>
+        </action>
+
+        <action name="book_collection_doc" class="action.documents.BookCollectionOfReaderAction" method="generate">
+            <result name="success">index.jsp</result>
+            <result name="error">index.jsp</result>
+        </action>
+
+        <action name="book_info_doc" class="action.documents.BookInfoAction" method="generate">
+            <result name="success">index.jsp</result>
+            <result name="error">index.jsp</result>
+        </action>
+
+        <action name="book_list_doc" class="action.documents.BooksListAction" method="generate">
+            <result name="success">index.jsp</result>
+            <result name="error">index.jsp</result>
+        </action>
+
+        <action name="view_statistic_doc" class="action.documents.ViewStatisticAction" method="generate">
+            <result name="success">index.jsp</result>
+            <result name="error">index.jsp</result>
+        </action>
+
+        <action name="user_list_doc" class="action.documents.UsersListAction" method="generate">
+            <result name="success">index.jsp</result>
+            <result name="error">index.jsp</result>
+        </action>
+
+        <action name="download_book" class="action.book.BookDownloadAction">
+            <result name="success">index.jsp</result>
+        </action>
+
+        <action name="read_online" class="action.book.ReadBookAction">
+            <result name="redirectPage">
+                <param name="location">${url}</param>
+            </result>
+        </action>
     </package>
 
 </struts>
