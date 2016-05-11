@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="input-field col s6" id="log">
+
+        <input type="text" ng-model="user.login" id="login" maxlength="45" required name="login"  class="validate">
+        <label class="active" for="login">Login</label>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="input-field col s6" id="pass">
+
+        <input type="password" ng-model="user.password" id="password" maxlength="45" required name="password"  class="validate">
+        <label class="active" for="password">Password</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="input-field col s6" id="mail">
+        <input type="text" ng-model="user.email" id="email" maxlength="45" required name="email"  class="validate">
+        <label class="active" for="email">Email</label>
+    </div>
+</div>
+<div class="row">
+    <div class="col s6">
+        <button class="waves-effect waves-light btn" ng-click="register(user)">Submit
+            <i class="material-icons right">send</i>
+        </button>
+    </div>
+</div>

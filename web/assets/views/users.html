@@ -1,0 +1,58 @@
+<table class="striped">
+        <thead>
+        <tr>
+            <th>Login</th>
+        </tr>
+        </thead>
+        <tr ng-repeat="user in users">
+    <td>
+    <h5>{{user.login}}</h5>
+    </td>
+    <td>
+            <a ui-sref="user({id: user.id})"
+               onclick="document.getElementById('view_inf${person.id}').submit(); return false;"
+               class="waves-effect waves-light btn"
+            ><i class="fa fa-eye" aria-hidden="true"></i></a>
+
+    </td>
+    <!--<c:if test="${user.admin == true}">-->
+        <!--<c:if test="${person.id != user.id && person.admin == false}">-->
+            <!--<td>-->
+                <!--<form method="post" action="edit_user.action" id="make_admin${person.id}">-->
+                    <!--<input type="hidden" name="action">-->
+                    <!--<input type="hidden" name="user_id" value="${person.id}">-->
+                    <!--<input type="hidden" name="isadmin" value=true>-->
+                    <!--<a ui-sref="javascript:{}"-->
+                       <!--onclick="document.getElementById('make_admin${person.id}').submit(); return false;"-->
+                       <!--class="waves-effect waves-light btn"-->
+                    <!--&gt;Make an admin <i class="fa fa-check" aria-hidden="true"></i></a>-->
+                <!--</form>-->
+
+            <!--</td>-->
+        <!--</c:if>-->
+        <!--<c:if test="${person.admin == true && person.login != 'admin'}">-->
+            <!--<td>-->
+                <!--<form method="post" action="edit_user.action" id="make_notadmin${person.id}">-->
+                    <!--<input type="hidden" name="user_id" value="${person.id}">-->
+                    <!--<input type="hidden" name="isadmin" value=false>-->
+                    <!--<a ui-sref="javascript:{}"-->
+                       <!--onclick="document.getElementById('make_notadmin${person.id}').submit(); return false;"-->
+                       <!--class="waves-effect waves-light btn"-->
+                    <!--&gt;Make not admin <i class="fa fa-remove" aria-hidden="true"></i></a>-->
+                <!--</form>-->
+
+            <!--</td>-->
+        <!--</c:if>-->
+        <!--<c:if test="${person.login != 'admin'}">-->
+            <!--<td>-->
+                <!--<form method="post" action="delete_user.action" id="delete_user${person.id}">-->
+                    <!--<input type="hidden" name="user_id" value="${person.id}">-->
+                    <!--<a ui-sref="javascript:{}"-->
+                       <!--onclick="if(confirm('Are you sure?')){document.getElementById('delete_user${person.id}').submit();return true}else{return false;}"-->
+                       <!--class="waves-effect waves-light btn"-->
+                    <!--&gt;<i class="fa fa-trash" aria-hidden="true"></i></a>-->
+                <!--</form>-->
+            <!--</td>-->
+        <!--</c:if>-->
+        </tr>
+        </table>

@@ -1,0 +1,38 @@
+    <h5>Login: {{login}}</h5>
+    <h5>Email: {{email}}</h5>
+    <h5>Book collection:</h5>
+    <table class="striped">
+        <thead>
+        <tr>
+            <th>Author</th>
+            <th>Title</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+            <tr ng-repeat="book in books">
+                <td>{{book.author}}</td>
+                <td>{{book.name}}</td>
+                <td>{{book.description}}</td>
+                <td>
+                        <a ui-sref="bookView({id: book.id})"
+                           class="waves-effect waves-light btn"
+                        ><i class="fa fa-eye" aria-hidden="true"></i></a>
+                </td>
+                <!--<c:if test="${user.login == userVO.login}">-->
+                <!--<td>-->
+                    <!--<form action="remove_book_from_collection.action" method="post" id="remove_book${book.id}">-->
+                        <!--<input type="hidden" name="bookid" value="${book.id}">-->
+                        <!--<a ui-sref="javascript:{}"-->
+                           <!--onclick="document.getElementById('remove_book${book.id}').submit(); return false;"-->
+                           <!--class="waves-effect waves-light btn"-->
+                        <!--&gt;<i class="fa fa-minus" aria-hidden="true"></i></a>-->
+                    <!--</form>-->
+
+                <!--</td>-->
+                <!--</c:if>-->
+                    <td>
+                            <a ui-sref="removeBook(book)"
+                               class="waves-effect waves-light btn"
+                            ><i class="fa fa-trash" aria-hidden="true"></i></a>
+            </tr>
+    </table>

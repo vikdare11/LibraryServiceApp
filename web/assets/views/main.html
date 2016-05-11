@@ -1,0 +1,148 @@
+<script>
+    window.onload = function onLoadFunc() {
+        var type = "pdf_type";
+        document.getElementById("inputTypeId").value = type;
+        document.getElementById("inputTypeId1").value = type;
+        document.getElementById("inputTypeId2").value = type;
+        document.getElementById("inputTypeId3").value = type;
+        document.getElementById("inputTypeId4").value = type;
+    }
+
+</script>
+
+<script>
+    function onChangeSelect() {
+        var e = document.getElementById("selectId");
+        var type = e.options[e.selectedIndex].value;
+        document.getElementById("inputTypeId").value = type;
+        document.getElementById("inputTypeId1").value = type;
+        document.getElementById("inputTypeId2").value = type;
+        document.getElementById("inputTypeId3").value = type;
+        document.getElementById("inputTypeId4").value = type;
+    }
+</script>
+    <div id="hero">
+        <div class="container" id="hero-text-container">
+            <div class="row">
+                <div class="col s12 center-align">
+                    <h1 id="hero-title" itemprop="description" style="font-size: 35px;">
+                        <div ng-show="logged">
+                            <span class="thin">Hello,</span>
+                            <span class="bold"> {{user.login}}</span>
+                            <span class="thin">!
+                                <br>Now all Your favourite books will be always with You.
+                                <br>Please, choose book or author to find interesting book.
+                                <br>Or see what others are reading.
+                            </span>
+                        </div>
+                    </h1>
+                </div>
+            </div>
+            <div ng-hide="logged" style="text-align: center;">
+                <h1 id="hero-title" itemprop="description" style="font-size: 35px;">
+                <span class="thin">
+                    Cafe, transport, home...<br>
+                    Now all Your favourite books will be with You.
+                </span>
+                <br>
+                <span class="bold">LibraryService</span>
+                <span class="thin">
+                    will allow You to read at any place and in any situation<br>
+                    Quick, easy, convenient.
+               </span>
+                    </h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <div class="center-align">
+                <table>
+                    <tr>
+                        <td style="padding-left: 100px">
+                            <a ui-sref="books"
+                               class="waves-effect waves-light btn"
+                            >Books <i class="fa fa-book" aria-hidden="true"></i></a>
+                        </td>
+                        <td>
+                            <form action="get_authors.action" method="post" id="authors">
+                                <a ui-sref="authors"
+                                   class="waves-effect waves-light btn"
+                                >Authors <i class="fa fa-users" aria-hidden="true"></i></a>
+                            </form>
+                        </td>
+                        <td>
+                            <div ng-show="logged">
+                                    <input type="hidden" name="action">
+                                    <a ui-sref="users"
+                                       class="waves-effect waves-light btn"
+                                    >Users <i class="fa fa-user" aria-hidden="true"></i></a>
+                        </td>
+                        <td ng-show="logged">
+                                <a href="#/users/{{user.id}}"
+                                   class="waves-effect waves-light btn"
+                                >My profile <i class="fa fa-user-secret" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                </table>
+
+                    <table  ng-show="logged">
+                        <tr>
+                            <td id="choose">
+                                <p style="margin-left: 365px; font-weight: bold;">Choose document type:</p>
+                                <select class="browser-default" id="selectId" name="doc_type"
+                                        onchange="onChangeSelect()">
+                                    <option value="pdf_type">pdf</option>
+                                    <option value="xls_type">xls</option>
+                                    <option value="csv_type">csv</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                <table ng-show="logged">
+                    <tr>
+                        <td>
+                                <form action="book_list_doc.action" enctype="multipart/form-data" method="get" id="books_list">
+                                    <input type="hidden" id="inputTypeId" name="doc_type">
+                                    <a ng-click="generate" class="waves-effect waves-light btn"
+                                    >Generate books list <i class="fa fa-download" aria-hidden="true"></i></a>
+                                </form>
+                        </td>
+                        <td>
+                            <form action="user_list_doc.action" enctype="multipart/form-data" method="get" id="users_list">
+                                <input type="hidden" id="inputTypeId1" name="doc_type">
+                                <a ng-click="generate" class="waves-effect waves-light btn"
+                                >Generate users list <i class="fa fa-download" aria-hidden="true"></i></a>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="book_info_doc.action" enctype="multipart/form-data" method="get" id="books_info">
+                                <input type="hidden" id="inputTypeId2" name="doc_type">
+                                <a ng-click="generate" class="waves-effect waves-light btn"
+                                >Generate books info <i class="fa fa-download" aria-hidden="true"></i></a>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+                <table ng-show="logged">
+                    <tr>
+                        <td>
+                            <form action="view_statistic_doc.action" enctype="multipart/form-data" method="get" id="views_statistic">
+                                    <input type="hidden" id="inputTypeId3" name="doc_type">
+                                    <a ng-click="generate" class="waves-effect waves-light btn"
+                                    >Generate views statistic <i class="fa fa-download" aria-hidden="true"></i></a>
+                                </form>
+                        </td>
+                        <td>
+                            <form action="book_collection_doc.action" enctype="multipart/form-data" method="get"
+                                  id="book_collections">
+                                <input type="hidden" id="inputTypeId4" name="doc_type">
+                                <a ng-click="generate" class="waves-effect waves-light btn">Generate book collections of reader
+                                    <i class="fa fa-download" aria-hidden="true"></i></a>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
