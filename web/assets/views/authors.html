@@ -1,0 +1,48 @@
+    <!--<form action="add_author.jsp" enctype="multipart/form-data"  id="add_author">-->
+
+      <!--<a ui-sref="javascript:{}"-->
+         <!--onclick="document.getElementById('add_author').submit(); return false;"-->
+         <!--class="waves-effect waves-light btn"-->
+      <!--&gt;Add author <i class="fa fa-plus" aria-hidden="true"></i></a>-->
+    <!--</form>-->
+
+  <table class="striped">
+    <thead>
+    <tr>
+      <th>Author</th>
+    </tr>
+    </thead>
+    <tr ng-repeat="author in authors">
+    <td>
+    <h5>{{author.name}} {{author.surname}}</h5>
+    </td>
+    <td>
+      <!--<form action="get_book_by_author.action" method="post" id="${author.id}">-->
+        <!--<input type="hidden" name="author_id" value="${author.id}">-->
+        <!--<a ui-sref="javascript:{}"-->
+           <!--onclick="document.getElementById('${author.id}').submit(); return false;"-->
+           <!--class="waves-effect waves-light btn"-->
+        <!--&gt;<i class="fa fa-eye" aria-hidden="true"></i></a>-->
+      <!--</form>-->
+
+    </td>
+    <td>
+        <a ui-sref="add_book({ author_id: author.id })"
+           class="waves-effect waves-light btn"
+        ><i class="fa fa-plus" aria-hidden="true"></i></a>
+
+      </td>
+    <td>
+        <a ui-sref="edit_author({ author: author, author_id: author.id })"
+           ng-click="storeAuthor(author)"
+           class="waves-effect waves-light btn"
+        ><i class="fa fa-edit" aria-hidden="true"></i></a>
+
+      </td>
+    <td>
+        <a ng-click="deleteAuthor(author)"
+           class="waves-effect waves-light btn"
+        ><i class="fa fa-trash" aria-hidden="true"></i></a>
+      </td>
+    </tr>
+    </table>

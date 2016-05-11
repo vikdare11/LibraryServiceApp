@@ -1,0 +1,66 @@
+<div class="navbar-fixed">
+  <nav>
+    <div class="nav-wrapper">
+      <a ui-sref="home" class="brand-logo center">Library Service</a>
+      <ul class="right hide-on-med-and-down">
+        <c:if test="${not empty user}">
+          <form method="post" action="logout.action" id="logout">
+            <input type="hidden" name="action">
+            <a ui-sref="javascript:{}"
+               onclick="document.getElementById('logout').submit(); return false;"
+               class="waves-effect waves-light btn"
+            >Logout <i class="fa fa-share" aria-hidden="true"></i></a>
+          </form>
+
+      </ul>
+      <ul class="left hide-on-med-and-down">
+        <form onClick="history.go(-1);return true;" enctype="multipart/form-data" method="get" id="back">
+
+          <a ui-sref="javascript:{}"
+             onclick="document.getElementById('back').submit(); return false;"
+             class="waves-effect waves-light btn"
+          >Back <i class="fa fa-reply" aria-hidden="true"></i></a>
+        </form>
+
+        </c:if>
+
+        <c:if test="${empty user}">
+          <a ui-sref="login">Sign in</a>
+          <a ui-sref="registration">Sign up</a>
+        </c:if>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<main>
+  <form action="add_author.action" method="post">
+
+  <div class="row">
+    <div class="input-field col s6" id="log">
+
+      <input type="text" id="name" maxlength="45"  name="author_name"  class="validate">
+      <label class="active" for="name">Name</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s6" id="pass">
+
+      <input type="text" id="surname" maxlength="45"  name="author_surname"  class="validate">
+      <label class="active" for="surname">Surname</label>
+    </div>
+  </div>
+
+  <button class="btn waves-effect waves-light" id="log_button" input type="submit" name="action">Submit
+    <i class="material-icons right">send</i>
+  </button>
+
+</form>
+</main>
+<footer class="page-footer" id="footer">
+  <div class="container grey-text">
+    <span class="left">Copyright 2016</span>
+    <span class="right">Made by LibraryServiceCompany</span>
+  </div>
+</footer>
