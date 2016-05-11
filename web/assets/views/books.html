@@ -1,0 +1,50 @@
+
+  <table class="striped">
+    <thead>
+    <tr>
+      <th>Author</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+    </thead>
+      <tr ng-repeat="book in books track by $index">
+        <td>{{book.author}}</td>
+        <td>{{book.name}}</td>
+        <td>{{book.description}}</td>
+
+        <!--<c:if test="${not empty user}">-->
+          <!--<c:choose>-->
+            <!--<c:when test="${user.admin}">-->
+              <!--<td>-->
+                <!--<form action="delete_book.action" method="post" id="delete_book${book.id}">-->
+                  <!--<input type="hidden" name="bookid" value="${book.id}">-->
+                  <!--<a ui-sref="javascript:{}"-->
+                     <!--onclick="if(confirm('Are you sure?')){document.getElementById('delete_book${book.id}').submit();return true}else{return false;}"-->
+                     <!--class="waves-effect waves-light btn"-->
+                  <!--&gt;<i class="fa fa-trash" aria-hidden="true"></i> </a>-->
+                <!--</form>-->
+
+              <!--</td>-->
+
+              <!--<td>-->
+                <!--<form method="post" action="view_book.action" id="view${book.id}">-->
+                  <!--<input type="hidden" name="bookid" value="${book.id}">-->
+                  <!--<a ui-sref="javascript:{}"-->
+                     <!--onclick="document.getElementById('view${book.id}').submit(); return false;"-->
+                     <!--class="waves-effect waves-light btn"-->
+                  <!--&gt;<i class="fa fa-eye" aria-hidden="true"></i> </a>-->
+                <!--</form>-->
+
+              <!--</td>-->
+            <!--</c:when>-->
+            <!--<c:otherwise>-->
+            <td>
+                <a ui-sref="bookView({ id: book.id })"
+                   class="waves-effect waves-light btn"
+                ><i class="fa fa-eye" aria-hidden="true"></i> </a>
+            </td>
+            <!--</c:otherwise>-->
+          <!--</c:choose>-->
+        <!--</c:if>-->
+      </tr>
+  </table>

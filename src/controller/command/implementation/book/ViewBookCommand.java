@@ -17,6 +17,8 @@ public class ViewBookCommand implements Command {
         return instance;
     }
 
+
+
     @Override
     public String execute(HttpServletRequest request) {
         Integer bookId = null;
