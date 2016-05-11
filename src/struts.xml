@@ -8,6 +8,130 @@
     <constant name="struts.devMode" value="true"/>
     <constant name="struts.convention.result.path" value="/"/>
 
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+    <constant name="struts.convention.default.parent.packege" value="angularstruts" />
+    <constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.Restful2ActionMapper" />
+    <constant name="struts.enable.SlashesInActionNames" value="true"/>
+    <constant name="struts.mapper.alwaysSelectFullNamespace" value="false" />
+
+    <package name="json-default" extends="struts-default">
+        <result-types>
+            <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
+        </result-types>
+        <interceptors>
+            <interceptor name="json" class="org.apache.struts2.json.JSONInterceptor"/>
+        </interceptors>
+    </package>
+
+    <package name="default" extends="json-default">
+    </package>
+
+    <package name="angular_auth" extends="json-default">
+        <action name="registrate_user" class="action.client.RegistrationAction" method="registrateUser">
+            <interceptor-ref name="json">
+                <param name="contentType">application/json</param>
+            </interceptor-ref>
+            <result type="json">
+            </result>
+        </action>
+        <action name="login_user" class="action.client.AuthActions" method="login">
+            <interceptor-ref name="json">
+                <param name="contentType">application/json</param>
+            </interceptor-ref>
+            <result type="json">
+            </result>
+        </action>
+
+        <action name="check_user_logged" class="action.client.AuthActions" method="checkLogin">
+            <result type="json">
+            </result>
+        </action>
+        <action name="user_logout" class="action.client.AuthActions" method="logout">
+            <result type="json">
+            </result>
+        </action>
+    </package>
+
+    <package name="angular_books" extends="json-default">
+        <action name="get_all_books" class="action.book.GetBooksAction" method="getJSONBooks">
+            <result type="json">
+            </result>
+        </action>
+        <action name="view_book_json" class="action.book.ViewBookAction" method="get_book_view">
+            <interceptor-ref name="json">
+                <param name="contentType">application/json</param>
+            </interceptor-ref>
+            <result type="json">
+            </result>
+        </action>
+
+        <action name="edit_book_json" class="action.book.EditBookAction" method="edit_book">
+            <interceptor-ref name="json">
+                <param name="contentType">application/json</param>
+            </interceptor-ref>
+            <result type="json">
+            </result>
+        </action>
+
+        <action name="add_book_comment" class="action.comment.AddCommentAction" method="add_comment">
+            <interceptor-ref name="json">
+                <param name="contentType">application/json</param>
+            </interceptor-ref>
+            <result type="json">
+            </result>
+        </action>
+    </package>
+
+    <package name="angular_authors" extends="json-default">
+        <action name="get_all_authors" class="action.author.GetAuthorsAction" method="getJSONAuthors">
+            <result type="json">
+            </result>
+        </action>
+        <action name="add_author_book" class="action.book.AddBookAction" method="add_author_book">
+            <interceptor-ref name="json">
+                <param name="contentType">application/json</param>
+            </interceptor-ref>
+            <result type="json">
+            </result>
+        </action>
+
+        <action name="add_author_json" class="action.author.AddAuthorAction" method="add_author">
+            <interceptor-ref name="json">
+                <param name="contentType">application/json</param>
+            </interceptor-ref>
+            <result type="json">
+            </result>
+        </action>
+
+        <action name="edit_author_json" class="action.author.EditAuthorAction" method="edit_author">
+            <interceptor-ref name="json">
+                <param name="contentType">application/json</param>
+            </interceptor-ref>
+            <result type="json">
+            </result>
+        </action>
+
+        <action name="delete_author_json" class="action.author.DeleteAuthorAction" method="delete_author">
+            <interceptor-ref name="json">
+                <param name="contentType">application/json</param>
+            </interceptor-ref>
+            <result type="json">
+            </result>
+        </action>
+    </package>
+    <package name="angular_users" extends="json-default">
+        <action name="get_all_users" class="action.client.GetUsersAction" method="getJSONUsers">
+            <result type="json">
+            </result>
+        </action>
+        <action name="get_user_info" class="action.client.ViewUserAction" method="getJSONUser">
+            <interceptor-ref name="json">
+                <param name="contentType">application/json</param>
+            </interceptor-ref>
+            <result type="json">
+            </result>
+        </action>
+    </package>
     <package name="bla" extends="struts-default">
         <action name="loging" class="action.client.LoginAction">
             <result name="success">index.jsp</result>
