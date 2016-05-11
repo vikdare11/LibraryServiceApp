@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="input-field col s6" id="log">
+
+      <input type="text" ng-model="name" id="name" maxlength="45"  name="author_name" value="${author.name}" class="validate">
+      <label class="active" for="name">Name</label>
+    </div>
+</div>
+
+<div class="row">
+  <div class="input-field col s6" id="pass">
+
+    <input type="text" ng-model="surname" id="surname" maxlength="45"  name="author_surname" value="${author.surname}" class="validate">
+    <label class="active" for="surname">Surname</label>
+  </div>
+</div>
+
+<button class="btn waves-effect waves-light" ng-click="editAuthor()">Edit
+  <i class="material-icons right">send</i>
+</button>
