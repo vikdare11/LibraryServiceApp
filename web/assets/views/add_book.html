@@ -1,0 +1,44 @@
+<div class="row">
+      <div class="input-field col s6" id="log">
+        <input type="text" ng-model="title" id="title" maxlength="45" required name="title"  class="validate">
+        <label class="active" for="title">Title</label>
+      </div>
+</div>
+
+<div class="row">
+  <div class="input-field col s6" id="desc">
+      <textarea id="textarea1" ng-model="description" name="description" class="materialize-textarea"></textarea>
+      <label for="textarea1">Description</label>
+  </div>
+</div>
+    <br>
+
+    <table>
+      <tr>
+        <td><h5>Path for online reading</h5></td>
+        <td><h5>Path for download in fb2</h5></td>
+        <td><h5>Path for download in pdf</h5></td>
+        <td><h5>Path for download in txt</h5></td>
+      </tr>
+    <tr>
+      <td>
+    <input  id="path_online" type="file" name="read_file" >
+      </td>
+      <td>
+   <input id="path_fb2"  type="file" name="fb2_file" >
+      </td>
+      <td>
+<input id="path_pdf" type="file" name="pdf_file" >
+      </td>
+      <td>
+    <input id="path_txt" type="file" name="txt_file">
+      </td>
+    </tr>
+    </table>
+    <br>
+    <br>
+    <button class="btn waves-effect waves-light" ng-click="addBook()">Submit
+      <i class="material-icons right">send</i>
+    </button>
+
+</form>
